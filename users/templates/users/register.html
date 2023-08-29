@@ -1,0 +1,88 @@
+{% extends 'users/master/base.html' %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="row">
+  <div class="offset-3 col-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12 text-center mb-4">
+            <i class='bx bx-lock-alt bx-lg bx-border-circle'></i>
+          </div>
+          <div class="col-12 mb-4 text-center">
+            <h4 class="card-title fw-bold">iTekad Sign Up</h4>
+            <p class="card-subtitle text-muted">Please provide your valid infomations to get the benefits form our site.</p>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">First Name</label>
+              <input type="text" class="form-control" name="fname" id="fname" placeholder="">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Last Name</label>
+              <input type="text" class="form-control" name="lname" id="lname" placeholder="">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Identification No.</label>
+              <input type="text" class="form-control" name="idNo" id="idNo" placeholder="">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Country</label>
+              <input type="text" class="form-control" name="country" id="country" placeholder="">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Mobile No.</label>
+              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Email Address</label>
+              <input type="text" class="form-control" name="email" id="email" placeholder="">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Password</label>
+              <input type="text" class="form-control" name="password" id="password" placeholder="">
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Confirm Password</label>
+              <input type="text" class="form-control" name="cpassword" id="cpassword" placeholder="">
+            </div>
+          </div>
+          <div class="col-12 mt-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="">
+              <label class="form-check-label" for="">I accept all <a href="#">Privacy and Policy</a> & <a href="#">Terms and Conditions</a>.</label>
+            </div>
+          </div>
+          <div class="col-12 mt-3">
+            <div class="d-grid gap-2">
+              <button type="button" class="btn btn-warning fw-bold text-uppercase">Signup Now</button>
+            </div>
+          </div>
+          <div class="col-12 text-center mt-3">
+            <small class="text-muted">Already have an account? <a href="{% url 'login_page' %}" class="text-decoration-none">Sign In</a></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}{% endblock js %}

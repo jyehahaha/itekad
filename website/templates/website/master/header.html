@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-warning">
+  <div class="container">
+    <div class="text-start">
+      <button type="button" class="btn btn-warning"><i class='bx bx-phone-call' ></i>&nbsp;Help Centre</button>
+      <button type="button" class="btn btn-warning"><i class='bx bx-globe' ></i>&nbsp;English</button>
+    </div>
+    <div class="text-end">
+      <a href="{% url 'login_page' %}" type="button" class="btn btn-warning"><i class='bx bx-log-in-circle' ></i>&nbsp;Login</a>
+      <a href="{% url 'register_page' %}" type="button" class="btn btn-warning"><i class='bx bx-user-plus' ></i>&nbsp;Registration</a>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand navbar-light bg-light shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://uatmap.muamalat.com.my/media/images/muamalat_logo.original.png" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
+    </a>
+
+    <div class="nav navbar-nav">
+      <a class="nav-item nav-link {% if landing %}active{% endif %}" href="{% url 'landing_page' %}">Home {% if landing %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+      <a class="nav-item nav-link {% if about %}active{% endif %}" href="{% url 'about_page' %}">About Us {% if about %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+      <a class="nav-item nav-link {% if campaigns %}active{% endif %}" href="{% url 'campaigns_page' %}">Campaigns {% if campaigns %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+      <a class="nav-item nav-link {% if contact %}active{% endif %}" href="{% url 'contact_page' %}">Contact Us {% if contact %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+    </div>
+  </div>
+</nav>

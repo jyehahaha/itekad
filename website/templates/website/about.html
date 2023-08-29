@@ -1,0 +1,57 @@
+{% extends 'website/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 bg-light">
+    <div class="container mb-3">
+      <div class="row mt-5 mb-4">
+        <div class="col-12 text-center">
+          <h2 class="card-title fw-bold">About Us</h2>
+          <!-- <p class="-card-subtitle fw-bold text-uppercase">- Our Story -</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="container mb-5">
+      <div class="row mt-5">
+        <div class="col-6 align-self-center text-center">
+          <h2 class="card-title fw-bold">Our Vision</h2>
+          <div class="mt-4">
+            <p class="text-muted">Bank Muamalat is a trendsetter in its contributions to Islamic social finance and is leading the way by providing an innovative solution to the current economic uncertainties through its iTEKAD Mawaddah programme.</p>
+          </div>
+        </div>
+        <div class="col-6 text-end align-middle p-4">
+          <img src="{% static 'website/images/picture3.jpg' %}" class="img-thumbnail rounded-top" alt="Picture 3">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 bg-light">
+    <div class="container mb-5">
+      <div class="row mt-5">
+        <div class="col-6 text-start align-middle p-4">
+          <img src="{% static 'website/images/picture4.jpg' %}" class="img-thumbnail rounded-top" alt="Picture 4">
+        </div>
+        <div class="col-6 align-self-center text-center">
+          <h2 class="card-title fw-bold">Our Mission</h2>
+          <div class="mt-4">
+            <p class="text-muted">The iTEKAD Mawaddah programme is unique as it incorporates the Shariah innovation of two-tier mudarabah.</p>
+            <div class="text-center">
+              <small class="text-muted fst-italic">Bank will source funds from investors to invest in businesses owned by B40 individuals and micro-entrepreneurs.</small>
+              <br />
+              <small class="text-muted fst-italic">The profit and loss of each business will be shared with the respective investors.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}{% endblock js %}

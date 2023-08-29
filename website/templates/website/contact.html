@@ -1,0 +1,67 @@
+{% extends 'website/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 bg-light">
+    <div class="container mb-3">
+      <div class="row mt-5 mb-4">
+        <div class="col-12 text-center">
+          <h2 class="card-title fw-bold">Contact Us</h2>
+          <!-- <p class="-card-subtitle fw-bold text-uppercase">- Our Story -</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="container mb-5">
+      <div class="row mt-5">
+        <div class="col-sm-12 col-md-12 offset-lg-3 col-lg-6">
+          <div class="card">
+            <div class="card-body p-4">
+              <h4 class="card-title fw-bold text-uppercase text-center">Contact Us</h4>
+
+              <div class="row mt-4">
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="fname" placeholder="">
+                    <label for="fname">Full Name</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" placeholder="">
+                    <label for="email">Email Address</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="subject" placeholder="">
+                    <label for="subject">Subject</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 100px; resize: none;"></textarea>
+                    <label for="message">Message</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-warning text-uppercase">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}{% endblock js %}
