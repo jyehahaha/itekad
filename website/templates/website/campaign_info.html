@@ -1,0 +1,44 @@
+{% extends 'website/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="section">
+    <div class="row">
+        <div class="col-12 bg-light">
+          <div class="container mb-3">
+            <div class="row mt-5 mb-4">
+              <div class="col-12 text-center">
+                <h2 class="card-title fw-bold">Campaigns Info</h2>
+                <!-- <p class="-card-subtitle fw-bold text-uppercase">- All Campigns -</p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <img src="{% static 'website/images/picture4.jpg' %}" alt="">
+        </div>
+        <div class="col-6">
+        <h1>Recommend Group</h1>
+        <p>South East Asia's #1 Home and Property Services Platform</p>
+        </div>
+        <button type="button" class="btn btn-light">
+            CONSUMER GOODS & SERVICES
+        </button>
+    </div>
+</div>
+<div class="section">
+    <div class="row">
+        <div class="col-12">
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}{% endblock js %}
