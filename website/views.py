@@ -22,6 +22,14 @@ def CampaignsPageView(request):
     }
     return render(request, 'website/campaigns.html', context)
 
+
+def CampaignsInfoPageView(request):
+    context = {
+        'title': 'Campaigns',
+        'campaigns': True,
+    }
+    return render(request, 'website/campaign_info.html', context)
+
 def ContactPageView(request):
     context = {
         'title': 'Contact Us',
