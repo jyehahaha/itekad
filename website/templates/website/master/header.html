@@ -11,17 +11,30 @@
   </div>
 </nav>
 
-<nav class="navbar navbar-expand navbar-light bg-light shadow-sm">
+<nav class="navbar navbar-expand-sm navbar-light bg-light shadow-sm">
   <div class="container">
     <a class="navbar-brand" href="#">
       <img src="https://uatmap.muamalat.com.my/media/images/muamalat_logo.original.png" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
     </a>
-
-    <div class="nav navbar-nav">
-      <a class="nav-item nav-link {% if landing %}active{% endif %}" href="{% url 'landing_page' %}">Home {% if landing %}<span class="visually-hidden">(current)</span>{% endif %}</a>
-      <a class="nav-item nav-link {% if about %}active{% endif %}" href="{% url 'about_page' %}">About Us {% if about %}<span class="visually-hidden">(current)</span>{% endif %}</a>
-      <a class="nav-item nav-link {% if campaigns %}active{% endif %}" href="{% url 'campaigns_page' %}">Campaigns {% if campaigns %}<span class="visually-hidden">(current)</span>{% endif %}</a>
-      <a class="nav-item nav-link {% if contact %}active{% endif %}" href="{% url 'contact_page' %}">Contact Us {% if contact %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% if landing %}active{% endif %}" href="{% url 'landing_page' %}">Home {% if landing %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if about %}active{% endif %}" href="{% url 'about_page' %}">About Us {% if about %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if campaigns %}active{% endif %}" href="{% url 'campaigns_page' %}">Campaigns {% if campaigns %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% if contact %}active{% endif %}" href="{% url 'contact_page' %}">Contact Us {% if contact %}<span class="visually-hidden">(current)</span>{% endif %}</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

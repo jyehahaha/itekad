@@ -1,0 +1,357 @@
+{% extends 'sfd/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+    {% if view == 'create' %}
+    <div class="card--container">
+        <h3 class="main--title">Create Business Profile</h3>
+        <div class="card--container">
+            <div class="row">
+                <div class="col-12">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Entreprenuer</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select Entreprenuer</option>
+                                    <option value="1">Ahmad Bin Muhammad</option>
+                                    <option value="2">Siti Nurhaliza</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class=" col-12 mb-4">
+                                <label class="form-label">Business Registration</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Tranche</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select Tranche</option>
+                                    <option value="1">Tranche 1</option>
+                                    <option value="2">Tranche 2</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Nature of Business</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select Nature of Business</option>
+                                    <option value="1">Servive</option>
+                                    <option value="2">Food & beverage</option>
+                                    <option value="2">Agriculture</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Category</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select Category</option>
+                                    <option value="1">Servive</option>
+                                    <option value="2">Fintech</option>
+                                    <option value="2">Tech</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Business Summary</label>
+                                <textarea class="form-control" style="height: 100px"></textarea>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <div class="upload__box">
+                                    <label for="formFile" class="form-label">Upload Business's Profile Picture</label>
+                                    <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
+                                    <div class="upload__img-wrap"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label for="formFile" class="form-label">Upload Entreprenuer's Profile</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Total Investment</label>
+                                <input type="number" class="form-control">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Total Grant</label>
+                                <input type="number" class="form-control">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Status</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Select Status</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Not Active</option>
+                                  </select>
+                              </div>
+                          
+                        </div>
+                     
+                    
+                     
+                      <div class="mb-4">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="btn btn-md btn-primary me-md-2" type="button">Create</a>
+                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                          </div>
+                      </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif view == 'update' %}
+    <div class="card--container">
+        <h3 class="main--title">Update Business Profile</h3>
+        <div class="card--container">
+            <div class="row">
+                <div class="col-12">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Entreprenuer</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Ahmad Bin Muhammad</option>
+                                    <option value="2">Siti Nurhaliza</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control" placeholder="Muhamad Ahmad Enterprise" disable>
+                            </div>
+                            <div class=" col-12 mb-4">
+                                <label class="form-label">Business Registration</label>
+                                <input type="text" class="form-control" placeholder="ABC123456789(6789)" disable>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Tranche</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Tranche 2</option>
+                                    <option value="1">Tranche 1</option>
+                                    <option value="3">Tranche 3</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Nature of Business</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Service</option>
+                                    <option value="2">Food & beverage</option>
+                                    <option value="3">Agriculture</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Select Category</label>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Service</option>
+                                    <option value="2">Fintech</option>
+                                    <option value="3">Tech</option>
+                                </select>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Business Summary</label>
+                                <textarea class="form-control" style="height: 100px" placeholder="Sell and repair mobile phone" disabled></textarea>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <div class="upload__box">
+                                    <label for="formFile" class="form-label">Upload Business's Profile Picture</label>
+                                    <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
+                                    <div class="upload__img-wrap"></div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label for="formFile" class="form-label">Upload Entreprenuer's Profile</label>
+                                <input class="form-control" type="file" id="formFile">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Micro Financing</label>
+                                <input type="number" class="form-control" placeholder="RM8,200">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Total Grant</label>
+                                <input type="number" class="form-control" placeholder="RM3,200">
+                            </div>
+                            <div class="col-12 mb-4">
+                                <label class="form-label">Status</label>
+                                <select class="form-select">
+                                    <option selected>Active</option>
+                                    <option value="2">Not Active</option>
+                                  </select>
+                            </div>
+                        </div>
+                        <div class=" col-12 mb-4">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a class="btn btn-md btn-primary me-md-2" type="button">Save</a>
+                                <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif view == 'details' %}
+    <div class="card--container">
+        <h3 class="main--title">Details Business's Profile</h3>
+        <div class="card--container">
+            <div class="row">
+                <div class="col-12">
+                    <form method="POST">
+                        <div class="row">
+                            <div class="col-1">
+                                <label class="form-label">Entreprenuer</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">Ahmad Bin Muhammad</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Campany's Name</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">Muhamad Ahmad Enterprise</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Business Registration</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">ABC123456789(6789)</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Tranche</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">Tranche 2</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Nature of Business</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">Service</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Category</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">Service</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Business Summary</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">Sell and repair mobile phone</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Business's Profile Picture</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <img src="{% static 'sfd/img/user.svg' %}" class="img-thumbnail" width="150px">
+                                <img src="{% static 'sfd/img/account.svg' %}" class="img-thumbnail" width="150px">
+                                <img src="{% static 'sfd/img/setting.svg' %}" class="img-thumbnail" width="150px">
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Entreprenuer's Profile</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label"></label><a name="" id="" class="btn btn-primary" href="#" role="button">View PDF</a>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Micro Financing</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">RM8,200</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Total Grant</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">RM3,200</label>
+                            </div>
+                            <div class="col-1">
+                                <label class="form-label">Status</label>
+                            </div>
+                            <div class="col-11 mb-4">
+                                <label class="form-label">Active</label>
+                            </div>
+                        </div>
+                      <div class="mb-4">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="btn btn-md btn-primary me-md-2" type="button">Back</a>
+                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                          </div>
+                      </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock  %}
+
+{% block js%}
+<script>
+    jQuery(document).ready(function () {
+  ImgUpload();
+});
+
+function ImgUpload() {
+  var imgWrap = "";
+  var imgArray = [];
+
+  $('.upload__inputfile').each(function () {
+    $(this).on('change', function (e) {
+      imgWrap = $(this).closest('.upload__box').find('.upload__img-wrap');
+      var maxLength = $(this).attr('data-max_length');
+
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
+      var iterator = 0;
+      filesArr.forEach(function (f, index) {
+
+        if (!f.type.match('image.*')) {
+          return;
+        }
+
+        if (imgArray.length > maxLength) {
+          return false
+        } else {
+          var len = 0;
+          for (var i = 0; i < imgArray.length; i++) {
+            if (imgArray[i] !== undefined) {
+              len++;
+            }
+          }
+          if (len > maxLength) {
+            return false;
+          } else {
+            imgArray.push(f);
+
+            var reader = new FileReader();
+            reader.onload = function (e) {
+              var html = "<div class='upload__img-box'><div style='background-image: url(" + e.target.result + ")' data-number='" + $(".upload__img-close").length + "' data-file='" + f.name + "' class='img-bg'><div class='upload__img-close'></div></div></div>";
+              imgWrap.append(html);
+              iterator++;
+            }
+            reader.readAsDataURL(f);
+          }
+        }
+      });
+    });
+  });
+
+  $('body').on('click', ".upload__img-close", function (e) {
+    var file = $(this).parent().data("file");
+    for (var i = 0; i < imgArray.length; i++) {
+      if (imgArray[i].name === file) {
+        imgArray.splice(i, 1);
+        break;
+      }
+    }
+    $(this).parent().parent().remove();
+  });
+}
+</script>
+
+{% endblock js%}

@@ -1,0 +1,230 @@
+{% extends 'sfd/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}
+<style>
+
+</style>
+{% endblock css %}
+
+{% block content %}
+{% if view == 'create' %}
+<div class="card--container">
+    <h3 class="main--title">Create Campaign</h3>
+    <div class="card--container">
+        <div class="row">
+            <div class="col-12">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Select Business Profile ID</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Select Business Profile ID</option>
+                                <option value="1">011023150339 - Muhamad Ahmad Enterprise</option>
+                                <option value="2">030923150339 - SBS Entreprise</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class=" col-12 mb-4">
+                            <label class="form-label">Trademark</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Remark</label>
+                            <textarea class="form-control" style="height: 100px"></textarea>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="upload__box">
+                                <label for="formFile" class="form-label">Upload Logo Campaign</label>
+                                <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
+                                <div class="upload__img-wrap" width="150px"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Start Date Campaign</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">End Date Campaign</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Select Status</option>
+                                <option value="1">Active</option>
+                                <option value="2">Not Active</option>
+                              </select>
+                          </div>
+                    </div>
+                  <div class="mb-4">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class="btn btn-md btn-primary me-md-2" type="button">Create</a>
+                        <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                      </div>
+                  </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% elif view == 'update' %}
+<div class="card--container">
+    <h3 class="main--title">Update Campaign</h3>
+    <div class="card--container">
+        <div class="row">
+            <div class="col-12">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Select Business Profile ID</label>
+                            <select class="form-select" aria-label="Default select example" disabled>
+                                <option selected>011023150339 - Muhamad Ahmad Enterprise</option>
+                                <option value="2">030923150339 - SBS Entreprise</option>
+                            </select>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Title</label>
+                            <input type="text" class="form-control" placeholder="Ribbon">
+                        </div>
+                        <div class=" col-12 mb-4">
+                            <label class="form-label">Trademark</label>
+                            <input type="text" class="form-control" placeholder="Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Remark</label>
+                            <textarea class="form-control" style="height: 100px" placeholder=" Testing Testing Testing ...."></textarea>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="upload__box">
+                                <label for="formFile" class="form-label">Upload Logo Campaign</label>
+                                <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
+                                <div class="upload__img-wrap" width="150px"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Start Date Campaign</label>
+                            <input type="text" class="form-control" placeholder="2023/05/01 13:05 PM">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">End Date Campaign</label>
+                            <input type="text" class="form-control" placeholder="2023/11/01 13:05 PM">
+                        </div>
+                        <div class="col-12 mb-4">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Select Status</option>
+                                <option value="1">Active</option>
+                                <option value="2">Not Active</option>
+                              </select>
+                          </div>
+                    </div>
+                  <div class="mb-4">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class="btn btn-md btn-success me-md-2" type="button">Save</a>
+                        <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                      </div>
+                  </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% elif view == 'details' %}
+<div class="card--container">
+    <h3 class="main--title">Details Campaign</h3>
+    <div class="card--container">
+        <div class="row">
+            <div class="col-12">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-1">
+                            <label class="form-label">Business profile ID</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <label class="form-label">011023150339</label>
+                        </div>
+                        <div class="col-1">
+                            <label class="form-label">Title</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <label class="form-label">Ribbon</label>
+                        </div>
+                        <div class="col-1">
+                            <label class="form-label">Trademark</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <label class="form-label">Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App</label>
+                        </div>
+                        <div class="col-1">
+                            <label class="form-label">Remark</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <label class="form-label">Testing Testing Testing ....</label>
+                        </div>
+                        <div class="col-1">
+                            <label class="form-label">Logo Campaign</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <img src="{% static 'sfd/img/user.svg' %}" class="img-thumbnail" width="150px">
+                        </div>
+                        <div class="col-1">
+                            <label class="form-label">Start Campaign</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <label class="form-label">2023/05/01 13:05 PM</label>
+                        </div>
+                        <div class="col-1">
+                            <label class="form-label">End Campaign</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <label class="form-label">2023/05/01 13:05 PM</label>
+                        </div>
+                        <div class="col-1">
+                            <label class="form-label">Status</label>
+                        </div>
+                        <div class="col-11 mb-4">
+                            <label class="form-label">Active</label>
+                        </div>
+                    </div>
+                  <div class="mb-4">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class="btn btn-md btn-primary me-md-2" type="button">Back</a>
+                        <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                      </div>
+                  </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% elif view == 'assign' %}
+<div class="card--container">
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Business Profile ID:</label>
+        <input type="text" class="form-control" value="011023150339 - Muhamad Ahmad Enterprise" disabled>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Title:</label>
+        <input type="text" class="form-control" value="Ribbon" disabled>
+    </div>
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label">Description:</label>
+        <input type="text" class="form-control" value="Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App" disabled>
+    </div>
+    <div class="mb-3 row">
+        
+    </div>
+
+</div>
+{% endif %}
+{% endblock content %}
+
+{% block js %}{% endblock js %}

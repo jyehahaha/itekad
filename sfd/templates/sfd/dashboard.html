@@ -1,0 +1,176 @@
+{% extends 'sfd/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+    <div class="card--container">
+        <h3 class="main--title">Quick Stat</h3>
+        <div class="card--wrapper">
+            <div class="investor--card">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                           Investor
+                        </span>
+                        <span class="amount--value">200</span>
+                    </div>
+                    <i class="fa-solid fa-user icon"></i>
+                </div>
+                <span class="card-detail">
+                    Total Investors
+                </span>
+            </div>
+            <div class="investor--card">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                          Fund
+                        </span>
+                        <span class="amount--value">1500</span>
+                    </div>
+                    <i class="fa-solid fa-users icon"></i>
+                </div>
+                <span class="card-detail">
+                   Total Collected Fund
+                </span>
+            </div>
+            <div class="investor--card">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                          Campaign
+                        </span>
+                        <span class="amount--value">50</span>
+                    </div>
+                    <i class="fa-solid fa-layer-group icon"></i>
+                </div>
+                <span class="card-detail">
+                   Total Campaign
+                </span>
+            </div>
+            <div class="investor--card">
+                <div class="card--header">
+                    <div class="amount">
+                        <span class="title">
+                          Campaign Completed
+                        </span>
+                        <span class="amount--value">25</span>
+                    </div>
+                    <i class="fa-solid fa-check-double icon"></i>
+                </div>
+                <span class="card-detail">
+                   Total Campaign Completed
+                </span>
+            </div>
+        </div>
+     </div>
+     <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="card--container mt-3 ">
+                <canvas id="bar"></canvas>
+              </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <div class="card--container mt-3 ">
+                <canvas id="doughnut"></canvas>
+              </div>
+        </div>
+     </div>
+     <div class="card--container mt-3">
+        <h3 class="main--title">Investor's Data</h3>
+        <div class="card-body">
+            <table id="tblUserManagement" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Mobile Phone</th>
+                        <th>MyKad No.</th>
+                        <th>Account No</th>
+                        <th>Account Name</th>
+                        <th>Date/Time Created</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ahmad Abu</td>
+                        <td>Ahmad46</td>
+                        <td>ahmad.abu@muamalat.com.my</td>
+                        <td>+6011-2345123</td>
+                        <td>700901-14-5122</td>
+                        <td>16430009876</td>
+                        <td>Maybank</td>
+                        <td>2023/05/01 13:05 PM</td>
+                        <td>Not Active</td>
+                    </tr>
+                    <tr>
+                        <td>Ahmad Faiq</td>
+                        <td>ahmad.faiq</td>
+                        <td>faiq@muamalat.com.my</td>
+                        <td>+6019-11119876</td>
+                        <td>881111-01-5234</td>
+                        <td>7654321009</td>
+                        <td>CIMB</td>
+                        <td>2023/05/01 13:05 PM</td>
+                        <td>Not Active</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+     </div>
+
+{% endblock  %}
+
+{% block js%}
+<script>
+    const ctx = document.getElementById("bar").getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ["rice", "yam", "tomato", "potato",
+        "beans", "maize", "oil"],
+        datasets: [{
+          label: 'food Items',
+          backgroundColor: 'rgba(161, 198, 247, 1)',
+          borderColor: 'rgb(47, 128, 237)',
+          data: [300, 400, 200, 500, 800, 900, 200],
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+            }
+          }]
+        }
+      },
+    });
+
+    const ctxD = document.getElementById("doughnut").getContext('2d');
+      const myChartD = new Chart(ctxD, {
+        type: 'doughnut',
+        data: {
+          labels: ["rice", "yam", "tomato", "potato", "beans",
+           "maize", "oil"],
+          datasets: [{
+            label: 'food Items',
+            data: [30, 40, 20, 50, 80, 90, 20],
+            backgroundColor: ["#0074D9", "#FF4136", "#2ECC40",
+            "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00",
+            "#001f3f", "#39CCCC", "#01FF70", "#85144b",
+            "#F012BE", "#3D9970", "#111111", "#AAAAAA"]
+          }]
+        },
+    });
+
+    // Datatable
+    new DataTable('#tblUserManagement');
+
+</script>
+{% endblock js%}

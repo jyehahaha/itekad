@@ -5,91 +5,279 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="section">
-    <div class="row">
-        <div class="col-12 bg-light">
-          <div class="container mb-3">
-            <div class="row mt-5 mb-4">
-              <div class="col-12 text-center">
-                <h2 class="card-title fw-bold">Campaigns Info</h2>
-                <!-- <p class="-card-subtitle fw-bold text-uppercase">- All Campigns -</p> -->
-              </div>
-            </div>
+<div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 bg-light">
+      <div class="container mb-3">
+        <div class="row mt-5 mb-4">
+          <div class="col-12 text-center">
+            <h2 class="card-title fw-bold">Campaigns Info</h2>
+            <!-- <p class="-card-subtitle fw-bold text-uppercase">- All Campigns -</p> -->
           </div>
         </div>
-    </div>
-    <div class="row mt-3">
-        <div class="col-6">
-            <img src="{% static 'website/images/test.jpeg' %}" width="150px">
-        </div>
-        <div class="col-6">
-        <h1>Recommend Group</h1>
-        <p>South East Asia's #1 Home and Property Services Platform</p>
-        </div>
-        <div class="col-12">
-            <button type="button" class="btn btn-light">
-                CONSUMER GOODS & SERVICES
-            </button>
-        </div>
+      </div>
     </div>
 </div>
 <div class="section">
+   <div class="container">
     <div class="row mt-5">
-        <div class="col-6">
-            <img src="{% static 'website/images/picture3.jpeg' %}">
+        <div class="col-sm-2 col-md-2 col-lg-1">
+            <img src="{% static 'website/images/test.jpeg' %}" width="100%" class="rounded">
         </div>
-        <div class="col-6">
-           <div class="row">
-            <h6>RM 596,310</h6>
-            <small>120% OF THE MIN.TARGET (RM 498,498)</small>
+        <div class="col-sm-10 col-md-10 col-lg-11">
+        <h1>Recommend Group</h1>
+        <p>South East Asia's #1 Home and Property Services Platform</p> <button type="button" class="btn btn-light">
+            CONSUMER GOODS & SERVICES
+        </button>
+        </div>
+    </div>
+   </div>
+</div>
+<div class="section">
+   <div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <img src="{% static 'website/images/picture3.jpg' %}" class="rounded">
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
+           <div class="row mt-2">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2>RM 596,310</h2>
+                <small>120% OF THE MIN.TARGET (RM 498,498)</small>
+            </div>
+           
            </div>
-           <div class="row">
-            <h6>19</h6>
-            <small>INVESTORS</small>
+           <div class="row mt-2">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2>19</h2>
+                <small>INVESTORS</small>
+            </div>
            </div>
-           <div class="row">
-            <h6>RM 214,500</h6>
-            <small>LARGEST INVESTMENT</small>
+           <div class="row mt-2">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2>RM 214,500</h2>
+                <small>LARGEST INVESTMENT</small>
+            </div>
            </div>
-           <div class="row">
-            <h6>30 JUNE 2023 - 15 SEPT 2023</h6>
-            <small>FUNDING PERIOD</small>
-           </div>
-           <div class="row">
-            <a class="btn btn-success" href="#" role="button">INVEST NOW</a>
+           <div class="row mt-2">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <h2>30 JUNE 2023 - 15 SEPT 2023</h2>
+                <small>FUNDING PERIOD</small>
+            </div>
            </div>
         </div>
     </div>
+   </div>
 </div>
 <section>
     <div class="row">
-        <div class="col-12">
-           <nav class="navbar navbar-expand-sm navbar-light bg-light">
-              <div class="container">
-                <div class="collapse navbar-collapse" id="collapsibleNavId">
-                    <ul class="nav nav-pills me-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownId">
-                                <a class="dropdown-item" href="#">Action 1</a>
-                                <a class="dropdown-item" href="#">Action 2</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-             </div>
-           </nav>
+        <div class="col-12 mt-5">
+            <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                  <div class="container">
+                    <div class="collapse navbar-collapse" id="collapsibleNavId">
+                        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                            <a class="btn btn-link" id="btn1" href="#btn1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                               Campaign Info
+                            </a>
+                            <a class="btn btn-link" id="btn2" href="#btn2" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Financial & Documents
+                            </a>
+                            <a class="btn btn-link" id="btn4" href="#btn4" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Investor
+                            </a>
+                        </ul>
+                    </div>
+              </div>
+            </nav>
         </div>
     </div>
-
+   <div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-8 col-lg-8">
+            <div class="show" id="view1">
+                <div class="card card-body border-0">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                        <div class="d-flex align-items-start">
+                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                              <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Summary</button>
+                              <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Problem</button>
+                              <button class="nav-link" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false">Solution</button>
+                              <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Traction</button>
+                              <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Business Model</button>
+                            </div>
+                            <div class="tab-content" id="v-pills-tabContent">
+                              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
+                                <h1>Summary</h1>
+                                <p>Buying a house, either as a home or for rental income, should be one of the best experiences of your life.</p>
+                                <h6>Yet it’s not.</h6>
+                                <p>Because you know that soon, you will have to deal with the interior design, renovations and maintenance of the home, and the process will be a real pain. However, it doesn’t have to be.</p>
+                                <p>Recommend Group is South East Asia’s #1 Home and Property Services platform. We operate as Recommend.my in Malaysia and Sejasa.com in Indonesia. It is a technology platform providing on-demand home maintenance services, a marketplace of home improvement services as well as an interior design company that can furnish a home in as quickly as 6 weeks. We operate a technology-driven, asset-light model which partners with thousands of individuals and SME companies who operate under our brand, use our CRM tools, scheduling and payments platform. Within the on-demand pillar, they also wear our uniform, honor our SOPs and prices.</p>
+                              </div>
+                              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
+                                <h1>Problem</h1>
+                                <p>Designing, renovating and maintaining a home is a pain for customers:</p>
+                                <li>Need so many different types of services, and it’s hard to get recommendations for everyone. Even if a service professional used to be good 2 years ago, there is no guarantee he or his team is still active and good</li>
+                                <li>There is no clarity on scope, quality and prices. You never know what you’re going to get, until it’s done. </li>
+                                <li>After you’ve paid for the service, and a problem occurs, there is no guarantee that the service professional will come back</li>
+                              </div>
+                              <div class="tab-pane fade" id="v-pills-disabled" role="tabpanel" aria-labelledby="v-pills-disabled-tab" tabindex="0">
+                                <h1>Solution</h1>
+                                <p>Recommend Group solves this problem by providing a technology platform for customers to book easily through the web or app, see prices (or price estimates), submit their contact details, and all these jobs gets distributed to service professionals’ App Dashboard using an algorithm that prioritizes ratings / reviews, scope match, location (and many other factors).</p>
+                                <p>The system leverages AI technology to ensure that the process is as smart and seamless as possible - the prices are all set or estimated upfront, the average job gets fulfilled in as quickly as 11 seconds, and the service professional can be at your doorstep in as little time as 45 minutes.</p>
+                              </div>
+                              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
+                                <h1>Traction</h1>
+                                <p>Although the business is seasonal in nature, we have exhibited growth year after year - in terms of successful jobs transacted over the platform, we have growth 5X since 2019. Our revenue in Q1 2023 is the highest it has ever been.</p>
+                                <img src="{% static 'website/images/traction.png' %}" alt="">
+                              </div>
+                              <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">
+                                <h1>Business Model</h1>
+                                <p>Recommend Group has 3 lines of business - Home Maintenance On-Demand, Home Improvement Marketplace and Interior Design.</p>
+                                <img src="{% static 'website/images/business.png' %}" alt="">
+                                <p>We earn our revenue by deducting credits to the service professional, depending on the category and value of the service. Service professionals pay for credits or subscription in advance of accepting a job, so we’re cash-first on both sides of the marketplace.</p>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse mt-3" id="view2">
+                <div class="card card-body border-0">
+                    <h6>Financial & Documents</h6>
+                    <object data="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf"  width="800" height="1000"></object>
+                </div>
+            </div>
+            <div class="collapse mt-3" id="view4">
+                <div class="card card-body border-0">
+                    <h6>Investor</h6>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">No Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td scope="row">Muhammad Bin Ali</td>
+                                    <td>mohd@gmail.com</td>
+                                    <td>011-11123435</td>
+                                </tr>
+                                <tr class="">
+                                    <td scope="row">Siti Aqilah Binti Hassan</td>
+                                    <td>pinkypromise@gmail.com</td>
+                                    <td>019-881343764</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <!-- <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        INVESTMENT SUMMARY
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div class="accordion-body">
+                      <div class="row">
+                        <div class="col-12">
+                            <p>Type</p>
+                            <h5>Equity - OS</h5>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <p>Equity Offered</p>
+                            <h5>~ up to 11.00%</h5>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <p>Valuation</p>
+                            <h5>RM 44,000,000</h5>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <p>Minimum Funding Target</p>
+                            <h5>RM 498,498</h5>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <p>Total Target Amount</p>
+                            <h5>RM 5,483,049</h5>
+                        </div>
+                        <div class="col-12 mt-2">
+                            <p>Tax Relief</p>
+                            <h5>-</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                        BUSINESS OVERVIEW
+                    </button>
+                  </h2>
+                  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <p>Company/LLP Nam</p>
+                                <h5>Recomn Technologies Sdn Bhd</h5>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <p>Location</p>
+                                <h5>A308 (Block A, Unit 8, Level 3) Phileo Damansara 1, 9 Jalan 16/11, Off Jalan Damansara, Section 16, 46350 Petaling Jaya, Selangor,</h5>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <p>Website</p>
+                                <h5>recommend.my</h5>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <p>Registration No.</p>
+                                <h5>201401020765</h5>
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+   </div>
 </section>
 
 {% endblock content %}
 
-{% block js %}{% endblock js %}
+{% block js %}
+<script>
+    $(document).ready(function() {
+        $('#btn1').on("click", function() {
+        $("#view2, #view3, #view4").removeClass('show');
+        $("#view2, #view3, #view4").addClass('collapse');
+        $("#view1").addClass("show");
+        });
+
+        $('#btn2').on("click", function() {
+        $("#view1, #view3, #view4").removeClass('show');
+        $("#view1, #view3, #view4").addClass('collapse');
+        $("#view2").addClass("show");
+        });
+
+        $('#btn3').on("click", function() {
+        $("#view1, #view2, #view4").removeClass('show');
+        $("#view1, #view2, #view4").addClass('collapse');
+        $("#view3").addClass("show");
+        });
+
+        $('#btn4').on("click", function() {
+        $("#view1, #view2, #view3").removeClass('show');
+        $("#view1, #view2, #view3").addClass('collapse');
+        $("#view4").addClass("show");
+        });
+    });
+</script>
+
+{% endblock js %}

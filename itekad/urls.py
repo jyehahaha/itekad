@@ -23,6 +23,8 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('', include('website.urls')),
     path('investor/', include('investor.urls')),
+    path('sfd/', include('sfd.urls')),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

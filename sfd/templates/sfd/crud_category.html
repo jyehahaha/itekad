@@ -1,0 +1,113 @@
+{% extends 'sfd/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+    {% if view == 'create' %}
+    <div class="card--container">
+        <h3 class="main--title">Create Category</h3>
+        <div class="card--container">
+            <div class="row">
+                <div class="col-12">
+                    <form method="POST">
+                      <div class="mb-5">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control">
+                      </div>
+                      <div class="mb-5">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" style="height: 100px"></textarea>
+                    </div>
+                      <div class="mb-5">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Select Status</option>
+                            <option value="1">Active</option>
+                            <option value="2">Not Active</option>
+                          </select>
+                      </div>
+                      <div class="mb-5">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="btn btn-md btn-primary me-md-2" type="button">Create</a>
+                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                          </div>
+                      </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif view == 'update' %}
+    <div class="card--container">
+        <h3 class="main--title">Update Category</h3>
+        <div class="card--container">
+            <div class="row">
+                <div class="col-12">
+                    <form method="POST">
+                      <div class="mb-5">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" disable>
+                      </div>
+                      <div class="mb-5">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" style="height: 100px"></textarea>
+                    </div>
+                      <div class="mb-5">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" aria-label="Default select example">
+                            <option selected>Select Status</option>
+                            <option value="1">Active</option>
+                            <option value="2">Not Active</option>
+                          </select>
+                      </div>
+                      <div class="mb-5">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a class="btn btn-md btn-primary me-md-2" type="button">Save</a>
+                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                          </div>
+                      </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% elif view == 'details' %}
+    <div class="card--container">
+        <h3 class="main--title">Details Category</h3>
+        <div class="card--container">
+            <div class="row">
+                <div class="col-12">
+                    <form method="POST">
+                      <div class="mb-5">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control"  placeholder="Service" disable>
+                      </div>
+                      <div class="mb-5">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" style="height: 100px" disable></textarea>
+                    </div>
+                      <div class="mb-5">
+                        <label class="form-label">Status</label>
+                        <input type="text" class="form-control"  placeholder="Active" disable>
+                      </div>
+                      <div class="mb-5">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a href="{% url 'category_page' %}" class="btn btn-md btn-primary me-md-2" type="button">Return to Category</a>
+                          </div>
+                      </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock  %}
+
+{% block js%}
+
+{% endblock js%}

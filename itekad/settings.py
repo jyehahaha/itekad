@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'website',
     'investor',
     'users',
+    'sfd',
 ]
 
 MIDDLEWARE = [

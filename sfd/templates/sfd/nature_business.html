@@ -1,0 +1,86 @@
+{% extends 'sfd/master/base.html' %}
+{% load static %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+    <div class="card--container">
+        <h3 class="main--title">Nature of Business</h3>
+        <div class="card--container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'create_nature_of_business_page' %}" class="btn btn-primary me-md-2" type="button"><i class="fa-solid fa-plus"></i>&nbspCreate Nature of Business</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <table id="tblNature" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Date/Time Created</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.</td>
+                                <td>Food & Beverage</td>
+                                <td>2023/05/01 13:05 PM</td>
+                                <td>Not Active</td>
+                                <td>
+                                    <div class="d-grid gap-2 d-md-block">
+                                    <a href="{% url 'details_nature_of_business_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+                                    <a href="{% url 'update_nature_of_business_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+                                    <a href="{% url 'delete_nature_of_business_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                    
+                                    </div>
+                                </td>
+    
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>Service</td>
+                                <td>2023/08/15 20:15 PM</td>
+                                <td>Active</td>
+                                <td>
+                                    <div class="d-grid gap-2 d-md-block">
+                                        <a href="{% url 'details_nature_of_business_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+                                        <a href="{% url 'update_nature_of_business_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+                                        <a href="{% url 'delete_nature_of_business_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                          
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2.</td>
+                                <td>Agriculture</td>
+                                <td>2023/08/15 20:15 PM</td>
+                                <td>Active</td>
+                                <td>
+                                    <div class="d-grid gap-2 d-md-block">
+                                        <a href="{% url 'details_nature_of_business_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+                                        <a href="{% url 'update_nature_of_business_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+                                        <a href="{% url 'delete_nature_of_business_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                         
+                                    </div>
+                                </td>                           
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock  %}
+
+{% block js%}
+<script>
+    new DataTable('#tblNature');
+</script>
+
+{% endblock js%}
