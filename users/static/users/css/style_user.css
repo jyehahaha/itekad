@@ -18,7 +18,7 @@ body {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 350px;
+    width: 150px;
     height: 100vh;
     padding: 0 1.7rem;
     color: #fff;
@@ -27,10 +27,10 @@ body {
     background: rgba(254,128,0);
 }
 
-/* .sidebar:hover{
+.sidebar:hover{
     width:350px;
     transition: 0.5s;
-} */
+}
 
 .logo {
     height: 180px;

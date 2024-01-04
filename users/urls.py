@@ -14,6 +14,4 @@ urlpatterns = [
     path('user/update/<int:id>/', views.UpdateUserManagementView, name='update_user_management_page'),
     path('user/delete/<int:id>/', views.DeleteUserManagementView, name='delete_user_management_page'),
     path('user/details/<int:id>/', views.DetailsUserManagementView, name='details_user_management_page'),
-
-
 ]
