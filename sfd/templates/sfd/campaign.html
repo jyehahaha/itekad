@@ -1,123 +1,110 @@
 {% extends 'sfd/master/base.html' %}
 
 {% block title %}iTekad{% endblock title %}
-{% block css %}
-<style>
-
-</style>
-{% endblock css %}
+{% block css %}{% endblock css %}
 
 {% block content %}
-<div class="card--container mb-5">
-    <h5 class="card-title">Search</h5>
-    <div class="card--container">
-        <div class="card-body">
-            <form method="POST">
-                <div class="row">
-                    <div class="col-6 mb-3">
-                        <label class="form-label">Business Profile ID</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="col-6">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="col-6 mb-3">
-                        <label class="form-label">Start Campaign Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="col-6 mb-3">
-                        <label class="form-label">End Campaign Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select Status</option>
-                            <option value="1">Active</option>
-                            <option value="2">Not Active</option>
-                          </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-danger" type="button"><i class="fa-solid fa-xmark"></i>&nbspReset</a>
-                            <a class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspSearch</a>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-       
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Search</div>
+<form method="POST">
+  <div class="row">
+    <div class="col-6 mb-3">
+      <label class="form-label">Business Profile ID</label>
+      <input type="text" class="form-control">
     </div>
+    <div class="col-6">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Start Campaign Date</label>
+      <input type="date" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">End Campaign Date</label>
+      <input type="date" class="form-control">
+    </div>
+    <div class="col-12 mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Select Status</option>
+        <option value="1">Active</option>
+        <option value="2">Not Active</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-danger" type="button"><i class="fa-solid fa-xmark"></i>&nbspReset</a>
+        <a class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspSearch</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="mb-5"></div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Campaigns</div>
+<div class="row">
+  <div class="col-12">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="{% url 'create_campaign_page' %}" class="btn btn-primary me-md-2" type="button"><i class="fa-solid fa-plus"></i>&nbspCreate Campaign</a>
+    </div>
+  </div>
 </div>
-<div class="card--container">
-    <h3 class="main--title">Campaign</h3>
-    <div class="card--container">
-        <div class="row">
-            <div class="col-12">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="{% url 'create_campaign_page' %}" class="btn btn-primary me-md-2" type="button"><i class="fa-solid fa-plus"></i>&nbspCreate Campaign</a>
-                </div>
+<div class="mb-3"></div>
+<div class="row">
+  <div class="col-12">
+    <table id="tblCampaign" class="table table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>Campaign ID</th>
+          <th>Business profile ID</th>
+          <th>Title</th>
+          <th>Trademark</th>
+          <th>Start Date/Time</th>
+          <th>End Date/Time</th>
+          <th>Status</th>
+          <th width="20%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1.</td>
+          <td>011023150339</td>
+          <td>Ribbon</td>
+          <td>Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>2023/11/01 13:05 PM</td>
+          <td>Active</td>
+          <td> 
+            <div class="d-grid gap-2 d-md-block">
+            <a href="{% url 'details_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+            <a href="{% url 'update_campaign_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+            <a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
+            <a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
             </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-12">
-                
-                <table id="tblCampaign" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Campaign ID</th>
-                            <th>Business profile ID</th>
-                            <th>Title</th>
-                            <th>Trademark</th>
-                            <th>Start Date/Time Campaign</th>
-                            <th>End Date/Time Campaign</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>011023150339</td>
-                            <td>Ribbon</td>
-                            <td>Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App</td>
-                            <td>2023/05/01 13:05 PM</td>
-                            <td>2023/11/01 13:05 PM</td>
-                            <td>Active</td>
-                            <td> 
-                                <div class="d-grid gap-2 d-md-block">
-                                <a href="{% url 'details_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                <a href="{% url 'update_campaign_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                <a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
-                                <a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>030923150339</td>
-                            <td>PREMIUMLOGY</td>
-                            <td>To deliver innovative techniques and technologies to promote sustainability and profitability in the agriculture industry.</td>
-                            <td>2023/12/12 10:05 PM</td>
-                            <td>2024/06/12 10:05 PM</td>
-                            <td>Not Active</td>
-                            <td> 
-                                <div class="d-grid gap-2 d-md-block">
-                                <a href="{% url 'details_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                <a href="{% url 'update_campaign_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                <a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
-                                <a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+          </td>
+        </tr>
+        <tr>
+          <td>2.</td>
+          <td>030923150339</td>
+          <td>PREMIUMLOGY</td>
+          <td>To deliver innovative techniques and technologies to promote sustainability and profitability in the agriculture industry.</td>
+          <td>2023/12/12 10:05 PM</td>
+          <td>2024/06/12 10:05 PM</td>
+          <td>Not Active</td>
+          <td> 
+            <div class="d-grid gap-2 d-md-block">
+              <a href="{% url 'details_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+              <a href="{% url 'update_campaign_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+              <a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
+              <a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
             </div>
-        </div>
-    </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock content %}
 

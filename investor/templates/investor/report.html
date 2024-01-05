@@ -1,0 +1,49 @@
+{% extends 'investor/master/base.html' %}
+
+{% block title %}iTekad{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="row">
+  <div class="col-2">
+    <a href="{% url 'home_page' %}" type="button" class="btn btn-warning"><i class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
+  </div>
+  <div class="col-10 align-self-center">
+    <h4 class="card-title fw-bold text-uppercase">Performance Report</h4>
+  </div>
+</div>
+
+<div class="row mt-5">
+  <div class="col-12">
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th scope="col" width="5%" class="text-center">#</th>
+            <th scope="col" class="text-center">Entreprenuer</th>
+            <th scope="col" width="10%" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row" class="text-center">1.</td>
+            <td>ABC Entreprise</td>
+            <td class="text-center">
+              <a href="#" class="text-decoration-none">View</a>
+            </td>
+          </tr>
+          <tr>
+            <td scope="row" class="text-center">2.</td>
+            <td>DEF Sdn Bhd</td>
+            <td class="text-center">
+              <a href="#" class="text-decoration-none">View</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}{% endblock js %}

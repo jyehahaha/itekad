@@ -1,129 +1,105 @@
 {% extends 'sfd/master/base.html' %}
 {% load static %}
 
-{% block title %}iTekad{% endblock title %}
+{% block title %} iTekad - Dashboard {% endblock title %}
 {% block css %}{% endblock css %}
 
 {% block content %}
-    <div class="card--container">
-        <h3 class="main--title">Quick Stat</h3>
-        <div class="card--wrapper">
-            <div class="investor--card">
-                <div class="card--header">
-                    <div class="amount">
-                        <span class="title">
-                           Investor
-                        </span>
-                        <span class="amount--value">200</span>
-                    </div>
-                    <i class="fa-solid fa-user icon"></i>
-                </div>
-                <span class="card-detail">
-                    Total Investors
-                </span>
-            </div>
-            <div class="investor--card">
-                <div class="card--header">
-                    <div class="amount">
-                        <span class="title">
-                          Fund
-                        </span>
-                        <span class="amount--value">1500</span>
-                    </div>
-                    <i class="fa-solid fa-users icon"></i>
-                </div>
-                <span class="card-detail">
-                   Total Collected Fund
-                </span>
-            </div>
-            <div class="investor--card">
-                <div class="card--header">
-                    <div class="amount">
-                        <span class="title">
-                          Campaign
-                        </span>
-                        <span class="amount--value">50</span>
-                    </div>
-                    <i class="fa-solid fa-layer-group icon"></i>
-                </div>
-                <span class="card-detail">
-                   Total Campaign
-                </span>
-            </div>
-            <div class="investor--card">
-                <div class="card--header">
-                    <div class="amount">
-                        <span class="title">
-                          Campaign Completed
-                        </span>
-                        <span class="amount--value">25</span>
-                    </div>
-                    <i class="fa-solid fa-check-double icon"></i>
-                </div>
-                <span class="card-detail">
-                   Total Campaign Completed
-                </span>
-            </div>
-        </div>
-     </div>
-     <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-6">
-            <div class="card--container mt-3 ">
-                <canvas id="bar"></canvas>
-              </div>
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-6">
-            <div class="card--container mt-3 ">
-                <canvas id="doughnut"></canvas>
-              </div>
-        </div>
-     </div>
-     <div class="card--container mt-3">
-        <h3 class="main--title">Investor's Data</h3>
+  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Quick Stat</div>
+  <div class="row">
+    <div class="col-3">
+      <div class="card">
         <div class="card-body">
-            <table id="tblUserManagement" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Mobile Phone</th>
-                        <th>MyKad No.</th>
-                        <th>Account No</th>
-                        <th>Account Name</th>
-                        <th>Date/Time Created</th>
-                        <th>Status</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ahmad Abu</td>
-                        <td>Ahmad46</td>
-                        <td>ahmad.abu@muamalat.com.my</td>
-                        <td>+6011-2345123</td>
-                        <td>700901-14-5122</td>
-                        <td>16430009876</td>
-                        <td>Maybank</td>
-                        <td>2023/05/01 13:05 PM</td>
-                        <td>Not Active</td>
-                    </tr>
-                    <tr>
-                        <td>Ahmad Faiq</td>
-                        <td>ahmad.faiq</td>
-                        <td>faiq@muamalat.com.my</td>
-                        <td>+6019-11119876</td>
-                        <td>881111-01-5234</td>
-                        <td>7654321009</td>
-                        <td>CIMB</td>
-                        <td>2023/05/01 13:05 PM</td>
-                        <td>Not Active</td>
-                    </tr>
-                </tbody>
-            </table>
+          <i class='bx bx-user-circle bx-pull-left bx-lg'></i>
+          <h4 class="card-title">Investor</h4>
+          <p class="card-subtitle">200</p>
         </div>
-     </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <i class='bx bx-wallet bx-pull-left bx-lg'></i>
+          <h4 class="card-title">Total Fund</h4>
+          <p class="card-subtitle">1500</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <i class='bx bx-credit-card bx-pull-left bx-lg'></i>
+          <h4 class="card-title">Collected Fund</h4>
+          <p class="card-subtitle">1500</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-3">
+      <div class="card">
+        <div class="card-body">
+          <i class='bx bx-layer bx-pull-left bx-lg'></i>
+          <h4 class="card-title">Campaigns</h4>
+          <p class="card-subtitle">50</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <div class="mt-5"></div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="card--container mt-3 ">
+        <canvas id="bar"></canvas>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6">
+      <div class="card--container mt-3 ">
+        <canvas id="doughnut"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-5"></div>
+  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Investor's Data</div>
+  <table id="tblUserManagement" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Mobile Phone</th>
+          <th>MyKad No.</th>
+          <th>Account No</th>
+          <th>Account Name</th>
+          <th>Date/Time Created</th>
+          <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>Ahmad Abu</td>
+          <td>Ahmad46</td>
+          <td>ahmad.abu@muamalat.com.my</td>
+          <td>+6011-2345123</td>
+          <td>700901-14-5122</td>
+          <td>16430009876</td>
+          <td>Maybank</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>Not Active</td>
+        </tr>
+        <tr>
+          <td>Ahmad Faiq</td>
+          <td>ahmad.faiq</td>
+          <td>faiq@muamalat.com.my</td>
+          <td>+6019-11119876</td>
+          <td>881111-01-5234</td>
+          <td>7654321009</td>
+          <td>CIMB</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>Not Active</td>
+        </tr>
+    </tbody>
+  </table>
 {% endblock  %}
 
 {% block js%}

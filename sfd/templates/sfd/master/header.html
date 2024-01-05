@@ -1,15 +1,32 @@
 {% load static %}
-<div class="header--wrapper">
-  <div class="header--title">
-      <span>USER MANAGEMENT</span>
-      <h2>Create User</h2>
+<nav class="navbar navbar-expand-sm navbar-dark bg-warning">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img src="https://map.muamalat.com.my/media/images/muamalat_logo_white.original.png" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
+    </a>
   </div>
-  <div class="user--info">
-      <div class="search--box">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="search" />
-      </div>
-     <img src="{% static 'sfd/img/user.svg' %}" alt="">
-  </div>
-</div>
+</nav>
   
+<nav class="navbar navbar-expand navbar-light bg-light shadow-sm">
+  <div class="container">
+    <div class="nav navbar-nav">
+      <a class="nav-item nav-link active" href="{% url 'dashboard_page' %}" aria-current="page">Dashboard <span class="visually-hidden">(current)</span></a>
+      <a class="nav-item nav-link" href="{% url 'user_management_page' %}">Users</a>
+      <a class="nav-item nav-link" href="{% url 'campaign_page' %}">Campaigns</a>
+      <a class="nav-item nav-link" href="{% url 'business_profile_page' %}">Enterprenuer</a>
+      <a class="nav-item nav-link" href="{% url 'upload_report_page' %}">Performance Report</a>
+      <a class="nav-item nav-link" href="#">Settings</a>
+    </div>
+
+    <div class="text-end">
+      <div class="dropdown">
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Muhammad Alif Tajudin</button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="{% url 'login_page' %}">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
