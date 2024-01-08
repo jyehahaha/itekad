@@ -8,177 +8,167 @@
 {% endblock css %}
 
 {% block content %}
-<div class="card--container mb-5">
-    <h5 class="card-title">Search</h5>
-    <div class="card--container">
-        <div class="card-body">
-            <form method="POST">
-                <div class="row">
-                    <div class="col-6">
-                        <label class="form-label">Company's Name</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    
-                    <div class="col-6 mb-3">
-                        <label class="form-label">Business Registration Number</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="col-6 mb-3">
-                        <label class="form-label">Tranche</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select Tranche</option>
-                            <option value="1">Tranche 1</option>
-                            <option value="2">Tranche 2</option>
-                            <option value="2">Tranche 3</option>
-                          </select>
-                    </div>
-                    <div class="col-3 mb-3">
-                        <label class="form-label">Start Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="col-3 mb-3">
-                        <label class="form-label">End Date</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="col-12 mb-3">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select Status</option>
-                            <option value="1">Active</option>
-                            <option value="2">Not Active</option>
-                          </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-danger" type="button"><i class="fa-solid fa-xmark"></i>&nbspReset</a>
-                            <a class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspSearch</a>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-       
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Search</div>
+<form method="POST">
+  <div class="row">
+    <div class="col-6">
+      <label class="form-label">Company's Name</label>
+      <input type="text" class="form-control">
     </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Business Registration Number</label>
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Tranche</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Select Tranche</option>
+        <option value="1">Tranche 1</option>
+        <option value="2">Tranche 2</option>
+        <option value="2">Tranche 3</option>
+      </select>
+    </div>
+    <div class="col-3 mb-3">
+      <label class="form-label">Start Date</label>
+      <input type="date" class="form-control">
+    </div>
+    <div class="col-3 mb-3">
+      <label class="form-label">End Date</label>
+      <input type="date" class="form-control">
+    </div>
+    <div class="col-12 mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Select Status</option>
+        <option value="1">Active</option>
+        <option value="2">Not Active</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-danger" type="button"><i class="fa-solid fa-xmark"></i>&nbspReset</a>
+        <a class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspSearch</a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Business Profile</div>
+<div class="row">
+  <div class="col-12">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="{% url 'create_business_profile_page' %}" class="btn btn-primary me-md-2" type="button"><i class="fa-solid fa-plus"></i>&nbspCreate</a>
+    </div>
+  </div>
 </div>
-<div class="card--container">
-    <h3 class="main--title">Business Profile</h3>
-    <div class="card--container">
-        <div class="row">
-            <div class="col-12">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="{% url 'create_business_profile_page' %}" class="btn btn-primary me-md-2" type="button"><i class="fa-solid fa-plus"></i>&nbspCreate Business Profile</a>
-                </div>
+
+<div class="row mt-3">
+  <div class="col-12">
+    <table id="tblBusinessProfile" class="table table-striped" style="width:100%">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Entreprenuer's Name</th>
+          <th>Company's Name</th>
+          <th>Business Registration</th>
+          <th>Tranche</th>
+          <th>Nature of Business</th>
+          <th>Date/Time Created</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>011023150339</td>
+          <td>Muhammad Bin Ahmad</td>
+          <td>Muhamad Ahmad Enterprise</td>
+          <td>ABC123456789(6789)</td>
+          <td>2</td>
+          <td>Service</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>Not Active</td>
+          <td> 
+            <div class="d-grid gap-2 d-md-block">
+            <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+            <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+            <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
             </div>
-        </div>
-        <div class="row mt-5">
-            <div class="col-12">
-                <table id="tblBusinessProfile" class="table table-striped" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Entreprenuer's Name</th>
-                            <th>Company's Name</th>
-                            <th>Business Registration</th>
-                            <th>Tranche</th>
-                            <th>Nature of Business</th>
-                            <th>Date/Time Created</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>011023150339</td>
-                            <td>Muhammad Bin Ahmad</td>
-                            <td>Muhamad Ahmad Enterprise</td>
-                            <td>ABC123456789(6789)</td>
-                            <td>2</td>
-                            <td>Service</td>
-                            <td>2023/05/01 13:05 PM</td>
-                            <td>Not Active</td>
-                            <td> 
-                                <div class="d-grid gap-2 d-md-block">
-                                <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>030923150339</td>
-                            <td>Anas Bin Ahmad Malik</td>
-                            <td>SBS Entreprise</td>
-                            <td>ABC123456789(6789)</td>
-                            <td>2</td>
-                            <td>Service</td>
-                            <td>2023/05/01 13:05 PM</td>
-                            <td>Not Active</td>
-                            <td> 
-                                <div class="d-grid gap-2 d-md-block">
-                                <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>310123150339</td>
-                            <td>Muhammad Bin Ahmad</td>
-                            <td>Muhamad Ahmad Enterprise</td>
-                            <td>ABC123456789(6789)</td>
-                            <td>2</td>
-                            <td>Service</td>
-                            <td>2023/05/01 13:05 PM</td>
-                            <td>Not Active</td>
-                            <td> 
-                                <div class="d-grid gap-2 d-md-block">
-                                <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>280823150339</td>
-                            <td>Muhammad Bin Ahmad</td>
-                            <td>Muhamad Ahmad Enterprise</td>
-                            <td>ABC123456789(6789)</td>
-                            <td>2</td>
-                            <td>Service</td>
-                            <td>2023/05/01 13:05 PM</td>
-                            <td>Not Active</td>
-                            <td> 
-                                <div class="d-grid gap-2 d-md-block">
-                                <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>121223150339</td>
-                            <td>Muhammad Bin Ahmad</td>
-                            <td>Muhamad Ahmad Enterprise</td>
-                            <td>ABC123456789(6789)</td>
-                            <td>2</td>
-                            <td>Service</td>
-                            <td>2023/05/01 13:05 PM</td>
-                            <td>Not Active</td>
-                            <td> 
-                                <div class="d-grid gap-2 d-md-block">
-                                <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+          </td>
+        </tr>
+        <tr>
+          <td>030923150339</td>
+          <td>Anas Bin Ahmad Malik</td>
+          <td>SBS Entreprise</td>
+          <td>ABC123456789(6789)</td>
+          <td>2</td>
+          <td>Service</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>Not Active</td>
+          <td> 
+            <div class="d-grid gap-2 d-md-block">
+            <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+            <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+            <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
             </div>
-        </div>
-    </div>
+          </td>
+        </tr>
+        <tr>
+          <td>310123150339</td>
+          <td>Muhammad Bin Ahmad</td>
+          <td>Muhamad Ahmad Enterprise</td>
+          <td>ABC123456789(6789)</td>
+          <td>2</td>
+          <td>Service</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>Not Active</td>
+          <td> 
+            <div class="d-grid gap-2 d-md-block">
+            <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+            <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+            <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>280823150339</td>
+          <td>Muhammad Bin Ahmad</td>
+          <td>Muhamad Ahmad Enterprise</td>
+          <td>ABC123456789(6789)</td>
+          <td>2</td>
+          <td>Service</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>Not Active</td>
+          <td> 
+            <div class="d-grid gap-2 d-md-block">
+            <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+            <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+            <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>121223150339</td>
+          <td>Muhammad Bin Ahmad</td>
+          <td>Muhamad Ahmad Enterprise</td>
+          <td>ABC123456789(6789)</td>
+          <td>2</td>
+          <td>Service</td>
+          <td>2023/05/01 13:05 PM</td>
+          <td>Not Active</td>
+          <td> 
+            <div class="d-grid gap-2 d-md-block">
+            <a href="{% url 'details_business_profile_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+            <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+            <a href="{% url 'delete_business_profile_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock content %}
 

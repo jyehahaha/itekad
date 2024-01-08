@@ -14,18 +14,91 @@
         <table class="table table-light">
           <tbody>
             <tr>
-              <th width="15%">
-                <div class="mb-3">
-                  <label class="form-label">Name</label>
-                </div>
-              </th>
+              <th width="15%" class="align-middle">Username</th>
               <td width="35%">
-                <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="Name">
-                </div>
+                <input type="text" class="form-control" placeholder="Username">
               </td>
-              <th width="15%">Account No.</th>
-              <td width="35%">16430009876</td>
+              <th width="15%" class="align-middle">Email Address</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Email Address">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Full Name</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Full Name">
+              </td>
+              <th width="15%" class="align-middle">MyKad No.</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="MyKad No.">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Mobile No.</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Mobile No.">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Address Line 1</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Address Line 1">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Address Line 2</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Address Line 2">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Address Line 3</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Address Line 3">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Postcode</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Postcode">
+              </td>
+              <th width="15%" class="align-middle">City</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="City">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">State</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="State">
+              </td>
+              <th width="15%" class="align-middle">Country</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="" value="Malaysia">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mb-3"></div>
+  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-light">
+          <tbody>
+            <tr>
+              <th width="15%" class="align-middle">Bank Name</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Bank Name">
+              </td>
+              <th width="15%" class="align-middle">Bank Account No.</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Bank Account No.">
+              </td>
             </tr>
           </tbody>
         </table>
@@ -35,328 +108,251 @@
 
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-light">
+          <tbody>
+            <tr>
+              <th width="15%" class="align-middle">Role</th>
+              <td width="35%">
+                <select class="form-select">
+                  <option selected>-- Select --</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Entreprenuer</option>
+                  <option value="3">Investor</option>
+                </select>
+              </td>
+              <th width="15%" class="align-middle">Category</th>
+              <td width="35%">
+                <select class="form-select">
+                  <option selected>-- Select --</option>
+                  <option value="1">Reviewer</option>
+                  <option value="2">Approver</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Status</th>
+              <td width="35%">
+                <select class="form-select">
+                  <option selected>-- Select --</option>
+                  <option value="1">Active</option>
+                  <option value="2">Not Active</option>
+                </select>
+              </td>
+              <th width="15%" class="align-middle"></th>
+              <td width="35%"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
-
-  <div class="card--container">
-    <h3 class="main--title">General Details</h3>
-    <p>Fill in the details</p>
-    <div class="card--container">
-      <div class="row">
-        <div class="col-1 mb-5">
-          <label class="form-label">Name</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Name">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Username</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Username">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Email</label>
-        </div>
-        <div class="col-11">
-          <input type="email" class="form-control" placeholder="Email">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Mobile Phone</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Mobile Phone">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Mykad No.</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Mykad">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Address 1</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Address 1">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Address 2</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Address 2">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Postcode</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Postcode">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">City</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="City">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">State</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="State">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Country</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Country">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Account Number</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Account Number">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Account Name</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Account Name">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card--container mt-3">
-    <h3 class="main--title">Role</h3>
-    <p>Select role of user</p>
-    <div class="card--container">
-      <div class="row">
-        <div class="col-1 mb-5">
-          <label class="form-label">Role</label>
-        </div>
-        <div class="col-11">
-          <select class="form-select">
-            <option selected>Select Role</option>
-            <option value="1">Admin</option>
-            <option value="2">Entreprenuer</option>
-            <option value="3">Investor</option>
-          </select>
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Category</label>
-        </div>
-        <div class="col-11">
-          <select class="form-select">
-            <option selected>Select Category</option>
-            <option value="1">Reviewer</option>
-            <option value="2">Approver</option>
-          </select>
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Status</label>
-        </div>
-        <div class="col-11">
-          <select class="form-select">
-            <option selected>Select Status</option>
-            <option value="1">Active</option>
-            <option value="2">Not Active</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card--container mt-3">
-    <h3 class="main--title">Password</h3>
-    <div class="card--container">
-      <div class="row">
-        <div class="col-1 mb-5">
-          <label class="form-label">Password</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Password">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Confirm Password</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Confirm Password">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-3 mb-3">
+  <div class="row">
     <div class="col-12">
-      <div class="d-grid gap-2">
-        <a class="btn btn-md btn-primary me-md-2" type="button">Create</a>
-        <a class="btn btn-md btn-danger" type="button">Cancel</a>
+      <div class="table-responsive">
+        <table class="table table-light">
+          <tbody>
+            <tr>
+              <th width="15%" class="align-middle">Password</th>
+              <td width="35%" class="align-middle">
+                <input type="text" class="form-control" placeholder="Password">
+              </td>
+              <th width="15%" class="align-middle">Confirm Password</th>
+              <td width="35%" class="align-middle">
+                <input type="text" class="form-control" placeholder="Confirm Password">
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+  </div>
+
+  <div class="mb-3"></div>
+  <div class="row">
+    <div class="col-12 text-end">
+      <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bx-chevron-left bx-pull-left bx-sm'></i>Cancel</a>
+      <button class="btn btn-warning" type="button" style="width:100px;"><i class='bx bx-edit bx-pencil bx-pull-left bx-sm'></i>Create</button>
     </div>
   </div>
 </form>
 {% elif view == 'update' %}
 <form method="POST">
   <div class="row">
-    <div class="col-12"></div>
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-light">
+          <tbody>
+            <tr>
+              <th width="15%" class="align-middle">Username</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Username">
+              </td>
+              <th width="15%" class="align-middle">Email Address</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Email Address">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Full Name</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Full Name">
+              </td>
+              <th width="15%" class="align-middle">MyKad No.</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="MyKad No.">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Mobile No.</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Mobile No.">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Address Line 1</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Address Line 1">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Address Line 2</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Address Line 2">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Address Line 3</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Address Line 3">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Postcode</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Postcode">
+              </td>
+              <th width="15%" class="align-middle">City</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="City">
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">State</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="State">
+              </td>
+              <th width="15%" class="align-middle">Country</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="" value="Malaysia">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mb-3"></div>
+  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-light">
+          <tbody>
+            <tr>
+              <th width="15%" class="align-middle">Bank Name</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Bank Name">
+              </td>
+              <th width="15%" class="align-middle">Bank Account No.</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Bank Account No.">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="table-responsive">
+        <table class="table table-light">
+          <tbody>
+            <tr>
+              <th width="15%" class="align-middle">Role</th>
+              <td width="35%">
+                <select class="form-select">
+                  <option selected>-- Select --</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Entreprenuer</option>
+                  <option value="3">Investor</option>
+                </select>
+              </td>
+              <th width="15%" class="align-middle">Category</th>
+              <td width="35%">
+                <select class="form-select">
+                  <option selected>-- Select --</option>
+                  <option value="1">Reviewer</option>
+                  <option value="2">Approver</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Status</th>
+              <td width="35%">
+                <select class="form-select">
+                  <option selected>-- Select --</option>
+                  <option value="1">Active</option>
+                  <option value="2">Not Active</option>
+                </select>
+              </td>
+              <th width="15%" class="align-middle"></th>
+              <td width="35%"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
-
-  <div class="card--container">
-    <h3 class="main--title">General Details</h3>
-    <p>Fill in the details</p>
-    <div class="card--container">
-      <div class="row">
-        <div class="col-1 mb-5">
-          <label class="form-label">Name</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Ahmad Abu">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Username</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Ahmad46">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Email</label>
-        </div>
-        <div class="col-11">
-          <input type="email" class="form-control" placeholder="ahmad.abu@muamalat.com.my">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Mobile Phone</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="+6011-2345123">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Mykad No.</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="700901-14-5122">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Address 1</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="No 24 Jalan Melawi">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Address 2</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Taman Melawi Indah 10">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Postcode</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="56100">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">City</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Cheras">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">State</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Wilayah Persekutuan Kuala Lumpur">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Country</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Malaysia">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Account Number</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="16430009876">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Account Name</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="Maybank">
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card--container mt-3">
-    <h3 class="main--title">Role</h3>
-    <p>Select role of user</p>
-    <div class="card--container">
-      <div class="row">
-        <div class="col-1 mb-5">
-          <label class="form-label">Role</label>
-        </div>
-        <div class="col-11">
-          <select class="form-select">
-            <option selected>Investor</option>
-            <option value="1">Admin</option>
-            <option value="2">Entreprenuer</option>
-          </select>
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Category</label>
-        </div>
-        <div class="col-11">
-          <select class="form-select">
-            <option selected>-</option>
-            <option value="1">Reviewer</option>
-            <option value="2">Approver</option>
-            <option value="3">-</option>
-          </select>
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Status</label>
-        </div>
-        <div class="col-11">
-          <select class="form-select">
-            <option selected>Active</option>
-            <option value="1">Active</option>
-            <option value="2">Not Active</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card--container mt-3">
-    <h3 class="main--title">Password</h3>
-    <div class="card--container">
-      <div class="row">
-        <div class="col-1 mb-5">
-          <label class="form-label">Password Expiry</label>
-        </div>
-        <div class="col-11">
-          <input type="text" class="form-control" placeholder="30/10/2025">
-        </div>
-        <div class="col-1 mb-5">
-          <label class="form-label">Last Reset Password</label>
-        </div>
-        <div class="col-6">
-          <input type="text" class="form-control" placeholder="11/08/2023 14:01 PM">
-        </div>
-        <div class="col-5">
-          <a class="btn btn-md btn-info" type="button">Send Password Link</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row mt-3 mb-3">
+  <div class="row">
     <div class="col-12">
-      <div class="d-grid gap-2">
-        <a class="btn btn-md btn-success me-md-2" type="button">Save</a>
-        <a class="btn btn-md btn-danger" type="button">Cancel</a>
+      <div class="table-responsive">
+        <table class="table table-light">
+          <tbody>
+            <tr>
+              <th width="15%" class="align-middle">Password</th>
+              <td width="35%" class="align-middle">
+                <input type="text" class="form-control" placeholder="Password">
+              </td>
+              <th width="15%" class="align-middle">Confirm Password</th>
+              <td width="35%" class="align-middle">
+                <input type="text" class="form-control" placeholder="Confirm Password">
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+  </div>
+
+  <div class="mb-3"></div>
+  <div class="row">
+    <div class="col-12 text-end">
+      <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bx-chevron-left bx-pull-left bx-sm'></i>Cancel</a>
+      <button class="btn btn-warning" type="button" style="width:100px;"><i class='bx bx-edit bx-pencil bx-pull-left bx-sm'></i>Update</button>
     </div>
   </div>
 </form>
@@ -376,7 +372,7 @@
             <th>Full Name</th>
             <td>Ahmad Bin Abu</td>
             <th>MyKad No.</th>
-            <td>Ahmad Bin Abu</td>
+            <td>123456-78-9012</td>
           </tr>
           <tr>
             <th>Address</th>
@@ -472,8 +468,8 @@
 <div class="mb-3"></div>
 <div class="row">
   <div class="col-12 text-end">
-    <a href="{% url 'user_management_page' %}" type="button" class="btn btn-danger" style="width: 100px;"><i class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
-    <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-success" type="button" style="width: 100px;"><i class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
+    <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
+    <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-warning" type="button" style="width: 100px;"><i class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
   </div>
 </div>
 {% endif %}
