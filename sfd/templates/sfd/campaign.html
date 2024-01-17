@@ -32,21 +32,21 @@
       </select>
     </div>
   </div>
+
+  <div class="mt-3"></div>
   <div class="row">
-    <div class="col-12">
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-danger" type="button"><i class="fa-solid fa-xmark"></i>&nbspReset</a>
-        <a class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspSearch</a>
-      </div>
+    <div class="col-12 text-end">
+      <a class="btn btn-secondary" type="button"><i class="bx bx-refresh bx-sm bx-pull-left"></i>Reset</a>
+      <a class="btn btn-warning" type="button"><i class="bx bx-search bx-sm bx-pull-left"></i>Search</a>
     </div>
   </div>
 </form>
 
 <div class="mb-5"></div>
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Campaigns</div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">List of Campaigns</div>
 <div class="row">
   <div class="col-12 text-end">
-    <a href="{% url 'create_campaign_page' %}" class="btn btn-primary" type="button"><i class="bx bx-plus-circle bx-sm bx-pull-left"></i>Create</a>
+    <a href="{% url 'create_campaign_page' %}" class="btn btn-primary" type="button"><i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create</a>
   </div>
 </div>
 <div class="mb-3"></div>
@@ -77,9 +77,10 @@
           <td> 
             <div class="d-grid gap-2 d-md-block">
             <a href="{% url 'details_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-            <a href="{% url 'update_campaign_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-            <a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
-            <a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
+            <br><a href="{% url 'update_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+            <br><a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-user"></i>&nbsp;Entrepreneur</a>
+            <br><a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-user"></i>&nbsp;Invest</a>
+            <br><a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
             </div>
           </td>
         </tr>

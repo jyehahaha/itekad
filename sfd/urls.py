@@ -3,11 +3,6 @@ from . import views
 
 urlpatterns = [
     path('dashboard/', views.DashboardView, name='dashboard_page'),
-    path('tranche/', views.TrancheView, name='tranche_page'),
-    path('tranche/create/', views.CreateTrancheView, name='create_tranche_page'),
-    path('tranche/update/<int:id>/', views.UpdateTrancheView, name='update_tranche_page'),
-    path('tranche/delete/<int:id>/', views.DeleteTrancheView, name='delete_tranche_page'),
-    path('tranche/details/<int:id>/', views.DetailsTrancheView, name='details_tranche_page'),
     path('business/', views.BusinessProfileView, name='business_profile_page'),
     path('business/create/', views.CreateBusinessProfileView, name='create_business_profile_page'),
     path('business/update/<int:id>/', views.UpdateBusinessProfileView, name='update_business_profile_page'),
@@ -30,7 +25,4 @@ urlpatterns = [
     path('campaign/delete/<int:id>/', views.DeleteCampaignView, name='delete_campaign_page'),
     path('campaign/details/<int:id>/', views.DetailsCampaignView, name='details_campaign_page'),
     path('campaign/assign/<int:id>/', views.AssignInvestorCampaignView, name='assign_investor_campaign_page'),
-
-
-
 ]

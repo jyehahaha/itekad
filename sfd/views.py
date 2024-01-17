@@ -7,36 +7,6 @@ def DashboardView(request):
   context = {}
   return render(request, 'sfd/dashboard.html', context)
 
-def TrancheView(request):
-  context = {}
-  return render(request, 'sfd/tranche.html', context)
-
-def CreateTrancheView(request):
-  context = {
-    'view': 'create',
-  }
-  return render(request, 'sfd/crud_tranche.html', context)
-
-def UpdateTrancheView(request, id):
-  # search by id
-  # insert into form
-  context = {
-    'view': 'update',
-  }
-  return render(request, 'sfd/crud_tranche.html', context)
-
-def DeleteTrancheView(request, id):
-  context = {
-    'view': 'delete',
-  }
-  return render(request, 'sfd/crud_tranche.html', context)
-
-def DetailsTrancheView(request, id):
-  context = {
-    'view': 'details',
-  }
-  return render(request, 'sfd/crud_tranche.html', context)
-
 def BusinessProfileView(request):
   context = {}
   return render(request, 'sfd/business.html', context)

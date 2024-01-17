@@ -1,7 +1,7 @@
 {% extends 'sfd/master/base.html' %}
 {% load static %}
 
-{% block title %}iTekad{% endblock title %}
+{% block title %} iTekad - User Management{% endblock title %}
 {% block css %}{% endblock css %}
 
 {% block content %}
@@ -14,19 +14,15 @@
         <table class="table table-light">
           <tbody>
             <tr>
-              <th width="15%" class="align-middle">Username</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Username">
-              </td>
-              <th width="15%" class="align-middle">Email Address</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Email Address">
+              <th width="15%" class="align-middle">Full Name</th>
+              <td width="35%" colspan="3">
+                <input type="text" class="form-control" placeholder="Full Name">
               </td>
             </tr>
             <tr>
-              <th width="15%" class="align-middle">Full Name</th>
+              <th width="15%" class="align-middle">Username</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="Full Name">
+                <input type="text" class="form-control" placeholder="Username">
               </td>
               <th width="15%" class="align-middle">MyKad No.</th>
               <td width="35%">
@@ -34,8 +30,12 @@
               </td>
             </tr>
             <tr>
+              <th width="15%" class="align-middle">Email Address</th>
+              <td width="35%">
+                <input type="text" class="form-control" placeholder="Email Address">
+              </td>
               <th width="15%" class="align-middle">Mobile No.</th>
-              <td width="35%" colspan="3">
+              <td width="35%">
                 <input type="text" class="form-control" placeholder="Mobile No.">
               </td>
             </tr>
@@ -328,6 +328,10 @@
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
   <div class="row">
+    <div class="col-12 text-end">
+      <a href="#" type="button" class="btn btn-secondary"><i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link Reset Password</a>
+      <div class="mb-3"></div>
+    </div>
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
@@ -341,6 +345,14 @@
               <td width="35%" class="align-middle">
                 <input type="text" class="form-control" placeholder="Confirm Password">
               </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Last Reset</th>
+              <td width="35%" class="align-middle">
+                <input type="date" class="form-control" placeholder="">
+              </td>
+              <th width="15%" class="align-middle"></th>
+              <td width="35%" class="align-middle"></td>
             </tr>
           </tbody>
         </table>

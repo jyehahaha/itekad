@@ -10,7 +10,7 @@
 
 {% block content %}
 {% if view == 'create' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create Campaign</div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create</div>
 <form method="POST">
   <div class="row">
     <div class="col-12">
@@ -18,12 +18,8 @@
         <table class="table table-light">
           <tbody>
             <tr>
-              <th width="15%" class="align-middle">Business Profile ID</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Business Profile ID">
-              </td>
-              <th width="15%" class="align-middle">Business Profile ID</th>
-              <td width="35%">
+              <th width="15%" class="align-middle">Entrepreneur</th>
+              <td width="35%" colspan="3">
                 <select class="form-select">
                   <option selected>-- Choose --</option>
                   <option value="1">011023150339 - Muhamad Ahmad Enterprise</option>
@@ -33,27 +29,61 @@
             </tr>
             <tr>
               <th width="15%" class="align-middle">Title</th>
-              <td width="35%">
+              <td width="35%" colspan="3">
                 <input type="text" class="form-control" placeholder="Title">
               </td>
+            </tr>
+            <tr>
               <th width="15%" class="align-middle">Trademark</th>
-              <td width="35%">
+              <td width="35%" colspan="3">
                 <input type="text" class="form-control" placeholder="Trademark">
               </td>
             </tr>
             <tr>
-              <th width="15%" class="align-middle">Remark</th>
+              <th width="15%" class="align-middle">Summary</th>
               <td width="35%" colspan="3">
                 <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
+                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Problem</th>
+              <td width="35%" colspan="3">
+                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
+                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Solution</th>
+              <td width="35%" colspan="3">
+                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
+                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Business Modal</th>
+              <td width="35%" colspan="3">
+                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
+                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
               </td>
             </tr>
             <tr>
               <th width="15%" class="align-middle">Logo</th>
               <td width="35%" colspan="3">
                 <div class="upload__box">
-                  <label for="formFile" class="form-label">Upload Logo Campaign</label>
                   <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
                   <div class="upload__img-wrap" width="150px"></div>
+                  <small id="helpId" class="form-text text-muted">Minimum: 1 Picture</small>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th width="15%" class="align-middle">Picture/Video</th>
+              <td width="35%" colspan="3">
+                <div class="upload__box">
+                  <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
+                  <div class="upload__img-wrap" width="150px"></div>
+                  <small id="helpId" class="form-text text-muted">Minimum: 1 Video/5 Picture</small>
                 </div>
               </td>
             </tr>
@@ -91,7 +121,7 @@
 </div>
 </form>
 {% elif view == 'update' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update Campaign</div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update</div>
 <form method="POST">
   <div class="row">
     <div class="col-12">
@@ -172,7 +202,7 @@
 </div>
 </form>
 {% elif view == 'details' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Details Campaign</div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Details</div>
 <div class="row">
   <div class="col-12">
     <div class="table-responsive">
