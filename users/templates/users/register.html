@@ -16,22 +16,30 @@
             <h4 class="card-title fw-bold">iTekad Sign Up</h4>
             <p class="card-subtitle text-muted">Please provide your valid infomations to get the benefits form our site.</p>
           </div>
+          <form method="POST" action="{% url 'register_page' %}">
+          {% csrf_token %}
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="" class="form-label">Username</label>
+              <input type="text" class="form-control" name="username" id="uname" placeholder="">
+            </div>
+          </div>
           <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">First Name</label>
-              <input type="text" class="form-control" name="fname" id="fname" placeholder="">
+              <input type="text" class="form-control" name="first_name" id="fname" placeholder="">
             </div>
           </div>
           <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Last Name</label>
-              <input type="text" class="form-control" name="lname" id="lname" placeholder="">
+              <input type="text" class="form-control" name="last_name" id="lname" placeholder="">
             </div>
           </div>
-          <div class="col-6">
+          <!-- <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Identification No.</label>
-              <input type="text" class="form-control" name="idNo" id="idNo" placeholder="">
+              <input type="text" class="form-control" name="mykad_no" id="idNo" placeholder="">
             </div>
           </div>
           <div class="col-6">
@@ -43,9 +51,9 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Mobile No.</label>
-              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="">
+              <input type="text" class="form-control" name="mobile_no" id="mobile" placeholder="">
             </div>
-          </div>
+          </div> -->
           <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Email Address</label>
@@ -55,13 +63,13 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Password</label>
-              <input type="text" class="form-control" name="password" id="password" placeholder="">
+              <input type="password" class="form-control" name="password1" id="password" placeholder="">
             </div>
           </div>
           <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Confirm Password</label>
-              <input type="text" class="form-control" name="cpassword" id="cpassword" placeholder="">
+              <input type="password" class="form-control" name="password2" id="cpassword" placeholder="">
             </div>
           </div>
           <div class="col-12 mt-4">
@@ -72,9 +80,10 @@
           </div>
           <div class="col-12 mt-3">
             <div class="d-grid gap-2">
-              <button type="button" class="btn btn-warning fw-bold text-uppercase">Signup Now</button>
+              <button type="submit" class="btn btn-warning fw-bold text-uppercase">Signup Now</button>
             </div>
           </div>
+          </form>
           <div class="col-12 text-center mt-3">
             <small class="text-muted">Already have an account? <a href="{% url 'login_page' %}" class="text-decoration-none">Sign In</a></small>
           </div>
