@@ -1,5 +1,10 @@
 asgiref==3.7.2
+dataclasses==0.6
 Django==4.2.4
 django-environ==0.10.0
+djongo==1.2.31
+dnspython==2.6.1
+pymongo==4.7.2
+pytz==2024.1
 sqlparse==0.4.4
 typing_extensions==4.7.1
