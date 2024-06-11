@@ -1,5 +1,6 @@
 {% extends 'sfd/master/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}iTekad{% endblock title %}
 {% block css %}{% endblock css %}
@@ -12,29 +13,14 @@
             <div class="row">
                 <div class="col-12">
                     <form method="POST">
-                      <div class="mb-5">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control">
-                      </div>
-                      <div class="mb-5">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px"></textarea>
-                    </div>
-                      <div class="mb-5">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select Status</option>
-                            <option value="1">Active</option>
-                            <option value="2">Not Active</option>
-                          </select>
-                      </div>
+                      {% csrf_token %}
+                      {{form | crispy}}
                       <div class="mb-5">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-md btn-primary me-md-2" type="button">Create</a>
-                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                            <button class="btn btn-md btn-primary me-md-2" type="submit">Create</button>
+                            <button class="btn btn-md btn-danger" type="reset">Reset</button>
                           </div>
                       </div>
-
                     </form>
                 </div>
             </div>
@@ -47,29 +33,14 @@
             <div class="row">
                 <div class="col-12">
                     <form method="POST">
-                      <div class="mb-5">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control" disable>
-                      </div>
-                      <div class="mb-5">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px"></textarea>
-                    </div>
-                      <div class="mb-5">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select Status</option>
-                            <option value="1">Active</option>
-                            <option value="2">Not Active</option>
-                          </select>
-                      </div>
+                      {% csrf_token %}
+                      {{form | crispy}}
                       <div class="mb-5">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-md btn-primary me-md-2" type="button">Save</a>
-                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                            <button class="btn btn-md btn-primary me-md-2" type="submit">Update</button>
+                            <button class="btn btn-md btn-danger" type="reset">Cancel</button>
                           </div>
                       </div>
-
                     </form>
                 </div>
             </div>
@@ -81,30 +52,53 @@
         <div class="card--container">
             <div class="row">
                 <div class="col-12">
-                    <form method="POST">
+                    {% if item %}
                       <div class="mb-5">
                         <label class="form-label">Title</label>
-                        <input type="text" class="form-control"  placeholder="Service" disable>
+                        <input type="text" class="form-control" value="{{item.title}}"  disabled>
                       </div>
                       <div class="mb-5">
                         <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px" disable></textarea>
-                    </div>
+                        <textarea class="form-control" style="height: 100px" disabled>{{item.description }}</textarea>
+                      </div>
                       <div class="mb-5">
                         <label class="form-label">Status</label>
-                        <input type="text" class="form-control"  placeholder="Active" disable>
+                        <input type="text" class="form-control" value="{{ item.status }}"  disabled>
                       </div>
                       <div class="mb-5">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="{% url 'category_page' %}" class="btn btn-md btn-primary me-md-2" type="button">Return to Category</a>
                           </div>
                       </div>
-
-                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+    {% elif view == 'delete' %}
+    <div class="card--container">
+      <h3 class="main--title">Delete Category</h3>
+      <div class="card--container">
+          <div class="row">
+              <div class="col-12">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="text-center">
+                      <h4 class="card-title">
+                        Are you sure you want to delete {{item.title}}?
+                      </h4>
+                    </div>
+                    <div class="mb-5">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button class="btn btn-md btn-primary me-md-2" type="submit">Confirm</button>
+                        </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+
     {% endif %}
 {% endblock  %}
 
