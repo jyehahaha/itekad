@@ -8,7 +8,7 @@ class User(AbstractUser):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mykad_no = models.CharField(max_length=100, blank=True)
+    mykad_no = models.CharField(max_length=100, null=True, blank=True)
     mobile_no = models.CharField(max_length=15, null=True, blank=True)
     address_line_one = models.CharField(max_length=100, null=True, blank=True)
     address_line_two = models.CharField(max_length=100, null=True, blank=True)
@@ -17,13 +17,16 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=100, null=True, blank=True)
-    bank_account_number = models.CharField(max_length=50,null=True, blank=True)
+    bank_account_number = models.CharField(max_length=50, null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
+    position = models.CharField(max_length=100, null=True, blank=True)
 
     class Role(models.TextChoices):
         ADMIN = "ADMIN", 'Admin'
         ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
         INVESTOR = "INVESTOR", 'Investor'
+		
+    base_role = Role.INVESTOR
 
     class Position(models.TextChoices):
         REVIEWER = "REVIEWER", 'Reviewer'
