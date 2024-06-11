@@ -18,6 +18,7 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=100, null=True, blank=True)
     bank_account_number = models.CharField(max_length=50,null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
+    position = models.CharField(max_length=100, null=True, blank=True)
 
     class Role(models.TextChoices):
         ADMIN = "ADMIN", 'Admin'

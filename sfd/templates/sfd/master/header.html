@@ -33,7 +33,7 @@
 
     <div class="text-end">
       <div class="dropdown">
-        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown"><i class="fa-solid fa-id-badge"></i>&nbsp{{request.user.get_full_name}}</button>
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">{{request.user.get_full_name}}</button>
         <ul class="dropdown-menu">
           {% comment %} <li><a class="dropdown-item" href="{% url 'update_user_management_page' %}">Profile</a></li> {% endcomment %}
           <li><hr class="dropdown-divider"></li>
