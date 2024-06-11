@@ -12,8 +12,8 @@ django-environ = "==0.10.0"
 django-filter = "==24.2"
 sqlparse = "==0.4.4"
 typing-extensions = "==4.7.1"
-djongo = "*"
-pytz = "*"
+django-crispy-forms = "*"
+crispy-bootstrap5 = "*"
 
 [dev-packages]
 
