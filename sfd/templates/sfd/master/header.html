@@ -1,7 +1,7 @@
 {% load static %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-warning">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{% url 'user_management_page' %}">
       <img src="{% static 'sfd/img/' %}muamalat_logo_new.png" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
     </a>
   </div>
@@ -36,11 +36,11 @@
 
     <div class="text-end">
       <div class="dropdown">
-        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">Muhammad Alif Tajudin</button>
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">{{request.user.get_full_name}}</button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Profile</a></li>
+          <li><a class="dropdown-item" href="{% url 'update_user_management_page' %}">Profile</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="{% url 'login_page' %}">Logout</a></li>
+          <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
         </ul>
       </div>
     </div>
