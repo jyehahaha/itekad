@@ -7,7 +7,7 @@ class User(AbstractUser):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    mykad_no = models.CharField(max_length=100, null=True, blank=True)
+    mykad_no = models.CharField(max_length=100, blank=True)
     mobile_no = models.CharField(max_length=15, null=True, blank=True)
     address_line_one = models.CharField(max_length=100, null=True, blank=True)
     address_line_two = models.CharField(max_length=100, null=True, blank=True)
@@ -16,21 +16,16 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
     country = models.CharField(max_length=100, null=True, blank=True)
-    bank_account_number = models.CharField(max_length=50, null=True, blank=True)
+    bank_account_number = models.CharField(max_length=50,null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
     password_reset_timestamp = models.DateTimeField(null=True, blank=True)
 
-    class Role(models.TextChoices):
-        ADMIN = "ADMIN", 'Admin'
-        ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
-        INVESTOR = "INVESTOR", 'Investor'
-		
-    base_role = Role.INVESTOR
-    role = models.CharField(max_length=50, choices=Role.choices, null=True, blank=True)
+class Role(models.TextChoices):
+    ADMIN = "ADMIN", 'Admin'
+    ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
+    INVESTOR = "INVESTOR", 'Investor'
 
-    class Position(models.TextChoices):
-        REVIEWER = "REVIEWER", 'Reviewer'
-        CHECKER = "CHECKER", 'Checker'
+role = models.CharField(max_length=50, choices=Role.choices)
 
     position = models.CharField(max_length=50, choices=Position.choices, null=True, blank=True)
 
