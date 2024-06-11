@@ -5,6 +5,20 @@ from django.contrib import messages
 from .models import User,UserProfile
 from .forms import UserForm, UserUpdateForm, UserProfileForm
 
+class UserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
+
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name", "email")
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ("mykad_no", "mobile_no", "country" , "postcode", "address_line_one", "address_line_two", "address_line_three", "city", "state", "bank_name", "bank_account_number", "role")
 
 # Create your views here.
 def LoginView(request):
@@ -117,12 +131,44 @@ def CreateUserManagementView(request):
         profile_form = UserProfileForm()
     return render(request, 'users/crud_user_management.html', {'user_form': user_form, 'profile_form': profile_form, 'view': 'create'})
 
+
 def UpdateUserManagementView(request,id=None):
     if request.method == "POST":
         # Get Current User
         current_user = User.objects.get(id=id)
         # Get Current User's Profile
         profile_user = UserProfile.objects.get(user__id=id)
+
+        form = UserUpdateForm(request.POST or None, instance=current_user)
+        profile_form = UserProfileForm(request.POST or None, instance=profile_user)
+
+        if form.is_valid() and profile_form.is_valid():
+          form.save()
+          profile_form.save()
+          messages.success(request, "Your Info Has Been Updated!!")
+          return redirect('user_management_page')
+    else:
+      messages.success(request, "You Must Be Logged In To Access That Page!!")
+
+      current_user = User.objects.get(id=id or request.user.id)
+      profile_user = UserProfile.objects.get(user__id=id or request.user.id)
+
+      form = UserUpdateForm(instance=current_user)
+      profile_form = UserProfileForm(instance=profile_user)
+      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+      	
+
+
+def DeleteUserManagementView(request,id):
+	if request.user.is_authenticated:
+		delete_it = User.objects.get(id=id)
+		delete_it.delete()
+		messages.success(request, "Record Deleted Successfully...")
+		return render(request, 'users/crud_user_management.html')
+	else:
+		messages.success(request, "You Must Be Logged In To Do That...")
+		return redirect('user_management_page')
+  
 
         form = UserUpdateForm(request.POST or None, instance=current_user)
         profile_form = UserProfileForm(request.POST or None, instance=profile_user)
