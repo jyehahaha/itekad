@@ -13,48 +13,41 @@ class UserForm(UserCreationForm):
         model = User
         fields = ("username", "first_name", "last_name", "email", "password1", "password2")
 
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name", "email")
+
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ("mykad_no", "mobile_no", "country")
+        fields = ("mykad_no", "mobile_no", "country" , "postcode", "address_line_one", "address_line_two", "address_line_three", "city", "state", "bank_name", "bank_account_number", "role")
 
 # Create your views here.
-@login_required
-@transaction.atomic
-def UpdateprofileView(request):
-    if request.method == "POST":
-        user_form = UserForm(request.POST, instance=request.user)
-        user_profile_form = UserProfileForm(request.POST, instance=request.user.userprofile)
-        if user_form.is_valid() and user_profile_form.is_valid():
-            user_form.save()
-            user_profile_form.save()
-            return redirect("user:profile")
-    else:
-        user_form = UserForm(instance=request.user)
-        user_profile_form = UserProfileForm(instance=request.user.userprofile)
-    return render(request, "profile.html", {"u_form":user_form, "p_form": user_profile_form})
-
 def LoginView(request):
-	if request.method == "POST":
-		username = request.POST['username']
-		password = request.POST['password']
-		user = authenticate(request, username=username, password=password)
-		if user is not None:
-			login(request, user)
-
-			messages.success(request, ("You Have Been Logged In!"))
-			return redirect('user_management_page')
-		else:
-			messages.success(request, ("There was an error, please try again..."))
-			return redirect('login_page')
-
-	else:
-		return render(request, 'users/login.html', {})
+    if request.method == "POST":
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            profile = UserProfile.objects.get(user=user)
+            if profile.role == "INVESTOR":
+                messages.success(request, ("You Have Been Logged In!"))
+                return redirect('home_page')
+            else:
+                messages.success(request, ("You Have Been Logged In!"))
+                return redirect('user_management_page')
+        else:
+            messages.success(request, ("There was an error, please try again..."))
+            return redirect('login_page')
+    else:
+        return render(request, 'users/login.html', {})
 
 def LogoutView(request):
 	logout(request)
 	messages.success(request, ("You have been logged out...Thanks for stopping by..."))
-	return redirect('home')
+	return redirect('landing_page')
 
 def RegisterView(request):
   form = UserForm()
@@ -71,7 +64,7 @@ def RegisterView(request):
       return redirect('user_management_page')
     else:
       messages.success(request, ("Whoops! There was a problem Registering, please try again..."))
-      return redirect('register')
+      return redirect('register_page')
   else:
     return render(request, 'users/register.html', {'form':form})  
 
@@ -96,29 +89,83 @@ def SendPassword(request):
   return render(request, 'users/send_password.html', context)
 
 def UserManagementView(request):
-  context = {}
-  return render(request, 'users/user_management.html', context)
-
+    if request.user.is_authenticated:
+        # Look Up Records
+        user_record = User.objects.all()
+        user_profile_record = UserProfile.objects.all()
+        return render(request, 'users/user_management.html', {'user_record':user_record, 'user_profile_record':user_profile_record})
+    else:
+        messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect('login_page')
+    
 def CreateUserManagementView(request):
-  context = {
-    'view': 'create'
-  }
-  return render(request, 'users/crud_user_management.html', context)
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        profile_form = UserProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save(commit=False)
+            user.save()
+            try:
+                profile = UserProfile.objects.get(user=user)
+            except UserProfile.DoesNotExist:
+                profile = UserProfile(user=user)
 
-def UpdateUserManagementView(request,id):
-  context = {
-     'view': 'update'
-  }
-  return render(request, 'users/crud_user_management.html', context)
+            # Update the profile fields from the form
+            profile_form = UserProfileForm(request.POST, instance=profile)
+            if profile_form.is_valid():
+                profile_form.save()
+            return redirect('user_management_page')  # Redirect to the user management page after registration
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileForm()
+    return render(request, 'users/crud_user_management.html', {'user_form': user_form, 'profile_form': profile_form, 'view': 'create'})
+
+
+def UpdateUserManagementView(request,id=None):
+    if request.method == "POST":
+        # Get Current User
+        current_user = User.objects.get(id=id)
+        # Get Current User's Profile
+        profile_user = UserProfile.objects.get(user__id=id)
+
+        form = UserUpdateForm(request.POST or None, instance=current_user)
+        profile_form = UserProfileForm(request.POST or None, instance=profile_user)
+
+        if form.is_valid() and profile_form.is_valid():
+          form.save()
+          profile_form.save()
+          messages.success(request, "Your Info Has Been Updated!!")
+          return redirect('user_management_page')
+    else:
+      messages.success(request, "You Must Be Logged In To Access That Page!!")
+
+      current_user = User.objects.get(id=id or request.user.id)
+      profile_user = UserProfile.objects.get(user__id=id or request.user.id)
+
+      form = UserUpdateForm(instance=current_user)
+      profile_form = UserProfileForm(instance=profile_user)
+      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+      	
+
 
 def DeleteUserManagementView(request,id):
-  context = {
-     'view': 'delete'
-  }
-  return render(request, 'users/crud_user_management.html', context)
+	if request.user.is_authenticated:
+		delete_it = User.objects.get(id=id)
+		delete_it.delete()
+		messages.success(request, "Record Deleted Successfully...")
+		return render(request, 'users/crud_user_management.html')
+	else:
+		messages.success(request, "You Must Be Logged In To Do That...")
+		return redirect('user_management_page')
+  
 
 def DetailsUserManagementView(request,id):
-  context = {
-      'view': 'details'
-  }
-  return render(request, 'users/crud_user_management.html', context)
+    if request.user.is_authenticated:
+        user_record = User.objects.get(id=id)
+        user_profile_record = UserProfile.objects.get(user_id=id)
+        return render(request, 'users/crud_user_management.html', {'user_record':user_record, 'user_profile_record': user_profile_record, 'view':'details'})
+    else:
+        messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect('login_page')
+    
+

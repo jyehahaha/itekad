@@ -15,13 +15,20 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=100, null=True, blank=True)
     bank_account_number = models.CharField(max_length=50,null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
+    position = models.CharField(max_length=100, null=True, blank=True)
 
-class Role(models.TextChoices):
-    ADMIN = "ADMIN", 'Admin'
-    ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
-    INVESTOR = "INVESTOR", 'Investor'
+    class Role(models.TextChoices):
+        ADMIN = "ADMIN", 'Admin'
+        ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
+        INVESTOR = "INVESTOR", 'Investor'
 
-role = models.CharField(max_length=50, choices=Role.choices)
+    role = models.CharField(max_length=50, choices=Role.choices)
+
+    class Position(models.TextChoices):
+        REVIEWER = "REVIEWER", 'Reviewer'
+        CHECKER = "CHECKER", 'Checker'
+
+    position = models.CharField(max_length=50, choices=Position.choices)
 
 
 def __str__(self):
@@ -29,9 +36,12 @@ def __str__(self):
 
 # Create a user Profile by default when user signs up
 def create_profile(sender, instance, created, **kwargs):
-	if created:
-		user_profile = UserProfile(user=instance)
-		user_profile.save()
+    if created:
+        if not instance.is_superuser:
+                UserProfile.objects.create(user=instance, role='INVESTOR')
+        else:
+                UserProfile.objects.create(user=instance)
+    instance.userprofile.save()    
 
 # Automate the profile thing
 post_save.connect(create_profile, sender=User)
