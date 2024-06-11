@@ -12,7 +12,9 @@
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          {% csrf_token %}
+          {{ user_form.as_p }}
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Full Name</th>
               <td width="35%" colspan="3">
@@ -77,19 +79,20 @@
                 <input type="text" class="form-control" placeholder="" value="Malaysia">
               </td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
   </div>
-  
+
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
   <div class="row">
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          {{ profile_form.as_p }}
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Bank Name</th>
               <td width="35%">
@@ -100,7 +103,7 @@
                 <input type="text" class="form-control" placeholder="Bank Account No.">
               </td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
@@ -112,7 +115,7 @@
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Role</th>
               <td width="35%">
@@ -144,7 +147,7 @@
               <th width="15%" class="align-middle"></th>
               <td width="35%"></td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
@@ -156,7 +159,7 @@
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Password</th>
               <td width="35%" class="align-middle">
@@ -167,7 +170,7 @@
                 <input type="text" class="form-control" placeholder="Confirm Password">
               </td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
@@ -176,106 +179,112 @@
   <div class="mb-3"></div>
   <div class="row">
     <div class="col-12 text-end">
-      <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bx-chevron-left bx-pull-left bx-sm'></i>Cancel</a>
-      <button class="btn btn-warning" type="button" style="width:100px;"><i class='bx bx-edit bx-pencil bx-pull-left bx-sm'></i>Create</button>
+      <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i
+          class='bx bx-chevron-left bx-pull-left bx-sm'></i>Cancel</a>
+      <button class="btn btn-warning" type="submit" style="width:100px;"><i
+          class='bx bx-edit bx-pencil bx-pull-left bx-sm'></i>Create</button>
     </div>
   </div>
 </form>
 {% elif view == 'update' %}
 <form method="POST">
+  {% csrf_token %}
   <div class="row">
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          {{ form.as_p }}
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Username</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="Username">
+                <input type="text" name="username" class="form-control"  placeholder="Username" value="{{ form.username.value }}">
               </td>
               <th width="15%" class="align-middle">Email Address</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="Email Address">
+                <input type="text" name="email" class="form-control" placeholder="Email" value="{{ form.email.value }}">
               </td>
             </tr>
             <tr>
-              <th width="15%" class="align-middle">Full Name</th>
+              <th width="15%" class="align-middle">First Name</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="Full Name">
+                <input type="text" class="form-control" placeholder="First Name" name="first_name" value="{{ form.first_name.value }}">
               </td>
               <th width="15%" class="align-middle">MyKad No.</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="MyKad No.">
+                <input type="text" class="form-control" placeholder="Mykad No." name="mykad_no" value="{{ profile_form.mykad_no.value }}">
               </td>
             </tr>
             <tr>
               <th width="15%" class="align-middle">Mobile No.</th>
               <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Mobile No.">
+                <input type="text" class="form-control" placeholder="Mobile No." name="mobile_no" value="{{ profile_form.mobile_no.value }}">
               </td>
             </tr>
             <tr>
               <th width="15%" class="align-middle">Address Line 1</th>
               <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Address Line 1">
+                <input type="text" class="form-control" placeholder="Address Line 1" name="address_line_one" value="{{ profile_form.address_line_one.value }}">
               </td>
             </tr>
             <tr>
               <th width="15%" class="align-middle">Address Line 2</th>
               <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Address Line 2">
+                <input type="text" class="form-control" placeholder="Address Line 2" name="address_line_two" value="{{ profile_form.address_line_two.value }}">
               </td>
             </tr>
             <tr>
               <th width="15%" class="align-middle">Address Line 3</th>
               <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Address Line 3">
+                <input type="text" class="form-control" placeholder="Address Line 3" name="address_line_three" value="{{ profile_form.address_line_three.value }}">
               </td>
             </tr>
             <tr>
               <th width="15%" class="align-middle">Postcode</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="Postcode">
+                <input type="text" class="form-control" placeholder="Postcode" name="postcode" value="{{ profile_form.postcode.value }}">
               </td>
               <th width="15%" class="align-middle">City</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="City">
+                <input type="text" class="form-control" placeholder="City" name="city" value="{{ profile_form.city.value }}">
               </td>
             </tr>
             <tr>
               <th width="15%" class="align-middle">State</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="State">
+                <input type="text" class="form-control" name="state" value="{{ profile_form.state.value }}">
               </td>
               <th width="15%" class="align-middle">Country</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="" value="Malaysia">
+                <input type="text" class="form-control" name="country" value="{{ profile_form.country.value }}">
               </td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
+
       </div>
     </div>
   </div>
-  
+
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
   <div class="row">
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          {{ profile_form.as_p }}
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Bank Name</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="Bank Name">
+                <input type="text" class="form-control" name="bank_name" value="{{ profile_form.bank_name.value }}">
               </td>
               <th width="15%" class="align-middle">Bank Account No.</th>
               <td width="35%">
-                <input type="text" class="form-control" placeholder="Bank Account No.">
+                <input type="text" class="form-control" name="bank_account_number" value="{{ profile_form.bank_account_number.value }}">
               </td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
@@ -287,15 +296,12 @@
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Role</th>
               <td width="35%">
                 <select class="form-select">
-                  <option selected>-- Select --</option>
-                  <option value="1">Admin</option>
-                  <option value="2">Entreprenuer</option>
-                  <option value="3">Investor</option>
+                  <option value="{{ profile_form.role.value }}">{{ profile_form.role }}</option>
                 </select>
               </td>
               <th width="15%" class="align-middle">Category</th>
@@ -319,7 +325,7 @@
               <th width="15%" class="align-middle"></th>
               <td width="35%"></td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
@@ -329,21 +335,22 @@
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
   <div class="row">
     <div class="col-12 text-end">
-      <a href="#" type="button" class="btn btn-secondary"><i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link Reset Password</a>
+      <a href="#" type="button" class="btn btn-secondary"><i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link
+        Reset Password</a>
       <div class="mb-3"></div>
     </div>
     <div class="col-12">
       <div class="table-responsive">
         <table class="table table-light">
-          <tbody>
+          <!-- <tbody>
             <tr>
               <th width="15%" class="align-middle">Password</th>
               <td width="35%" class="align-middle">
-                <input type="text" class="form-control" placeholder="Password">
+                <input type="password" class="form-control" placeholder="Password" name="password1" value="{{ form.password1.value }}">
               </td>
               <th width="15%" class="align-middle">Confirm Password</th>
               <td width="35%" class="align-middle">
-                <input type="text" class="form-control" placeholder="Confirm Password">
+                <input type="password" class="form-control" placeholder="Confirm Password" name="password2" value="{{ form.password2.value }}">
               </td>
             </tr>
             <tr>
@@ -354,7 +361,7 @@
               <th width="15%" class="align-middle"></th>
               <td width="35%" class="align-middle"></td>
             </tr>
-          </tbody>
+          </tbody> -->
         </table>
       </div>
     </div>
@@ -363,8 +370,10 @@
   <div class="mb-3"></div>
   <div class="row">
     <div class="col-12 text-end">
-      <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bx-chevron-left bx-pull-left bx-sm'></i>Cancel</a>
-      <button class="btn btn-warning" type="button" style="width:100px;"><i class='bx bx-edit bx-pencil bx-pull-left bx-sm'></i>Update</button>
+      <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i
+          class='bx bx-chevron-left bx-pull-left bx-sm'></i>Cancel</a>
+      <button class="btn btn-warning" type="submit" style="width:100px;"><i
+          class='bx bx-edit bx-pencil bx-pull-left bx-sm'></i>Update</button>
     </div>
   </div>
 </form>
@@ -376,27 +385,27 @@
         <tbody>
           <tr>
             <th width="15%">Username</th>
-            <td width="35%">Ahmad56</td>
+            <td width="35%">{{ user_record.username }}</td>
             <th width="15%">Email Address</th>
-            <td width="35%">ahmad.abu@muamalat.com.my</td>
+            <td width="35%">{{ user_record.email }}</td>
           </tr>
           <tr>
             <th>Full Name</th>
-            <td>Ahmad Bin Abu</td>
+            <td>{{ user_record.get_full_name }}</td>
             <th>MyKad No.</th>
-            <td>123456-78-9012</td>
+            <td>{{ user_profiel_record.mykad_no }}</td>
           </tr>
           <tr>
             <th>Address</th>
-            <td colspan="3">No 24 Jalan Melawi,</td>
+            <td colspan="3">{{ user_profile_record.address_line_one }}</td>
           </tr>
           <tr>
             <th></th>
-            <td colspan="3">Taman Melawi Indah 10,</td>
+            <td colspan="3">{{ user_profile_record.address_line_two }}</td>
           </tr>
           <tr>
             <th></th>
-            <td colspan="3">56100 Cheras,</td>
+            <td colspan="3">{{ user_profile_record.address_line_three }}</td>
           </tr>
           <tr>
             <th></th>
@@ -417,9 +426,9 @@
         <tbody>
           <tr>
             <th width="15%">Bank Name</th>
-            <td width="35%">Maybank</td>
+            <td width="35%">{{ user_profile_record.bank_name }}</td>
             <th width="15%">Account No.</th>
-            <td width="35%">16430009876</td>
+            <td width="35%">{{ user_profile_record.bank_account_number }}</td>
           </tr>
         </tbody>
       </table>
@@ -436,13 +445,13 @@
         <tbody>
           <tr>
             <th width="15%">Role</th>
-            <td width="35%">Investor</td>
+            <td width="35%">{{ user_profile_record.role }}</td>
             <th width="15%">Category</th>
             <td width="35%">-</td>
           </tr>
           <tr>
             <th width="15%">Status</th>
-            <td width="35%">Active</td>
+            <td width="35%">{{ user_record.is_active }}</td>
             <th width="15%"></th>
             <td width="35%"></td>
           </tr>
@@ -480,8 +489,10 @@
 <div class="mb-3"></div>
 <div class="row">
   <div class="col-12 text-end">
-    <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
-    <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-warning" type="button" style="width: 100px;"><i class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
+    <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i
+        class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
+    <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-warning" type="button" style="width: 100px;"><i
+        class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
   </div>
 </div>
 {% endif %}

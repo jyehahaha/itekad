@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-warning">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="{% url 'home_page' %}">
       <img src="https://map.muamalat.com.my/media/images/muamalat_logo_white.original.png" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
     </a>
   </div>
@@ -16,13 +16,13 @@
 
     <div class="text-end">
       <div class="dropdown">
-        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Muhammad Alif Tajudin</button>
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{request.user.get_full_name}}</button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Home</a></li>
           <li><a class="dropdown-item" href="#">FAQ</a></li>
           <li><a class="dropdown-item" href="#">Settings</a></li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="{% url 'login_page' %}">Logout</a></li>
+          <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
         </ul>
       </div>
     </div>

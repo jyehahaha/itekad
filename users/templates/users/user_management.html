@@ -108,111 +108,31 @@
           </tr>
       </thead>
       <tbody>
+          {% if user_record %}
+          {% for record in user_record %}
           <tr>
-              <td>Ahmad Abu</td>
-              <td>Ahmad46</td>
-              <td>ahmad.abu@muamalat.com.my</td>
-              <td>+6011-2345123</td>
-              <td>700901-14-5122</td>
-              <td>Malaysia</td>
-              <td>16430009876</td>
-              <td>Maybank</td>
-              <td>Investor</td>
-              <td>-</td>
-              <td>2023/05/01 13:05 PM</td>
-              <td>Not Active</td>
+              <td>{{ record.get_full_name }}</td>
+              <td>{{ record.username }}</td>
+              <td>{{ record.email }}</td>
+              <td>{{ user_profile_record.mobile_no }}</td>
+              <td>{{ user_profile_record.mykad_no }}</td>
+              <td>{{ user_profile_record.country }}</td>
+              <td>{{ user_profile_record.bank_account_number }}</td>
+              <td>{{ user_profile_record.bank_name }}</td>
+              <td>{{ user_profile_record.role }}</td>
+              <td>{{ record.is_staff }}=</td>
+              <td>{{ record.date_joined }}</td>
+              <td>{{ record.is_active }}</td>
               <td> 
                   <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_management_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  <a href="{% url 'delete_user_management_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a> </b>
+                  <a href="{% url 'details_user_management_page' record.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+                  <a href="{% url 'update_user_management_page' record.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+                  <a href="{% url 'delete_user_management_page' record.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
                   </div>
               </td>
           </tr>
-          <tr>
-              <td>Ahmad Faiq</td>
-              <td>ahmad.faiq</td>
-              <td>faiq@muamalat.com.my</td>
-              <td>+6019-11119876</td>
-              <td>881111-01-5234</td>
-              <td>Malaysia</td>
-              <td>7654321009</td>
-              <td>CIMB</td>
-              <td>Investor</td>
-              <td>-</td>
-              <td>2023/05/01 13:05 PM</td>
-              <td>Not Active</td>
-              <td> 
-                  <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_management_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  <a href="{% url 'delete_user_management_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                  </div>
-              </td>
-          </tr>
-          <tr>
-              <td>Mujahid Aljabar</td>
-              <td>102987</td>
-              <td>mujahid.aljabar@muamalat.com.my</td>
-              <td>+6013-33112346</td>
-              <td>6507023-02-0986</td>
-              <td>Malaysia</td>
-              <td>700986535</td>
-              <td>CIMB</td>
-              <td>Admin</td>
-              <td>Reviewer</td>
-              <td>2023/05/01 13:05 PM</td>
-              <td>Not Active</td>
-              <td> 
-                  <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_management_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  <a href="{% url 'delete_user_management_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                  </div>
-              </td>
-          </tr>
-          <tr>
-              <td>Siti Nurhaliza</td>
-              <td>103911</td>
-              <td>siti.nurhaliza@muamalat.com.my</td>
-              <td>+6016-8743218</td>
-              <td>920103-11-0018</td>
-              <td>Malaysia</td>
-              <td>104300987647</td>
-              <td>Bank Muamalat</td>
-              <td>Admin</td>
-              <td>Approver</td>
-              <td>2023/05/01 13:05 PM</td>
-              <td>Not Active</td>
-              <td> 
-                  <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_management_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  <a href="{% url 'delete_user_management_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                  </div>
-              </td>
-          </tr>
-          <tr>
-              <td>Muhammad Khairul</td>
-              <td>khairul123</td>
-              <td>khairul@gmail.com.my</td>
-              <td>+6011-111888765</td>
-              <td>880229-05-7654</td>
-              <td>Malaysia</td>
-              <td>1041076597303</td>
-              <td>Bank Muamalat</td>
-              <td>Entreprenuer</td>
-              <td>-</td>
-              <td>2023/05/01 13:05 PM</td>
-              <td>Not Active</td>
-              <td> 
-                  <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_management_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  <a href="{% url 'delete_user_management_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                  </div>
-              </td>
-          </tr>
+          {% endfor %}
+          {% endif %}
       </tbody>
     </table>
   </div>
