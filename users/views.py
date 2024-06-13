@@ -1,4 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django import forms
+from .models import UserProfile
+from django.contrib.auth.models import User
+from django.db import transaction
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
@@ -137,17 +144,12 @@ def UpdateUserManagementView(request,id=None):
         current_user = User.objects.get(id=id or request.user.id)
         profile_user = UserProfile.objects.get(user__id=id or request.user.id)
 
-        form = UserUpdateForm(instance=current_user)
-        profile_form = UserProfileForm(instance=profile_user)
-
-        context = {
-            'form': form,
-            'profile_form': profile_form,
-            'current_user': current_user,
-            'view': 'update',
-        }
-        return render(request, "users/crud_user_management.html", context)
+    form = UserUpdateForm(instance=current_user)
+    profile_form = UserProfileForm(instance=profile_user)
+    return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
       	
+
+
 def DeleteUserManagementView(request, id):
     
     user = get_object_or_404(User, id=id)
@@ -174,6 +176,7 @@ def DeleteUserManagementView(request, id):
 	# 	messages.success(request, "You Must Be Logged In To Do That...")
 	# 	return redirect('user_management_page')
   
+
 def DetailsUserManagementView(request,id):
     if request.user.is_authenticated:
         user_record = User.objects.get(id=id)
