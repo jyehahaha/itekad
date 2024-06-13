@@ -18,7 +18,6 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=100, null=True, blank=True)
     bank_account_number = models.CharField(max_length=50, null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
-    position = models.CharField(max_length=100, null=True, blank=True)
 
     class Role(models.TextChoices):
         ADMIN = "ADMIN", 'Admin'
@@ -33,16 +32,16 @@ class UserProfile(models.Model):
 
     position = models.CharField(max_length=50, choices=Position.choices, null=True, blank=True)
 
-def __str__(self):
-    return self.user.username
+    def __str__(self):
+        return self.user.username
 
 # Create a user Profile by default when user signs up
 def create_profile(sender, instance, created, **kwargs):
     if created:
         if not instance.is_superuser:
-                UserProfile.objects.create(user=instance, role='INVESTOR')
+            UserProfile.objects.create(user=instance, role='INVESTOR')
         else:
-                UserProfile.objects.create(user=instance)
+            UserProfile.objects.create(user=instance)
     instance.userprofile.save()    
 
 # Automate the profile thing
