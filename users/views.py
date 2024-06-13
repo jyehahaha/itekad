@@ -1,26 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django import forms
-from .models import UserProfile
 from django.contrib.auth.models import User
-from django.db import transaction
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .models import UserProfile
+from .forms import UserForm, UserUpdateForm, UserProfileForm
 
-class UserForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
-
-class UserUpdateForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ("username", "first_name", "last_name", "email")
-
-class UserProfileForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = ("mykad_no", "mobile_no", "country" , "postcode", "address_line_one", "address_line_two", "address_line_three", "city", "state", "bank_name", "bank_account_number", "role")
 
 # Create your views here.
 def LoginView(request):
@@ -124,7 +108,6 @@ def CreateUserManagementView(request):
         profile_form = UserProfileForm()
     return render(request, 'users/crud_user_management.html', {'user_form': user_form, 'profile_form': profile_form, 'view': 'create'})
 
-
 def UpdateUserManagementView(request,id=None):
     if request.method == "POST":
         # Get Current User
@@ -150,8 +133,6 @@ def UpdateUserManagementView(request,id=None):
       profile_form = UserProfileForm(instance=profile_user)
       return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
       	
-
-
 def DeleteUserManagementView(request, id):
     
     user = get_object_or_404(User, id=id)
@@ -178,7 +159,6 @@ def DeleteUserManagementView(request, id):
 	# 	messages.success(request, "You Must Be Logged In To Do That...")
 	# 	return redirect('user_management_page')
   
-
 def UpdateUserManagementView(request,id=None):
     if request.method == "POST":
         # Get Current User
