@@ -121,7 +121,7 @@
                   <div class="d-grid gap-2 d-md-block">
                   <a href="{% url 'details_user_management_page' record.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
                   <a href="{% url 'update_user_management_page' record.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  <a href="{% url 'delete_user_management_page' record.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
+                  <!-- <a href="{% url 'delete_user_management_page' record.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a> -->
                   {% if request.user.is_superuser %}
                   <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-user-id="{{ record.id }}" data-username="{{ record.username }}"><i class="fa-solid fa-trash"></i>&nbspDelete</button>
                   {% endif %}
