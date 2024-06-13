@@ -1,17 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.shortcuts import render, redirect, get_object_or_404
-from django import forms
-from .models import UserProfile
-from django.contrib.auth.models import User
-from django.db import transaction
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
-from .models import User,UserProfile
-from .forms import UserForm, UserUpdateForm, UserProfileForm
-
+from .models import User, UserProfile
+from .forms import UserForm, UserProfileForm, UserUpdateForm
 
 # Create your views here.
 def LoginView(request):
@@ -43,22 +36,31 @@ def RegisterView(request):
   if request.method == "POST":
     form = UserForm(request.POST)
     
+    
     if form.is_valid():
       form.save()
+      
       
       username = form.cleaned_data['username']
       password = form.cleaned_data['password1']
 			
       # log in user
+			
+      # log in user
       user = authenticate(username=username, password=password)
       login(request, user)
 
+
       messages.success(request, ("Username Created - Please Fill Out Your User Info Below..."))
+      return redirect('home_page')
       return redirect('home_page')
     else:
       messages.success(request, ("Whoops! There was a problem Registering, please try again..."))
       return redirect('register_page')
   else:
+    form = UserForm()
+  
+  return render(request, 'users/register.html', {'form':form})  
     form = UserForm()
   
   return render(request, 'users/register.html', {'form':form})  
@@ -151,12 +153,10 @@ def UpdateUserManagementView(request,id=None):
         current_user = User.objects.get(id=id or request.user.id)
         profile_user = UserProfile.objects.get(user__id=id or request.user.id)
 
-    form = UserUpdateForm(instance=current_user)
-    profile_form = UserProfileForm(instance=profile_user)
-    return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+      form = UserUpdateForm(instance=current_user)
+      profile_form = UserProfileForm(instance=profile_user)
+      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
       	
-
-
 def DeleteUserManagementView(request, id):
     
     user = get_object_or_404(User, id=id)
@@ -183,7 +183,6 @@ def DeleteUserManagementView(request, id):
 	# 	messages.success(request, "You Must Be Logged In To Do That...")
 	# 	return redirect('user_management_page')
   
-
 def DetailsUserManagementView(request,id):
     if request.user.is_authenticated:
         user_record = User.objects.get(id=id)

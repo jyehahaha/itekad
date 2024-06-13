@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save
 
 class User(AbstractUser):
@@ -18,7 +19,6 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=100, null=True, blank=True)
     bank_account_number = models.CharField(max_length=50,null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
-    position = models.CharField(max_length=100, null=True, blank=True)
 
     class Role(models.TextChoices):
         ADMIN = "ADMIN", 'Admin'
@@ -32,6 +32,7 @@ class UserProfile(models.Model):
         REVIEWER = "REVIEWER", 'Reviewer'
         CHECKER = "CHECKER", 'Checker'
 
+    position = models.CharField(max_length=50, choices=Position.choices, null=True, blank=True)
     position = models.CharField(max_length=50, choices=Position.choices, null=True, blank=True)
 
 def __str__(self):
