@@ -10,14 +10,9 @@ class UserForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email")
+        fields = ("username", "first_name", "last_name", "email")
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ("mykad_no", "mobile_no", "country" , "postcode", "address_line_one", "address_line_two", "address_line_three", "city", "state", "bank_name", "bank_account_number", "role", "position")
-        labels = {
-            'address_line_one': "Address 1",
-            'address_line_two': "Address 2",
-            'address_line_three': "Address 3",
-        }
+        fields = ("mykad_no", "mobile_no", "country" , "postcode", "address_line_one", "address_line_two", "address_line_three", "city", "state", "bank_name", "bank_account_number", "role")
