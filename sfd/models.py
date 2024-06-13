@@ -2,8 +2,30 @@ from django.db import models
 from django.contrib.auth.admin import User
 
 # Create your models here.
+class NatureOfBusiness(models.Model):
+    title = models.CharField(max_length=150, null=True,blank=True)
+    description = models.CharField(max_length=150, null=True,blank=True)
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+    
+class CategoryOfBusiness(models.Model):
+    nature_of_business = models.ForeignKey(NatureOfBusiness, on_delete=models.CASCADE, null=True,blank=True)
+    title = models.CharField(max_length=150, null=True,blank=True)
+    description = models.CharField(max_length=150, null=True,blank=True)
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
 class CompanyProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    category_of_business = models.ForeignKey(CategoryOfBusiness, on_delete=models.CASCADE,null=True,blank=True)
     company_name = models.CharField(max_length=150, null=True,blank=True)
     company_email = models.CharField(max_length=150, null=True,blank=True)
     company_phone_number = models.CharField(max_length=150, null=True,blank=True)
@@ -19,21 +41,31 @@ class CompanyProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.company_name
+
 class Campaign(models.Model):
     title = models.CharField(max_length=150, null=True,blank=True)
-    status = models.BooleanField(default=False)
+    description = models.CharField(max_length=150, null=True,blank=True)
     total_amount = models.CharField(max_length=50, null=True,blank=True)
+    status = models.BooleanField(default=False)
+    start_campaign = models.DateTimeField(null=True,blank=True)
+    end_campaign= models.DateTimeField(null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.title
+
+
 class TrancheInvestor(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,blank=True)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class TrancheEntreprenuer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -44,23 +76,4 @@ class TrancheReport(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class CategoryOfBusiness(models.Model):
-    title = models.CharField(max_length=150, null=True,blank=True)
-    description = models.CharField(max_length=150, null=True,blank=True)
-    status = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.title
-
-class NatureOfBusiness(models.Model):
-    category_of_business = models.ForeignKey(CategoryOfBusiness, on_delete=models.CASCADE, null=True,blank=True)
-    title = models.CharField(max_length=150, null=True,blank=True)
-    description = models.CharField(max_length=150, null=True,blank=True)
-    status = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title

@@ -5,12 +5,31 @@ from django import forms
 class CompanyProfileForm(ModelForm):
     class Meta:
         model = CompanyProfile
-        fields = ["company_name","company_email","company_phone_number","company_website","company_address","company_logo","company_portfolio","company_registration_number","company_summary","financing_amount","grant_amount","company_status"]
+        # fields = ["company_name","company_email","company_phone_number","company_website","company_address","company_logo","company_portfolio","company_registration_number","company_summary","financing_amount","grant_amount","company_status"]
+        fields = "__all__"
+        widgets = {
+            'company_summary': forms.Textarea()
+        }
+        labels = {
+            'company_email': "E-mail Address",
+            'company_website': "Website",
+            'company_address': "Address",
+            'company_logo': "Logo",
+            'company_registration_number': "Company SSM Number",
+            'company_summary': "Company Summary Backgroud",
+            'financing_amount': 'Financing Amount(RM)',
+            'grant_amount': 'Grant Amount(RM)',
+            'company_status': "Status"
+
+        }
 
 class CampaignForm(ModelForm):
     class Meta:
         model = Campaign
-        fields = ["title","status","total_amount"]
+        fields = "__all__"
+        widgets = {
+            'description': forms.Textarea()
+        }
 
 class TrancheEntreprenuerForm(ModelForm):
     class Meta:
@@ -30,7 +49,7 @@ class TrancheReportForm(ModelForm):
 class NatureOfBusinessForm(ModelForm):
     class Meta:
         model = NatureOfBusiness
-        fields = ["title","description","category_of_business","status"]
+        fields = "__all__"
         widgets = {
             'description': forms.Textarea()
         }
@@ -38,7 +57,7 @@ class NatureOfBusinessForm(ModelForm):
 class CategoryOfBusinessForm(ModelForm):
     class Meta:
         model = CategoryOfBusiness
-        fields = ["title","description","status"]
+        fields = "__all__"
         widgets = {
             'description': forms.Textarea()
         }

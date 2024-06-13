@@ -8,7 +8,7 @@
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">List of Categories</div>
 
     <div class="card--container">
-        <h3 class="main--title">Category</h3>
+        <h3 class="main--title">Category of Business</h3>
         <div class="card--container">
             <div class="row">
                 <div class="col-12">
@@ -24,6 +24,7 @@
                     <table id="tblCategory" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
+                                <th>Nature of Business</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Date/Time Created</th>
@@ -35,6 +36,7 @@
                         <tbody>
                             {% for item in items %}
                             <tr>
+                                <td>{{item.nature_of_business}}</td>
                                 <td>{{item.title}}</td>
                                 <td>{{item.description}}</td>
                                 <td>{{item.created_at | date:'d-m-Y h:i A'}}</td>

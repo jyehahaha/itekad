@@ -38,8 +38,9 @@
                       {{form | crispy}}
                       <div class="mb-5">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <button class="btn btn-md btn-primary me-md-2" type="submit">Update</button>
+                            <a href="{% url 'nature_of_business_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
                             <button class="btn btn-md btn-danger" type="reset">Reset</button>
+                            <button class="btn btn-md btn-warning" type="submit">Update</button>
                           </div>
                       </div>
                     </form>
@@ -54,23 +55,19 @@
             <div class="row">
                 <div class="col-12">
                   {% if item %}
-                      <div class="mb-5">
+                      <div class="mb-3">
                         <label class="form-label">Title</label>
                         <input type="text" class="form-control"  value="{{item.title}}" disabled>
                       </div>
-                      <div class="mb-5">
+                      <div class="mb-3">
                         <label class="form-label">Description</label>
                         <textarea class="form-control" style="height: 100px" disabled>{{item.description}}</textarea>
                       </div>
-                      <div class="mb-5">
-                        <label class="form-label">Category of service </label>
-                        <input type="text" class="form-control"  value="{{item.category_of_business}}" disabled>
-                      </div>
-                      <div class="mb-5">
+                      <div class="mb-3">
                         <label class="form-label">Status</label>
                         <input type="text" class="form-control"  value="{{item.status}}" disabled>
                       </div>
-                      <div class="mb-5">
+                      <div class="mb-3">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <a href="{% url 'nature_of_business_page' %}" class="btn btn-md btn-primary me-md-2" type="button">Return to Nature of Business</a>
                           </div>
