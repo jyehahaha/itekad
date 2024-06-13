@@ -23,7 +23,6 @@ class UserProfile(models.Model):
         INVESTOR = "INVESTOR", 'Investor'
 		
     base_role = Role.INVESTOR
-
     role = models.CharField(max_length=50, choices=Role.choices)
 
     class Position(models.TextChoices):
