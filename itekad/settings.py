@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'investor',
     'users',
     'sfd',
+
+    #  Plugins
+    'django_filters',
 ]
 
 MIDDLEWARE = [

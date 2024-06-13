@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django import forms
 from .models import UserProfile
 from django.contrib.auth.models import User
@@ -148,15 +148,31 @@ def UpdateUserManagementView(request,id=None):
       	
 
 
-def DeleteUserManagementView(request,id):
-	if request.user.is_authenticated:
-		delete_it = User.objects.get(id=id)
-		delete_it.delete()
-		messages.success(request, "Record Deleted Successfully...")
-		return render(request, 'users/crud_user_management.html')
-	else:
-		messages.success(request, "You Must Be Logged In To Do That...")
-		return redirect('user_management_page')
+def DeleteUserManagementView(request, id):
+    
+    user = get_object_or_404(User, id=id)
+    
+    if not request.user.is_superuser:
+        messages.error(request, "You do not have permission to delete users.")
+        return redirect('user_management_page')
+
+    if user == request.user:
+        messages.error(request, "You cannot delete yourself.")
+        return redirect('user_management_page')
+
+    user.delete()
+    messages.success(request, "User deleted successfully.")
+    return redirect('user_management_page')
+
+
+	# if request.user.is_authenticated:
+	# 	delete_it = User.objects.get(id=id)
+	# 	delete_it.delete()
+	# 	messages.success(request, "Record Deleted Successfully...")
+	# 	return render(request, 'users/crud_user_management.html')
+	# else:
+	# 	messages.success(request, "You Must Be Logged In To Do That...")
+	# 	return redirect('user_management_page')
   
 
 def DetailsUserManagementView(request,id):
