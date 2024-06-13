@@ -24,7 +24,8 @@ class UserProfile(models.Model):
         ADMIN = "ADMIN", 'Admin'
         ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
         INVESTOR = "INVESTOR", 'Investor'
-
+		
+    base_role = Role.INVESTOR
     role = models.CharField(max_length=50, choices=Role.choices)
 
     class Position(models.TextChoices):
@@ -34,6 +35,9 @@ class UserProfile(models.Model):
     position = models.CharField(max_length=50, choices=Position.choices)
 
     position = models.CharField(max_length=50, choices=Position.choices, null=True, blank=True)
+
+    position = models.CharField(max_length=50, choices=Position.choices)
+
 
 def __str__(self):
     return self.user.username
