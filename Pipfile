@@ -9,8 +9,9 @@ django = "==4.2.4"
 django-environ = "==0.10.0"
 sqlparse = "==0.4.4"
 typing-extensions = "==4.7.1"
-django-crispy-forms = "*"
-crispy-bootstrap5 = "*"
+django-crispy-forms = "==2.1"
+crispy-bootstrap5 = "==2024.2"
+django-filter = "==24.2"
 
 [dev-packages]
 
