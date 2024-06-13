@@ -1,5 +1,7 @@
 {% extends 'sfd/master/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block title %} iTekad - Create Campaign {% endblock title %}
 {% block css %}
@@ -12,244 +14,66 @@
 {% if view == 'create' %}
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create</div>
 <form method="POST">
-  <div class="row">
-    <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-light">
-          <tbody>
-            <tr>
-              <th width="15%" class="align-middle">Entrepreneur</th>
-              <td width="35%" colspan="3">
-                <select class="form-select">
-                  <option selected>-- Choose --</option>
-                  <option value="1">011023150339 - Muhamad Ahmad Enterprise</option>
-                  <option value="2">030923150339 - SBS Entreprise</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Title</th>
-              <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Title">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Trademark</th>
-              <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Trademark">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Summary</th>
-              <td width="35%" colspan="3">
-                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
-                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Problem</th>
-              <td width="35%" colspan="3">
-                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
-                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Solution</th>
-              <td width="35%" colspan="3">
-                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
-                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Business Modal</th>
-              <td width="35%" colspan="3">
-                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
-                <small id="helpId" class="form-text text-muted">WYSIWYG</small>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Logo</th>
-              <td width="35%" colspan="3">
-                <div class="upload__box">
-                  <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
-                  <div class="upload__img-wrap" width="150px"></div>
-                  <small id="helpId" class="form-text text-muted">Minimum: 1 Picture</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Picture/Video</th>
-              <td width="35%" colspan="3">
-                <div class="upload__box">
-                  <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
-                  <div class="upload__img-wrap" width="150px"></div>
-                  <small id="helpId" class="form-text text-muted">Minimum: 1 Video/5 Picture</small>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Start</th>
-              <td width="35%">
-                <input type="date" class="form-control" placeholder="Start Date/Time">
-              </td>
-              <th width="15%" class="align-middle">End</th>
-              <td width="35%">
-                <input type="date" class="form-control" placeholder="End Date/Time">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Status</th>
-              <td width="35%" colspan="3">
-                <select class="form-select">
-                  <option selected>-- Choose --</option>
-                  <option value="1">Active</option>
-                  <option value="2">Not Active</option>
-                </select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  {% csrf_token %}
+  {{form | crispy}}
+  <div class="mb-3">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a href="{% url 'campaign_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
+      <button class="btn btn-md btn-danger" type="reset">Cancel</button>
+      <button class="btn btn-md btn-warning" type="submit">Create</button>
     </div>
   </div>
-
-  <div class="mb-3">
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="{% url 'campaign_page' %}" class="btn btn-md btn-secondary" type="button" style="width: 100px;"><i class="bx bx-chevron-left bx-sm bx-pull-left"></i>Cancel</a>
-    <a class="btn btn-md btn-warning" type="button" style="width: 100px;"><i class="bx bx-edit-alt bx-sm bx-pull-left"></i>Create</a>
-  </div>
-</div>
 </form>
 {% elif view == 'update' %}
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update</div>
 <form method="POST">
-  <div class="row">
-    <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-light">
-          <tbody>
-            <tr>
-              <th width="15%" class="align-middle">Business Profile ID</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Business Profile ID">
-              </td>
-              <th width="15%" class="align-middle">Business Profile ID</th>
-              <td width="35%">
-                <select class="form-select">
-                  <option selected>-- Choose --</option>
-                  <option value="1">011023150339 - Muhamad Ahmad Enterprise</option>
-                  <option value="2">030923150339 - SBS Entreprise</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Title</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Title">
-              </td>
-              <th width="15%" class="align-middle">Trademark</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Trademark">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Remark</th>
-              <td width="35%" colspan="3">
-                <textarea class="form-control" style="height: 100px; resize: none;"></textarea>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Logo</th>
-              <td width="35%" colspan="3">
-                <div class="upload__box">
-                  <label for="formFile" class="form-label">Upload Logo Campaign</label>
-                  <input type="file" multiple="" data-max_length="20" class=" form-control upload__inputfile">
-                  <div class="upload__img-wrap" width="150px"></div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Start</th>
-              <td width="35%">
-                <input type="date" class="form-control" placeholder="Start Date/Time">
-              </td>
-              <th width="15%" class="align-middle">End</th>
-              <td width="35%">
-                <input type="date" class="form-control" placeholder="End Date/Time">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Status</th>
-              <td width="35%" colspan="3">
-                <select class="form-select">
-                  <option selected>-- Choose --</option>
-                  <option value="1">Active</option>
-                  <option value="2">Not Active</option>
-                </select>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
+  {% csrf_token %}
+  {{form | crispy}}
   <div class="mb-3">
   <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="{% url 'campaign_page' %}" class="btn btn-md btn-secondary" type="button" style="width: 100px;"><i class="bx bx-chevron-left bx-sm bx-pull-left"></i>Cancel</a>
-    <a class="btn btn-md btn-warning" type="button" style="width: 100px;"><i class="bx bx-edit-alt bx-sm bx-pull-left"></i>Update</a>
+    <a href="{% url 'campaign_page' %}" class="btn btn-md btn-secondary" type="button">Cancel</a>
+    <button class="btn btn-md btn-warning" type="submit">Update</a>
   </div>
 </div>
 </form>
 {% elif view == 'details' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Details</div>
-<div class="row">
-  <div class="col-12">
-    <div class="table-responsive">
-      <table class="table table-light">
-        <tbody>
-          <tr>
-            <th width="20%" class="align-middle">Logo</th>
-            <td width="80%" colspan="3">
-              <img src="{% static 'sfd/img/user.svg' %}" class="img-thumbnail" width="150px">
-            </td>
-          </tr>
-          <tr>
-            <th width="20%" class="align-middle">Business Profile ID</th>
-            <td width="80%" colspan="3">011023150339</td>
-          </tr>
-          <tr>
-            <th width="20%" class="align-middle">Title</th>
-            <td width="80%" colspan="3">Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App</td>
-          </tr>
-          <tr>
-            <th width="20%" class="align-middle">Trademark</th>
-            <td width="80%" colspan="3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima explicabo non corrupti est pariatur eaque ab ipsa nam vero repudiandae doloribus ut animi reiciendis optio qui sit impedit, sapiente in. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod illo asperiores ullam voluptates magni provident. Qui, beatae doloribus consequatur ex repellat aperiam excepturi deserunt asperiores magnam praesentium minus vero id!</td>
-          </tr>
-          <tr>
-            <th width="20%" class="align-middle">Start</th>
-            <td width="30%">2023/05/01 13:05 PM</td>
-            <th width="20%" class="align-middle">Start</th>
-            <td width="30%">2023/05/01 13:05 PM</td>
-          </tr>
-          <tr>
-            <th width="20%" class="align-middle">Status</th>
-            <td width="80%" colspan="3">Active</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="card--container">
+  <h3 class="main--title">Details Campaign</h3>
+  <div class="card--container">
+      <div class="row">
+          <div class="col-12">
+              {% if campaign %}
+                <div class="mb-5">
+                  <label class="form-label">Title</label>
+                  <input type="text" class="form-control" value="{{campaign.title}}"  disabled>
+                </div>
+                <div class="mb-5">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" style="height: 100px" disabled>{{campaign.description }}</textarea>
+                </div>
+                <div class="mb-5">
+                  <label class="form-label">Start Campaign</label>
+                  <input type="text" class="form-control" value="{{ campaign.start_campaign }}"  disabled>
+                </div>
+                <div class="mb-5">
+                  <label class="form-label">End Campaign</label>
+                  <input type="text" class="form-control" value="{{ campaign.end_campaign }}"  disabled>
+                </div>
+                <div class="mb-5">
+                  <label class="form-label">Status</label>
+                  <input type="text" class="form-control" value="{{ campaign.status }}"  disabled>
+                </div>
+                <div class="mb-5">
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <a href="{% url 'category_page' %}" class="btn btn-md btn-primary me-md-2" type="button">Return to Campaign</a>
+                    </div>
+                </div>
+              {% endif %}
+          </div>
+      </div>
   </div>
 </div>
-
-<div class="mb-3"></div>
-<div class="row">
-  <div class="col-12 text-end">
-    <a href="{% url 'campaign_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
-    <a href="{% url 'update_campaign_page' 1 %}" class="btn btn-warning" type="button" style="width: 100px;"><i class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
-  </div>
-</div>
-{% elif view == 'assign' %}
+{% elif view == 'delete' %}
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Search Entrepreneur</div>
 <form method="POST">
   <div class="row">

@@ -22,7 +22,6 @@
                     <table id="tblNature" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>Category of business</th>
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Date/Time Created</th>
@@ -35,7 +34,6 @@
                         <tbody>
                             {% for item in items %}
                             <tr>
-                                <td>{{item.category_of_business}}</td>
                                 <td>{{item.title}}</td>
                                 <td>{{item.description}}</td>
                                 <td>{{item.created_at | date:'d-m-Y h:i A'}}</td>
