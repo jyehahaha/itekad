@@ -1,21 +1,16 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.forms import PasswordResetForm
 from .models import User, UserProfile
-from django.utils import timezone
-from django.contrib.auth import get_user_model
-User = get_user_model()
 
 class UserForm(UserCreationForm):
-    terms_agreement = forms.BooleanField(label='I accept all Privacy and Policy & Terms and Conditions.')
     class Meta:
         model = User
-        fields = ("username", "first_name", "last_name", "email", "password1", "password2", "terms_agreement")
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2")
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ("first_name", "last_name", "email")
+        fields = ("username", "first_name", "last_name", "email")
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
