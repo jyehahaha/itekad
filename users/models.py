@@ -25,13 +25,11 @@ class UserProfile(models.Model):
         ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
         INVESTOR = "INVESTOR", 'Investor'
 
-    role = models.CharField(max_length=50, choices=Role.choices)
+    role = models.CharField(max_length=50, choices=Role.choices, null=True, blank=True)
 
     class Position(models.TextChoices):
         REVIEWER = "REVIEWER", 'Reviewer'
         CHECKER = "CHECKER", 'Checker'
-
-    position = models.CharField(max_length=50, choices=Position.choices)
 
     position = models.CharField(max_length=50, choices=Position.choices, null=True, blank=True)
 
