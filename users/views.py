@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
-from .models import UserProfile
+from .models import User,UserProfile
 from .forms import UserForm, UserUpdateForm, UserProfileForm
 
 
@@ -72,7 +72,21 @@ def EnableDisableView(request):
   context = {}
   return render(request, 'users/user_management.html', context)
 
-def SendPassword(request):
+def SendPassword(request, id):
+	# Fetch User
+  user = User.objects.get(id=id)
+  
+	# send email
+  form = PasswordResetForm({'email': user.email})
+  assert form.is_valid()
+		# send email
+  form.save(request=request,from_email="mr.alif.93@gmail.com")
+
+
+		
+      
+  
+  
   context = {}
   return render(request, 'users/send_password.html', context)
 
@@ -124,65 +138,20 @@ def UpdateUserManagementView(request,id=None):
           messages.success(request, "Your Info Has Been Updated!!")
           return redirect('user_management_page')
     else:
-      messages.success(request, "You Must Be Logged In To Access That Page!!")
 
-      current_user = User.objects.get(id=id or request.user.id)
-      profile_user = UserProfile.objects.get(user__id=id or request.user.id)
+        current_user = User.objects.get(id=id or request.user.id)
+        profile_user = UserProfile.objects.get(user__id=id or request.user.id)
 
-      form = UserUpdateForm(instance=current_user)
-      profile_form = UserProfileForm(instance=profile_user)
-      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
-      	
-def DeleteUserManagementView(request, id):
-    
-    user = get_object_or_404(User, id=id)
-    
-    if not request.user.is_superuser:
-        messages.error(request, "You do not have permission to delete users.")
-        return redirect('user_management_page')
+        form = UserUpdateForm(instance=current_user)
+        profile_form = UserProfileForm(instance=profile_user)
 
-    if user == request.user:
-        messages.error(request, "You cannot delete yourself.")
-        return redirect('user_management_page')
-
-    user.delete()
-    messages.success(request, "User deleted successfully.")
-    return redirect('user_management_page')
-
-
-	# if request.user.is_authenticated:
-	# 	delete_it = User.objects.get(id=id)
-	# 	delete_it.delete()
-	# 	messages.success(request, "Record Deleted Successfully...")
-	# 	return render(request, 'users/crud_user_management.html')
-	# else:
-	# 	messages.success(request, "You Must Be Logged In To Do That...")
-	# 	return redirect('user_management_page')
-  
-def UpdateUserManagementView(request,id=None):
-    if request.method == "POST":
-        # Get Current User
-        current_user = User.objects.get(id=id)
-        # Get Current User's Profile
-        profile_user = UserProfile.objects.get(user__id=id)
-
-        form = UserUpdateForm(request.POST or None, instance=current_user)
-        profile_form = UserProfileForm(request.POST or None, instance=profile_user)
-
-        if form.is_valid() and profile_form.is_valid():
-          form.save()
-          profile_form.save()
-          messages.success(request, "Your Info Has Been Updated!!")
-          return redirect('user_management_page')
-    else:
-      messages.success(request, "You Must Be Logged In To Access That Page!!")
-
-      current_user = User.objects.get(id=id or request.user.id)
-      profile_user = UserProfile.objects.get(user__id=id or request.user.id)
-
-      form = UserUpdateForm(instance=current_user)
-      profile_form = UserProfileForm(instance=profile_user)
-      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+        context = {
+            'form': form,
+            'profile_form': profile_form,
+            'current_user': current_user,
+            'view': 'update',
+        }
+        return render(request, "users/crud_user_management.html", context)
       	
 def DeleteUserManagementView(request, id):
     

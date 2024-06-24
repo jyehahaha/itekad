@@ -67,21 +67,20 @@
      </div>
      <div class="col-12 mt-5">
       <div class="row">
+        {% for campaign in campaign_info%}
         <div class="col-3">
           <div class="card border-0 shadow-sm">
-            <img src="{% static 'website/images/picture4.jpg' %}" class="card-img-top" alt="Picture 4">
-            <div class="card-body">
-              <h5 class="card-title">Ribbon</h5>
-              <p class="card-text">Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App</p>
+            <img src="{{ campaign.campaign_logo }}" class="card-img-top" alt="Picture 4">
+            <div class="card-body text-center">
+              <h5 class="card-title">{{campaign.title}}</h5>
+              <p class="card-text">{{campaign.description}}</p>
               <div class="mb-4">
-                <div class="progress">
-                  <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuemax="100">25%</div>
-                </div>
               </div>
-              <a href="#" class="btn btn-warning text-uppercase fw-bold rounded-0">Learn More</a>
+              <a href="{% url 'campaign_info' campaign.id %}" class="btn btn-warning text-uppercase fw-bold rounded-0">Learn More</a>
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
      </div>
      <div class="col-12 mt-5 text-center">

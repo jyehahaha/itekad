@@ -12,7 +12,7 @@
 
 {% block content %}
 {% if view == 'create' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create</div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create Campaign</div>
 <form method="POST">
   {% csrf_token %}
   {{form | crispy}}
@@ -25,7 +25,7 @@
   </div>
 </form>
 {% elif view == 'update' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update</div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update Campaign</div>
 <form method="POST">
   {% csrf_token %}
   {{form | crispy}}
@@ -37,40 +37,52 @@
 </div>
 </form>
 {% elif view == 'details' %}
-<div class="card--container">
-  <h3 class="main--title">Details Campaign</h3>
-  <div class="card--container">
-      <div class="row">
-          <div class="col-12">
-              {% if campaign %}
-                <div class="mb-5">
-                  <label class="form-label">Title</label>
-                  <input type="text" class="form-control" value="{{campaign.title}}"  disabled>
-                </div>
-                <div class="mb-5">
-                  <label class="form-label">Description</label>
-                  <textarea class="form-control" style="height: 100px" disabled>{{campaign.description }}</textarea>
-                </div>
-                <div class="mb-5">
-                  <label class="form-label">Start Campaign</label>
-                  <input type="text" class="form-control" value="{{ campaign.start_campaign }}"  disabled>
-                </div>
-                <div class="mb-5">
-                  <label class="form-label">End Campaign</label>
-                  <input type="text" class="form-control" value="{{ campaign.end_campaign }}"  disabled>
-                </div>
-                <div class="mb-5">
-                  <label class="form-label">Status</label>
-                  <input type="text" class="form-control" value="{{ campaign.status }}"  disabled>
-                </div>
-                <div class="mb-5">
-                  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                      <a href="{% url 'category_page' %}" class="btn btn-md btn-primary me-md-2" type="button">Return to Campaign</a>
-                    </div>
-                </div>
-              {% endif %}
-          </div>
-      </div>
+<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Details Campaign</div>
+<div class="row">
+  <div class="col-12">
+    {% if campaign %}
+    <div class="mb-5 text-center">
+      <img src="{{campaign.campaign_logo}}" class="img-fluid rounded-top" alt=""/>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">Title</label>
+      <input type="text" class="form-control" value="{{campaign.title}}"  disabled>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">Description</label>
+      <input type="text" class="form-control" value="{{campaign.description}}"  disabled>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">Summary</label>
+      <textarea class="form-control" style="height: 100px" disabled>{{ campaign.campaign_summary }}</textarea>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">Start Campaign</label>
+      <input type="text" class="form-control" value="{{ campaign.start_campaign }}"  disabled>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">End Campaign</label>
+      <input type="text" class="form-control" value="{{ campaign.end_campaign }}"  disabled>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">Total Amount</label>
+      <input type="text" class="form-control" value="{{ campaign.total_amount }}"  disabled>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">Min Target Amount</label>
+      <input type="text" class="form-control" value="{{ campaign.min_target_amount }}"  disabled>
+    </div>
+    <div class="mb-5">
+      <label class="form-label">Status</label>
+      <input type="text" class="form-control" value="{{ campaign.status }}"  disabled>
+    </div>
+    <div class="mb-5">
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a href="{% url 'campaign_page' %}" type="button" class="btn btn-secondary">Back</a>
+        <a href="{% url 'update_campaign_page' campaign.id %}" class="btn btn-warning" type="button">Edit</a>
+        </div>
+    </div>
+  {% endif %}
   </div>
 </div>
 {% elif view == 'delete' %}

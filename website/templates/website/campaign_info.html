@@ -21,11 +21,11 @@
    <div class="container">
     <div class="row mt-5">
         <div class="col-sm-2 col-md-2 col-lg-1">
-            <img src="{% static 'website/images/test.jpeg' %}" width="100%" class="rounded">
+            <img src="{{ campaign.campaign_logo }}" width="100%" class="rounded">
         </div>
         <div class="col-sm-10 col-md-10 col-lg-11">
-        <h1>Recommend Group</h1>
-        <p>South East Asia's #1 Home and Property Services Platform</p> 
+        <h1>{{campaign.title}}</h1>
+        <p>{{campaign.description}}</p> 
         </div>
     </div>
    </div>
@@ -34,12 +34,12 @@
    <div class="container">
     <div class="row mt-5">
         <div class="col-sm-12 col-md-12 col-lg-6">
-            <img src="{% static 'website/images/picture3.jpg' %}" class="rounded">
+            <img src="{{campaign.campaign_logo}}" class="rounded">
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
            <div class="row mt-2">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>RM 596,310</h2>
+                <h2>RM {{ campaign.total_amount }}</h2>
                 <small>120% OF THE MIN.TARGET (RM 498,498)</small>
             </div>
            
@@ -52,7 +52,7 @@
            </div>
            <div class="row mt-2">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>RM 214,500</h2>
+                <h2>RM {{Investor.invest_amount}}</h2>
                 <small>LARGEST INVESTMENT</small>
             </div>
            </div>
@@ -91,11 +91,7 @@
                             </div>
                             <div class="tab-content" id="v-pills-tabContent">
                               <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-                                <h1>Summary</h1>
-                                <p>Buying a house, either as a home or for rental income, should be one of the best experiences of your life.</p>
-                                <h6>Yet it’s not.</h6>
-                                <p>Because you know that soon, you will have to deal with the interior design, renovations and maintenance of the home, and the process will be a real pain. However, it doesn’t have to be.</p>
-                                <p>Recommend Group is South East Asia’s #1 Home and Property Services platform. We operate as Recommend.my in Malaysia and Sejasa.com in Indonesia. It is a technology platform providing on-demand home maintenance services, a marketplace of home improvement services as well as an interior design company that can furnish a home in as quickly as 6 weeks. We operate a technology-driven, asset-light model which partners with thousands of individuals and SME companies who operate under our brand, use our CRM tools, scheduling and payments platform. Within the on-demand pillar, they also wear our uniform, honor our SOPs and prices.</p>
+                                {{campaign.campaign_summary}}
                               </div>
                             </div>
                           </div>

@@ -108,7 +108,7 @@
   <div class="row">
     <div class="col-12 text-end">
       <a href="{% url 'business_profile_page' %}" type="button" class="btn btn-secondary">Back</a>
-      <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-warning" type="button">Edit</a>
+      <a href="{% url 'update_business_profile_page' company.id %}" class="btn btn-warning" type="button">Edit</a>
     </div>
   </div>
   {% endif %}

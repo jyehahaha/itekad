@@ -56,7 +56,8 @@
       <thead>
         <tr>
           <th>Title</th>
-          <th>Description</th>
+          <th>Total Amount</th>
+          <th>Min Amount Target</th>
           <th>Start Campaign</th>
           <th>End Campaign</th>
           <th>Date/Time Created</th>
@@ -69,7 +70,8 @@
         <tr>
           {% for campaign in campaigns %}
           <td>{{campaign.title}}</td>
-          <td>{{campaign.description}}</td>
+          <td>{{campaign.total_amount}}</td>
+          <td>{{campaign.min_target_amount}}</td>
           <td>{{campaign.start_campaign | date:'d-m-Y'}}</td>
           <td>{{campaign.end_campaign | date:'d-m-Y'}}</td>
           <td>{{campaign.created_at | date:'d-m-Y h:i A'}}</td>
@@ -77,7 +79,7 @@
           <td>{{campaign.status}}</td>
           <td> 
             <div class="d-grid gap-2 d-md-block">
-              <a href="{% url 'details_campaign_page' campaign.id %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
+              <a href="{% url 'assign_campaign_page' campaign.id %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
               <a href="{% url 'details_campaign_page' campaign.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
               <a href="{% url 'update_campaign_page' campaign.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
               <a href="{% url 'delete_campaign_page' campaign.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
