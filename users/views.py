@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
-from .models import User, UserProfile
-from .forms import UserForm, UserProfileForm, UserUpdateForm
+from .models import User,UserProfile
+from .forms import UserForm, UserUpdateForm, UserProfileForm
+
 
 # Create your views here.
 def LoginView(request):
@@ -71,7 +72,21 @@ def EnableDisableView(request):
   context = {}
   return render(request, 'users/user_management.html', context)
 
-def SendPassword(request):
+def SendPassword(request, id):
+	# Fetch User
+  user = User.objects.get(id=id)
+  
+	# send email
+  form = PasswordResetForm({'email': user.email})
+  assert form.is_valid()
+		# send email
+  form.save(request=request,from_email="mr.alif.93@gmail.com")
+
+
+		
+      
+  
+  
   context = {}
   return render(request, 'users/send_password.html', context)
 
@@ -89,20 +104,18 @@ def CreateUserManagementView(request):
     if request.method == 'POST':
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-        
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
             user.save()
-            
             try:
-              profile = UserProfile.objects.get(user=user)
+                profile = UserProfile.objects.get(user=user)
             except UserProfile.DoesNotExist:
-              profile = UserProfile(user=user)
+                profile = UserProfile(user=user)
 
             # Update the profile fields from the form
             profile_form = UserProfileForm(request.POST, instance=profile)
-            profile_form.save()
-
+            if profile_form.is_valid():
+                profile_form.save()
             return redirect('user_management_page')  # Redirect to the user management page after registration
     else:
         user_form = UserForm()
@@ -125,14 +138,20 @@ def UpdateUserManagementView(request,id=None):
           messages.success(request, "Your Info Has Been Updated!!")
           return redirect('user_management_page')
     else:
-      messages.success(request, "You Must Be Logged In To Access That Page!!")
 
-      current_user = User.objects.get(id=id or request.user.id)
-      profile_user = UserProfile.objects.get(user__id=id or request.user.id)
+        current_user = User.objects.get(id=id or request.user.id)
+        profile_user = UserProfile.objects.get(user__id=id or request.user.id)
 
-      form = UserUpdateForm(instance=current_user)
-      profile_form = UserProfileForm(instance=profile_user)
-      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+        form = UserUpdateForm(instance=current_user)
+        profile_form = UserProfileForm(instance=profile_user)
+
+        context = {
+            'form': form,
+            'profile_form': profile_form,
+            'current_user': current_user,
+            'view': 'update',
+        }
+        return render(request, "users/crud_user_management.html", context)
       	
 def DeleteUserManagementView(request, id):
     

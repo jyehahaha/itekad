@@ -5,8 +5,11 @@ name = "pypi"
 
 [packages]
 asgiref = "==3.7.2"
+crispy-bootstrap5 = "==2024.2"
 django = "==4.2.4"
+django-crispy-forms = "==2.1"
 django-environ = "==0.10.0"
+django-filter = "==24.2"
 sqlparse = "==0.4.4"
 typing-extensions = "==4.7.1"
 django-filter = "==24.2"

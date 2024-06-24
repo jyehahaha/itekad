@@ -19,3 +19,13 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+.bg-warning {
+  background-color: #ff8145 !important;
+}
+
+.btn-warning {
+  color: white;
+  border-color: #ff8145 !important;
+  background-color: #ff8145 !important;
+}

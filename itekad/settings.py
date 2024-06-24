@@ -48,7 +48,9 @@ INSTALLED_APPS = [
     'users',
     'sfd',
 
-    #  Plugins
+    # Library/Plugin
+    'crispy_forms',
+    'crispy_bootstrap5',
     'django_filters',
 ]
 
@@ -141,4 +143,17 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
 AUTH_USER_MODEL = 'users.User'
+
+# Email Setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_SSL = False
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = 'mr.alif.93@gmail.com'
+EMAIL_HOST_USER = 'mr.alif.93@gmail.com'
+EMAIL_HOST_PASSWORD = 'vjpw sntr ivkh xmua'

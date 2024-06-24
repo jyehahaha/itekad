@@ -55,52 +55,38 @@
     <table id="tblCampaign" class="table table-striped" style="width:100%">
       <thead>
         <tr>
-          <th>Campaign ID</th>
-          <th>Business profile ID</th>
           <th>Title</th>
-          <th>Trademark</th>
-          <th>Start Date/Time</th>
-          <th>End Date/Time</th>
+          <th>Total Amount</th>
+          <th>Min Amount Target</th>
+          <th>Start Campaign</th>
+          <th>End Campaign</th>
+          <th>Date/Time Created</th>
+          <th>Date/Time Updated</th>
           <th>Status</th>
-          <th width="20%">Action</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>1.</td>
-          <td>011023150339</td>
-          <td>Ribbon</td>
-          <td>Asia's No. 1 (Rent a Local Friend) Social & Culture Experience App</td>
-          <td>2023/05/01 13:05 PM</td>
-          <td>2023/11/01 13:05 PM</td>
-          <td>Active</td>
+          {% for campaign in campaigns %}
+          <td>{{campaign.title}}</td>
+          <td>{{campaign.total_amount}}</td>
+          <td>{{campaign.min_target_amount}}</td>
+          <td>{{campaign.start_campaign | date:'d-m-Y'}}</td>
+          <td>{{campaign.end_campaign | date:'d-m-Y'}}</td>
+          <td>{{campaign.created_at | date:'d-m-Y h:i A'}}</td>
+          <td>{{campaign.updated_at | date:'d-m-Y h:i A'}}</td>
+          <td>{{campaign.status}}</td>
           <td> 
             <div class="d-grid gap-2 d-md-block">
-            <a href="{% url 'details_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-            <br><a href="{% url 'update_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-            <br><a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-user"></i>&nbsp;Entrepreneur</a>
-            <br><a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-user"></i>&nbsp;Invest</a>
-            <br><a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
+              <a href="{% url 'assign_campaign_page' campaign.id %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
+              <a href="{% url 'details_campaign_page' campaign.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+              <a href="{% url 'update_campaign_page' campaign.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+              <a href="{% url 'delete_campaign_page' campaign.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
             </div>
           </td>
         </tr>
-        <tr>
-          <td>2.</td>
-          <td>030923150339</td>
-          <td>PREMIUMLOGY</td>
-          <td>To deliver innovative techniques and technologies to promote sustainability and profitability in the agriculture industry.</td>
-          <td>2023/12/12 10:05 PM</td>
-          <td>2024/06/12 10:05 PM</td>
-          <td>Not Active</td>
-          <td> 
-            <div class="d-grid gap-2 d-md-block">
-              <a href="{% url 'details_campaign_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-              <a href="{% url 'update_campaign_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-              <a href="{% url 'assign_investor_campaign_page' 1 %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
-              <a href="{% url 'delete_campaign_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-            </div>
-          </td>
-        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>

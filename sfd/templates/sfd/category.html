@@ -8,7 +8,7 @@
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">List of Categories</div>
 
     <div class="card--container">
-        <h3 class="main--title">Category</h3>
+        <h3 class="main--title">Category of Business</h3>
         <div class="card--container">
             <div class="row">
                 <div class="col-12">
@@ -18,56 +18,39 @@
                 </div>
             </div>
             <div class="row mt-5">
+               <div class="col-12">
+               </div>
                 <div class="col-12">
                     <table id="tblCategory" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Nature of Business</th>
                                 <th>Title</th>
+                                <th>Description</th>
                                 <th>Date/Time Created</th>
+                                <th>Date/Time Updated</th>
                                 <th>Status</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
+                            {% for item in items %}
                             <tr>
-                                <td>1.</td>
-                                <td>Service</td>
-                                <td>2023/05/01 13:05 PM</td>
-                                <td>Not Active</td>
+                                <td>{{item.nature_of_business}}</td>
+                                <td>{{item.title}}</td>
+                                <td>{{item.description}}</td>
+                                <td>{{item.created_at | date:'d-m-Y h:i A'}}</td>
+                                <td>{{item.updated_at | date:'d-m-Y h:i A'}}</td>
+                                <td>{{item.status}}</td>
                                 <td>
                                     <div class="d-grid gap-2 d-md-block">
-                                    <a href="{% url 'details_category_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                    <a href="{% url 'update_category_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                    <a href="{% url 'delete_category_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                    
+                                    <a href="{% url 'details_category_page' item.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+                                    <a href="{% url 'update_category_page' item.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+                                    <a href="{% url 'delete_category_page' item.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                    
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2.</td>
-                                <td>Fintech</td>
-                                <td>2023/08/15 20:15 PM</td>
-                                <td>Active</td>
-                                <td>
-                                    <div class="d-grid gap-2 d-md-block">
-                                    <a href="{% url 'details_category_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                    <a href="{% url 'update_category_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                    <a href="{% url 'delete_category_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3.</td>
-                                <td>Tech</td>
-                                <td>2023/10/23 10:31 AM</td>
-                                <td>Active</td>
-                                <td>
-                                    <div class="d-grid gap-2 d-md-block">
-                                    <a href="{% url 'details_category_page' 1 %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                    <a href="{% url 'update_category_page' 1 %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                    <a href="{% url 'delete_category_page' 1 %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                    </div>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

@@ -1,318 +1,114 @@
 {% extends 'sfd/master/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
+
 
 {% block title %}iTekad{% endblock title %}
 {% block css %}{% endblock css %}
 
 {% block content %}
   {% if view == 'create' %}
-  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create</div>
-  <form method="POST">
-    <div class="row">
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">User</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Ahmad Bin Muhammad</option>
-            <option value="2">Siti Nurhaliza</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Company Name</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="mb-3">
-          <label class="form-label">Company Email</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="mb-3">
-          <label class="form-label">Company Phone No.</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Company Website</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Company Address</label>
-          <textarea class="form-control" rows="3" style="resize: none;"></textarea>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label for="" class="form-label">Tranche</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Tranche 1</option>
-            <option value="2">Tranche 2</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label for="" class="form-label">Category of Business</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Servive</option>
-            <option value="2">Food & beverage</option>
-            <option value="2">Agriculture</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label for="" class="form-label">Nature of Business</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Servive</option>
-            <option value="2">Fintech</option>
-            <option value="2">Tech</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Business Registration No.</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Business Summary</label>
-          <textarea class="form-control" rows="3" style="resize: none;"></textarea>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Business's Logo</label>
-          <input class="form-control" type="file">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Business's Portfolio</label>
-          <input class="form-control" type="file">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Financing (RM)</label>
-          <input type="number" class="form-control">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Grant (RM)</label>
-          <input type="number" class="form-control">
-        </div>
-      </div>
-    </div>
-
+  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create Company Profile</div>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form | crispy}}
     <div class="mb-3">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="{% url 'business_profile_page' %}" class="btn btn-md btn-secondary" type="button"><i class="bx bx-chevron-left bx-sm bx-pull-left"></i>Cancel</a>
-      <a class="btn btn-md btn-warning" type="button"><i class="bx bx-edit-alt bx-sm bx-pull-left"></i>Create</a>
+      <a href="{% url 'business_profile_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
+      <button class="btn btn-md btn-danger" type="reset"></i>Cancel</button>
+      <button class="btn btn-md btn-warning" type="submit">Create</button>
     </div>
   </form>
   {% elif view == 'update' %}
-  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update</div>
+  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update Company Profile</div>
   <form method="POST">
-    <div class="row">
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">User</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Ahmad Bin Muhammad</option>
-            <option value="2">Siti Nurhaliza</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Company Name</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="mb-3">
-          <label class="form-label">Company Email</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-3">
-        <div class="mb-3">
-          <label class="form-label">Company Phone No.</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Company Website</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Company Address</label>
-          <textarea class="form-control" rows="3" style="resize: none;"></textarea>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label for="" class="form-label">Tranche</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Tranche 1</option>
-            <option value="2">Tranche 2</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label for="" class="form-label">Category of Business</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Servive</option>
-            <option value="2">Food & beverage</option>
-            <option value="2">Agriculture</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label for="" class="form-label">Nature of Business</label>
-          <select class="form-select">
-            <option selected>-- Choose --</option>
-            <option value="1">Servive</option>
-            <option value="2">Fintech</option>
-            <option value="2">Tech</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Business Registration No.</label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Business Summary</label>
-          <textarea class="form-control" rows="3" style="resize: none;"></textarea>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Business's Logo</label>
-          <input class="form-control" type="file">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Business's Portfolio</label>
-          <input class="form-control" type="file">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Financing (RM)</label>
-          <input type="number" class="form-control">
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Grant (RM)</label>
-          <input type="number" class="form-control">
-        </div>
-      </div>
-    </div>
-
+    {% csrf_token %}
+    {{form | crispy}}
     <div class="mb-3">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="{% url 'business_profile_page' %}" class="btn btn-md btn-secondary" type="button"><i class="bx bx-chevron-left bx-sm bx-pull-left"></i>Cancel</a>
-      <a class="btn btn-md btn-warning" type="button"><i class="bx bx-edit-alt bx-sm bx-pull-left"></i>Update</a>
+      <a href="{% url 'business_profile_page' %}" class="btn btn-md btn-danger" type="button">Cancel</a>
+      <button class="btn btn-md btn-warning" type="submit">Update</a>
     </div>
   </form>
   {% elif view == 'details' %}
-  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update</div>
+  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Details Company</div>
   <div class="row">
     <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-light">
-          <tbody>
-            <tr>
-              <th width="20%" class="align-middle">Logo</th>
-              <td width="80%" colspan="3">
-                <img src="{% static 'sfd/img/user.svg' %}" class="img-thumbnail" width="150px">
-              </td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Entreprenuer</th>
-              <td width="80%" colspan="3">Ahmad Bin Muhammad</td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Campany's Name</th>
-              <td width="80%" colspan="3">Muhamad Ahmad Enterprise</td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Campany's Email</th>
-              <td width="30%">Ahmad Bin Muhammad</td>
-              <th width="20%" class="align-middle">Campany's Phone No.</th>
-              <td width="30%">Ahmad Bin Muhammad</td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Campany's Website</th>
-              <td width="80%" colspan="3"><a href="https://www.muamalat.com.my/">www.muamalat.com.my</a></td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Campany's Address</th>
-              <td width="80%" colspan="3">Bank Muamalat Malaysia Berhad HQ, <br>21, Jalan Melaka, City Centre, <br>50100 Kuala Lumpur, <br>Wilayah Persekutuan Kuala Lumpur</td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Category of Business</th>
-              <td width="30%">Ahmad Bin Muhammad</td>
-              <th width="20%" class="align-middle">Nature of Business</th>
-              <td width="30%">Ahmad Bin Muhammad</td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Business Summary</th>
-              <td width="80%" colspan="3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod eligendi fugit ipsa! Recusandae hic placeat quos voluptates dolorem laborum maiores pariatur quasi sunt tenetur? Quasi est praesentium neque repudiandae odio?Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet impedit ullam blanditiis tempore itaque, et quos architecto fuga incidunt voluptatum atque illum cum odit, natus commodi ea, quaerat autem esse!
-              </td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Financing (RM)</th>
-              <td width="30%">5,000</td>
-              <th width="20%" class="align-middle">Grant (RM)</th>
-              <td width="30%">8,000</td>
-            </tr>
-            <tr>
-              <th width="20%" class="align-middle">Company Portfolio</th>
-              <td width="80%" colspan="3"><a href="https://www.muamalat.com.my/">View</a></td>
-            </tr>
-          </tbody>
-        </table>
+      {% if company %}
+      <div class="mb-3">
+        <label class="form-label">Logo</label>
+        <input type="text" class="form-control" value="{{company.company_logo}}"  disabled>
       </div>
+      <div class="mb-3">
+        <label class="form-label">Entreprenuer</label>
+        <input type="text" class="form-control" value="{{company.user}}"  disabled>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Company's Name</label>
+        <input type="text" class="form-control" value="{{company.company_name}}"  disabled>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+            <label class="form-label">Phone Number</label>
+            <input type="text" class="form-control" value="{{company.company_phone_number}}"  disabled>
+        </div>
+        <div class="col-6">
+            <label class="form-label">E-mail Address</label>
+            <input type="text" class="form-control" value="{{company.company_email}}"  disabled>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Website</label>
+        <input type="text" class="form-control" value="{{company.company_email}}"  disabled>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Company Address</label>
+        <textarea class="form-control" disabled>{{company.company_address}}</textarea>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Nature of business</label>
+            <input type="text" class="form-control" value="{{company.category_of_business.nature_of_business.title}}"  disabled>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Category of business</label>
+            <input type="text" class="form-control" value="{{company.category_of_business}}"  disabled>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Business Summary</label>
+        <textarea class="form-control" disabled>{{company.company_summary}}</textarea>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Financing Amount(RM)</label>
+            <input type="text" class="form-control" value="{{company.financing_amount}}"  disabled>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="mb-3">
+            <label class="form-label">Grant Amount(RM)</label>
+            <input type="text" class="form-control" value="{{company.grant_amount}}"  disabled>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Company Portfolio</label>
+        <input type="text" class="form-control" value="{{company.company_portfolio}}"  disabled>
+      </div>
+      {% endif %}
     </div>
   </div>
-
   <div class="mb-3"></div>
   <div class="row">
     <div class="col-12 text-end">
-      <a href="{% url 'business_profile_page' %}" type="button" class="btn btn-secondary"><i class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
-      <a href="{% url 'update_business_profile_page' 1 %}" class="btn btn-warning" type="button"><i class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
+      <a href="{% url 'business_profile_page' %}" type="button" class="btn btn-secondary">Back</a>
+      <a href="{% url 'update_business_profile_page' company.id %}" class="btn btn-warning" type="button">Edit</a>
     </div>
   </div>
   {% endif %}

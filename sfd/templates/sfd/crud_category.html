@@ -1,5 +1,6 @@
 {% extends 'sfd/master/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}iTekad{% endblock title %}
 {% block css %}{% endblock css %}
@@ -12,29 +13,14 @@
             <div class="row">
                 <div class="col-12">
                     <form method="POST">
-                      <div class="mb-5">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control">
-                      </div>
-                      <div class="mb-5">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px"></textarea>
-                    </div>
-                      <div class="mb-5">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select Status</option>
-                            <option value="1">Active</option>
-                            <option value="2">Not Active</option>
-                          </select>
-                      </div>
+                      {% csrf_token %}
+                      {{form | crispy}}
                       <div class="mb-5">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-md btn-primary me-md-2" type="button">Create</a>
-                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                            <button class="btn btn-md btn-primary me-md-2" type="submit">Create</button>
+                            <button class="btn btn-md btn-danger" type="reset">Reset</button>
                           </div>
                       </div>
-
                     </form>
                 </div>
             </div>
@@ -44,32 +30,18 @@
     <div class="card--container">
         <h3 class="main--title">Update Category</h3>
         <div class="card--container">
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-12">
                     <form method="POST">
-                      <div class="mb-5">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control" disable>
-                      </div>
-                      <div class="mb-5">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px"></textarea>
-                    </div>
-                      <div class="mb-5">
-                        <label class="form-label">Status</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Select Status</option>
-                            <option value="1">Active</option>
-                            <option value="2">Not Active</option>
-                          </select>
-                      </div>
+                      {% csrf_token %}
+                      {{form | crispy}}
                       <div class="mb-5">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-md btn-primary me-md-2" type="button">Save</a>
-                            <a class="btn btn-md btn-danger" type="button">Cancel</a>
+                            <a href="{% url 'category_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
+                            <button class="btn btn-md btn-danger" type="reset">Cancel</button>
+                            <button class="btn btn-md btn-warning" type="submit">Update</button>
                           </div>
                       </div>
-
                     </form>
                 </div>
             </div>
@@ -77,34 +49,63 @@
     </div>
     {% elif view == 'details' %}
     <div class="card--container">
-        <h3 class="main--title">Details Category</h3>
+        <h3 class="main--title">Details Category of Business</h3>
         <div class="card--container">
             <div class="row">
                 <div class="col-12">
-                    <form method="POST">
-                      <div class="mb-5">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control"  placeholder="Service" disable>
-                      </div>
-                      <div class="mb-5">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px" disable></textarea>
+                    {% if item %}
+                    <div class="mb-3">
+                      <label class="form-label">Nature of business</label>
+                      <input class="form-control"  value="{{item.nature_of_business }}" disabled>
                     </div>
-                      <div class="mb-5">
-                        <label class="form-label">Status</label>
-                        <input type="text" class="form-control"  placeholder="Active" disable>
+                      <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input type="text" class="form-control" value="{{item.title}}"  disabled>
                       </div>
-                      <div class="mb-5">
+                     
+                      <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" style="height: 100px" disabled>{{item.description }}</textarea>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <input type="text" class="form-control" value="{{ item.status }}" disabled>
+                      </div>
+                      <div class="mb-3">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{% url 'category_page' %}" class="btn btn-md btn-primary me-md-2" type="button">Return to Category</a>
+                          <a href="{% url 'category_page' %}" type="button" class="btn btn-secondary">Back</a>
+                          <a href="{% url 'update_category_page' item.id %}" class="btn btn-warning" type="button">Edit</a>
                           </div>
                       </div>
-
-                    </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
+    {% elif view == 'delete' %}
+    <div class="card--container">
+      <h3 class="main--title">Delete Category</h3>
+      <div class="card--container">
+          <div class="row">
+              <div class="col-12">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <div class="text-center">
+                      <h4 class="card-title">
+                        Are you sure you want to delete {{item.title}}?
+                      </h4>
+                    </div>
+                    <div class="mb-5">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <button class="btn btn-md btn-primary me-md-2" type="submit">Confirm</button>
+                        </div>
+                    </div>
+                  </form>
+              </div>
+          </div>
+      </div>
+    </div>
+
     {% endif %}
 {% endblock  %}
 
