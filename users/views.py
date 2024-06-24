@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
-from .models import User, UserProfile
-from .forms import UserForm, UserProfileForm, UserUpdateForm
+from .models import User,UserProfile
+from .forms import UserForm, UserUpdateForm, UserProfileForm
+
 
 # Create your views here.
 def LoginView(request):
@@ -81,6 +81,11 @@ def SendPassword(request, id):
   assert form.is_valid()
 		# send email
   form.save(request=request,from_email="mr.alif.93@gmail.com")
+
+
+		
+      
+  
   
   context = {}
   return render(request, 'users/send_password.html', context)
@@ -135,14 +140,20 @@ def UpdateUserManagementView(request,id=None):
           messages.success(request, "Your Info Has Been Updated!!")
           return redirect('user_management_page')
     else:
-      messages.success(request, "You Must Be Logged In To Access That Page!!")
 
-      current_user = User.objects.get(id=id or request.user.id)
-      profile_user = UserProfile.objects.get(user__id=id or request.user.id)
+        current_user = User.objects.get(id=id or request.user.id)
+        profile_user = UserProfile.objects.get(user__id=id or request.user.id)
 
-      form = UserUpdateForm(instance=current_user)
-      profile_form = UserProfileForm(instance=profile_user)
-      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+        form = UserUpdateForm(instance=current_user)
+        profile_form = UserProfileForm(instance=profile_user)
+
+        context = {
+            'form': form,
+            'profile_form': profile_form,
+            'current_user': current_user,
+            'view': 'update',
+        }
+        return render(request, "users/crud_user_management.html", context)
       	
 def DeleteUserManagementView(request, id):
     

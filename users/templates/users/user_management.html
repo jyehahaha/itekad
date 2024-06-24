@@ -105,21 +105,18 @@
           </tr>
       </thead>
       <tbody>
-          {% if user_record %}
-          {% for record in user_record %}
+          {% if user_profile_record %}
+          {% for record in user_profile_record %}
           <tr>
-              <td>{{ record.get_full_name }}</td>
-              <td>{{ record.username }}</td>
-              <td>{{ record.email }}</td>
-              <td>{{ user_profile_record.mobile_no }}</td>
-              <td>{{ user_profile_record.mykad_no }}</td>
-              <td>{{ user_profile_record.country }}</td>
-              <td>{{ user_profile_record.bank_account_number }}</td>
-              <td>{{ user_profile_record.bank_name }}</td>
-              <td>{{ user_profile_record.role }}</td>
-              <td>{{ record.is_staff }}=</td>
-              <td>{{ record.date_joined }}</td>
-              <td>{{ record.is_active }}</td>
+              <td>{{ record.user.get_full_name }}</td>
+              <td>{{ record.user.username }}</td>
+              <td>{{ record.user.email }}</td>
+              <td>{{ record.mobile_no }}</td>
+              <td>{{ record.mykad_no }}</td>
+              <td>{{ record.role}}</td>
+              <td>{{ record.position | default:"-"}} </td>
+              <td>{{ record.user.date_joined }}</td>
+              <td>{{ record.user.is_active }}</td>
               <td> 
                   <div class="d-grid gap-2 d-md-block">
                   <a href="{% url 'details_user_management_page' record.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
