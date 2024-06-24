@@ -1,0 +1,228 @@
+{% extends 'sfd/master/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}iTekad - Assign{% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="card border-0 shadow-sm bg-light">
+    <div class="card-body p-4">
+        <div class="row">
+            <div class="col-sm-10 col-md-10 col-lg-11">
+                <div class="card-title">
+                    <h4 class="card-title fw-bold text-uppercase">{{campaign.title}}</h4>
+                    <p class="card-subtitle">{{campaign.description}}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <img  class="img-fluid rounded-top" src="{% static 'sfd/img/' %}muamalat_logo_new.png" alt="Title" />
+                        <div class="mt-3">
+                            <h4 class="card-title">About this campaign</h4>
+                            <p class="card-text">{{campaign.campaign_summary}}</p>
+                        </div>
+
+                        <hr class="mt-3">
+                        <div class="mt-2">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>Info</h4>
+                               </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">
+                                <table class="table mt-3">
+                                    <tbody>
+                                      <tr>
+                                        <th>Start Campaign</th>
+                                        <td>{{campaign.start_campaign}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th>End Campaign</th>
+                                        <td>{{campaign.end_campaign}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th>Total Amount</th>
+                                        <td>{{campaign.total_amount}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th>Min Target Amount</th>
+                                        <td>{{campaign.min_target_amount}}</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                              </div>
+                            </div>
+                        </div>
+
+                        <hr class="mt-3">
+                        <div class="mt-5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4>Investor</h4>
+                               </div>
+                               <div class="col-6 text-end">
+                                <a href="{% url 'investor_page' campaign.id %}" class="btn btn-md btn-primary" type="button">Add Investor</a>
+                               </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th>Name</th>
+                                            <th>Mykad</th>
+                                            <th>E-mail Address</th>
+                                            <th>Mobile No.</th>
+                                            <th class="text-end">Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {% for person in investors_tranche %}
+                                          <tr>
+                                            <td>{{person.user.user.get_full_name}}</td>
+                                            <td>{{person.user.mykad_no}}</td>
+                                            <td>{{person.user.user.email}}</td>
+                                            <td>{{person.user.mobile_no}}</td>
+                                            <td class="text-end">
+                                              <a href="{% url 'delete_investor_page' person.id %}">
+                                                <i class="fa-solid text-danger fa-trash"></i>
+                                              </a>
+                                            </td>
+                                          </tr>
+                                          {% endfor%}
+                                        </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                        </div>
+
+                        <hr class="mt-3">
+                        <div class="mt-5">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h4>Entreprenuer</h4>
+                               </div>
+                               <div class="col-6 text-end">
+                                <a href="{% url 'enterprenuer_page' campaign.id %}" class="btn btn-md btn-primary" type="button">Add Entreprenuer</a>
+                               </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th>Name</th>
+                                            <th>Mykad</th>
+                                            <th>E-mail Address</th>
+                                            <th>Mobile No.</th>
+                                            <th>Company Name</th>
+                                            <th class="text-end">Action</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>Muhammad Alif Tajudin</td>
+                                            <td>940916148902</td>
+                                            <td>mr.alif.93@gmail.com</td>
+                                            <td>0133411384</td>
+                                            <td>Ahmad Assan Enterprise</td>
+                                            <td class="text-end"><i class="fa-solid fa-trash"></i></td>
+                                          </tr>
+                                          <tr>
+                                            <td>Hariz Mohd Nor</td>
+                                            <td>0166548975</td>
+                                            <td>hariz@test.com.my</td>
+                                            <td>0166548975</td>
+                                            <td>Ahmad Assan Enterprise</td>
+                                            <td class="text-end"><i class="fa-solid fa-trash"></i></td>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-md-4 col-sm-12">
+                <div class="row">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne">
+                            List of Investor
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                <div class="row mt-2">
+                                    <div class="col-12 text-end">
+                                        <a href="{% url 'investor_page' campaign.id %}" class="btn btn-md btn-warning" type="button">Add Investor</a>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="list-group"> 
+                                            <label class="list-group-item"> 
+                                                <input class="form-check-input me-3" type="checkbox">Muhammad Alif Bin Tajuddin
+                                            </label> 
+                                            <label class="list-group-item"> 
+                                                <input class="form-check-input me-3" type="checkbox">Naziha Izzati
+                                            </label> 
+                                            <label class="list-group-item"> 
+                                                <input class="form-check-input me-3" type="checkbox">Hariz Danial
+                                            </label> 
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo">
+                            List of Entreprenuer
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
+                            <div class="accordion-body">
+                                <div class="row mt-2">
+                                    <div class="col-12 text-end">
+                                        <a href="#" class="btn btn-md btn-warning" type="button">Add Entreprenuer</a>
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <div class="list-group"> 
+                                            <label class="list-group-item"> 
+                                                <input class="form-check-input me-3" type="checkbox">Muhammad Alif Bin Tajuddin
+                                            </label> 
+                                            <label class="list-group-item"> 
+                                                <input class="form-check-input me-3" type="checkbox">Naziha Izzati
+                                            </label> 
+                                            <label class="list-group-item"> 
+                                                <input class="form-check-input me-3" type="checkbox">Hariz Danial
+                                            </label> 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+{% endblock js %}

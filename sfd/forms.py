@@ -1,6 +1,9 @@
-from django.forms import ModelForm
+from django.forms import ModelForm,DateTimeInput
 from sfd.models import CompanyProfile,Campaign,TrancheEntreprenuer,TrancheInvestor,TrancheReport,NatureOfBusiness,CategoryOfBusiness
 from django import forms
+
+class DateTimeInputCustom(DateTimeInput):
+    input_type = 'date'
 
 class CompanyProfileForm(ModelForm):
     class Meta:
@@ -28,7 +31,9 @@ class CampaignForm(ModelForm):
         model = Campaign
         fields = "__all__"
         widgets = {
-            'description': forms.Textarea()
+            'campaign_summary': forms.Textarea(),
+            'start_campaign': forms.DateTimeInput(format='%Y-%m-%d %H:%M:%S', attrs={'type':'datetime-local'}),
+            'end_campaign': forms.DateTimeInput(format='%Y-%m-%d %H:%M:%S', attrs={'type':'datetime-local'}),
         }
 
 class TrancheEntreprenuerForm(ModelForm):
@@ -40,6 +45,11 @@ class TrancheInvestorForm(ModelForm):
     class Meta:
         model = TrancheInvestor
         fields = "__all__"
+        labels = {
+            'user': 'Investor',
+            'campaign': 'Campaign',
+            'invest_amount': 'Investment Amount (RM)',
+        }
 
 class TrancheReportForm(ModelForm):
     class Meta:

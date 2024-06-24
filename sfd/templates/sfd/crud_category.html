@@ -73,7 +73,8 @@
                       </div>
                       <div class="mb-3">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{% url 'category_page' %}" class="btn btn-md btn-primary me-md-2" type="button">Return to Category</a>
+                          <a href="{% url 'category_page' %}" type="button" class="btn btn-secondary">Back</a>
+                          <a href="{% url 'update_category_page' item.id %}" class="btn btn-warning" type="button">Edit</a>
                           </div>
                       </div>
                     {% endif %}

@@ -71,33 +71,20 @@
           <th>MyKad No.</th>
           <th>Account No</th>
           <th>Account Name</th>
-          <th>Date/Time Created</th>
-          <th>Status</th>
         </tr>
     </thead>
     <tbody>
+        {% for investor in investors %}
         <tr>
-          <td>Ahmad Abu</td>
-          <td>Ahmad46</td>
-          <td>ahmad.abu@muamalat.com.my</td>
-          <td>+6011-2345123</td>
-          <td>700901-14-5122</td>
-          <td>16430009876</td>
-          <td>Maybank</td>
-          <td>2023/05/01 13:05 PM</td>
-          <td>Not Active</td>
+          <td>{{investor.user.get_full_name}}</td>
+          <td>{{investor.user.username}}</td>
+          <td>{{investor.user.email}}</td>
+          <td>{{investor.mobile_no}}</td>
+          <td>{{investor.mykad_no}}</td>
+          <td>{{investor.bank_account_number}}</td>
+          <td>{{investor.bank_name}}</td>
         </tr>
-        <tr>
-          <td>Ahmad Faiq</td>
-          <td>ahmad.faiq</td>
-          <td>faiq@muamalat.com.my</td>
-          <td>+6019-11119876</td>
-          <td>881111-01-5234</td>
-          <td>7654321009</td>
-          <td>CIMB</td>
-          <td>2023/05/01 13:05 PM</td>
-          <td>Not Active</td>
-        </tr>
+        {% endfor %}
     </tbody>
   </table>
 {% endblock  %}

@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import User
+from users.models import User, UserProfile
 
 # Create your models here.
 class NatureOfBusiness(models.Model):
@@ -24,7 +24,7 @@ class CategoryOfBusiness(models.Model):
         return self.title
 
 class CompanyProfile(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     category_of_business = models.ForeignKey(CategoryOfBusiness, on_delete=models.CASCADE,null=True,blank=True)
     company_name = models.CharField(max_length=150, null=True,blank=True)
     company_email = models.CharField(max_length=150, null=True,blank=True)
@@ -34,7 +34,7 @@ class CompanyProfile(models.Model):
     company_logo = models.CharField(max_length=500, default='https://i.pinimg.com/736x/72/8b/6c/728b6c0d58d7e6b29e91faf8a1a31bc4.jpg')
     company_portfolio = models.CharField(max_length=500, default='https://i.pinimg.com/736x/72/8b/6c/728b6c0d58d7e6b29e91faf8a1a31bc4.jpg')
     company_registration_number = models.CharField(max_length=150, null=True,blank=True)
-    company_summary = models.CharField(max_length=300, null=True,blank=True)
+    company_summary = models.CharField(max_length=1000, null=True,blank=True)
     financing_amount = models.CharField(max_length=100, null=True,blank=True)
     grant_amount = models.CharField(max_length=100, null=True,blank=True)
     company_status = models.BooleanField(default=False)
@@ -47,7 +47,10 @@ class CompanyProfile(models.Model):
 class Campaign(models.Model):
     title = models.CharField(max_length=150, null=True,blank=True)
     description = models.CharField(max_length=150, null=True,blank=True)
+    campaign_summary = models.CharField(max_length=300, null=True,blank=True)
+    campaign_logo = models.CharField(max_length=500, default='https://i.pinimg.com/736x/72/8b/6c/728b6c0d58d7e6b29e91faf8a1a31bc4.jpg')
     total_amount = models.CharField(max_length=50, null=True,blank=True)
+    min_target_amount = models.CharField(max_length=50, null=True,blank=True)
     status = models.BooleanField(default=False)
     start_campaign = models.DateTimeField(null=True,blank=True)
     end_campaign= models.DateTimeField(null=True,blank=True)
@@ -59,13 +62,15 @@ class Campaign(models.Model):
 
 
 class TrancheInvestor(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True,blank=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True,blank=True)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
+    invest_amount = models.CharField(max_length=50, null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
 
 class TrancheEntreprenuer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,null=True,blank=True)
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
