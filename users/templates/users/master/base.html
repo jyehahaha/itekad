@@ -34,7 +34,7 @@
   {% include 'users/master/header.html' %}
   
   <!-- Body -->
-  <div class="container-fluid mb-5 p-5">
+  <div class="container mt-5 mb-5">
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -45,16 +45,6 @@
         {% endfor %}
     </ul>
     {% endif %}
-
-    {% if form.errors %}
-      {% for field in form %}
-        {% for error in field.errors %}
-          <p> {{ error }} </p>
-        {% endfor %}
-      {% endfor %}
-    {% endif %}
-
-    {{ form1.errors }}
 
     {% block content %}{% endblock content %}
   </div>
