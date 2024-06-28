@@ -31,7 +31,10 @@ class CustomPasswordResetForm(PasswordResetForm):
     def save(self, *args, **kwargs):
         email = self.cleaned_data["email"]
         users = User.objects.filter(email=email)
-        for user in users:
-            user.userprofile.password_reset_timestamp = timezone.now()
-            user.userprofile.save()
+        if not users.exists():
+            raise forms.ValidationError("There is no user registered with the specified email address.")
+        else:
+            for user in users:
+                user.userprofile.password_reset_timestamp = timezone.now()
+                user.userprofile.save()
         super().save(*args, **kwargs)  
