@@ -5,6 +5,8 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
 from .models import User, UserProfile
 from .forms import UserForm, UserProfileForm, UserUpdateForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .filters import UserFilter
 
 # Create your views here.
 def LoginView(request):
@@ -36,7 +38,7 @@ def RegisterView(request):
   if request.method == "POST":
     form = UserForm(request.POST)
     
-    if form.is_valid():
+    if form.is_valid() and form.cleaned_data['terms_agreement']:
       form.save()
       
       username = form.cleaned_data['username']
@@ -54,15 +56,11 @@ def RegisterView(request):
   else:
     form = UserForm()
   
-  return render(request, 'users/register.html', {'form':form})  
-
-def ForgotPasswordView(request):
-  context = {}
-  return render(request, 'users/forgot_password.html', context)
+  return render(request, 'users/register.html', {'form':form})
 
 def ResetPasswordView(request):
   context = {}
-  return render(request, 'users/reset_password.html', context)
+  return render(request, "users/reset_password.html", context)
 
 def SuccessPasswordView(request):
   context = {}
@@ -93,9 +91,36 @@ def SendPassword(request, id):
 def UserManagementView(request):
     if request.user.is_authenticated:
         # Look Up Records
-        user_record = User.objects.all()
-        user_profile_record = UserProfile.objects.all()
-        return render(request, 'users/user_management.html', {'user_record':user_record, 'user_profile_record':user_profile_record})
+        user_profile_record = UserProfile.objects.filter(user__is_superuser=False)
+
+        # filter
+        f = UserFilter(request.GET, queryset=user_profile_record)
+
+        # variable for paginator
+        page_num = request.GET.get('page', 1)
+        limit = request.GET.get('limit', 10)
+
+        # pass the list for pagination
+        paginator = Paginator(f.qs, limit)
+
+        # paginator
+        try:
+            page_obj = paginator.page(page_num)
+        except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            # if the page is out of range, deliver the last page
+            page_obj = paginator.page(paginator.num_pages)
+
+        context = {
+          'filter': f,
+          'page_obj': page_obj,
+          'dashboard_view': True,
+          'user_profile_record':user_profile_record
+        }
+
+        return render(request, 'users/user_management.html', context)
     else:
         messages.success(request, "You Must Be Logged In To View That Page...")
         return redirect('login_page')

@@ -1,5 +1,4 @@
-{% extends 'users/master/base.html' %}
-{% load crispy_forms_tags %}
+{% extends 'sfd/master/base.html' %}
 {% load dashboard_extras %}
 {% load static %}
 
@@ -8,47 +7,16 @@
 
 {% block content %}
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Search</div>
-<form method="get">
+<form method="GET">
   <div class="row">
-    <div class="col-6">
-      {{ filter.form.firstname | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.lastname | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.mykad_no | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.email | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.bank_account_number | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.bank_name | as_crispy_field }}
-    </div>
-    <div class="col-3 mb-3">
-      {{ filter.form.start_date | as_crispy_field }}
-    </div>
-    <div class="col-3 mb-3">
-      {{ filter.form.end_date | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.status | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.role | as_crispy_field }}
-    </div>
-    <div class="col-6 mb-3">
-      {{ filter.form.position | as_crispy_field }}
+    <div class="col-12">
+      {{ filter.form.as_p }}
     </div>
   </div>
   <div class="row">
     <div class="col-12">
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-danger" href="{% url 'user_management_page' %}"><i
-            class="fa-solid fa-xmark"></i>&nbsp;Reset</a>
+        <button class="btn btn-danger" type="reset"><i class="fa-solid fa-xmark"></i>&nbsp;Reset</button>
         <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search</button>
       </div>
     </div>
@@ -88,34 +56,35 @@
         </tr>
       </thead>
       <tbody>
-          {% if user_record %}
-          {% for record in user_record %}
-          <tr>
-              <td>{{ record.get_full_name }}</td>
-              <td>{{ record.username }}</td>
-              <td>{{ record.email }}</td>
-              <td>{{ user_profile_record.mobile_no }}</td>
-              <td>{{ user_profile_record.mykad_no }}</td>
-              <td>{{ user_profile_record.country }}</td>
-              <td>{{ user_profile_record.bank_account_number }}</td>
-              <td>{{ user_profile_record.bank_name }}</td>
-              <td>{{ user_profile_record.role }}</td>
-              <td>{{ record.is_staff }}=</td>
-              <td>{{ record.date_joined }}</td>
-              <td>{{ record.is_active }}</td>
-              <td> 
-                  <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_management_page' record.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_management_page' record.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  <!-- <a href="{% url 'delete_user_management_page' record.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a> -->
-                  {% if request.user.is_superuser %}
-                  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-user-id="{{ record.id }}" data-username="{{ record.username }}"><i class="fa-solid fa-trash"></i>&nbspDelete</button>
-                  {% endif %}
-                  </div>
-              </td>
-          </tr>
-          {% endfor %}
-          {% endif %}
+        {% for x in page_obj %}
+        <tr>
+          <td>{{ x.user.get_full_name }}</td>
+          <td>{{ x.user.username }}</td>
+          <td>{{ x.user.email }}</td>
+          <td>{{ x.mobile_no }}</td>
+          <td>{{ x.mykad_no }}</td>
+          <td>{{ x.country }}</td>
+          <td>{{ x.bank_account_number }}</td>
+          <td>{{ x.bank_name }}</td>
+          <td>{{ x.role | default:"-" }}</td>
+          <td>{{ x.position }}</td>
+          <td>{{ x.date_joined }}</td>
+          <td>{{ x.is_active }}</td>
+          <td>
+            <div class="d-grid gap-2 d-md-block">
+              <a href="{% url 'details_user_management_page' x.id %}" class="btn btn-primary" type="button"><i
+                  class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+              <a href="{% url 'update_user_management_page' x.id %}" class="btn btn-success" type="button"><i
+                  class="fa-solid fa-pen"></i>&nbspEdit</a>
+              {% if request.user.is_superuser %}
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                data-user-id="{{ record.id }}" data-username="{{ record.username }}"><i
+                  class="fa-solid fa-trash"></i>&nbspDelete</button>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
@@ -155,7 +124,8 @@
 </div>
 
 <!-- Bootstrap Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -174,19 +144,19 @@
     </div>
   </div>
 </div>
-{% endblock  %}
+{% endblock %}
 
 {% block js%}
 <script>
-    new DataTable('#tblUserManagement');
+  // new DataTable('#tblUserManagement');
 
-    $('#confirmDeleteModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget)
-        var userId = button.data('user-id')
-        var username = button.data('username')
-        var modal = $(this)
-        modal.find('#modal-username').text(username)
-        modal.find('#confirm-delete-button').attr('href', '/users/user/delete/' + userId + '/')
-    })
+  $('#confirmDeleteModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget)
+    var userId = button.data('user-id')
+    var username = button.data('username')
+    var modal = $(this)
+    modal.find('#modal-username').text(username)
+    modal.find('#confirm-delete-button').attr('href', '/users/user/delete/' + userId + '/')
+  })
 </script>
 {% endblock js%}
