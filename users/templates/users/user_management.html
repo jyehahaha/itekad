@@ -1,7 +1,7 @@
 {% extends 'sfd/master/base.html' %}
 {% load dashboard_extras %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block title %} iTekad - User Management {% endblock title %}
 {% block css %}{% endblock css %}
 
@@ -10,7 +10,7 @@
 <form method="GET">
   <div class="row">
     <div class="col-12">
-      {{ filter.form.as_p }}
+      {{ filter.form | crispy }}
     </div>
   </div>
   <div class="row">
