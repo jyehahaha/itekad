@@ -1,7 +1,8 @@
-{% extends 'sfd/master/base.html' %}
+{% extends 'users/master/base.html' %}
+{% load crispy_forms_tags %}
 {% load dashboard_extras %}
 {% load static %}
-{% load crispy_forms_tags %}
+
 {% block title %} iTekad - User Management {% endblock title %}
 {% block css %}{% endblock css %}
 
@@ -10,67 +11,44 @@
 <form method="get">
   <div class="row">
     <div class="col-6">
-      <label class="form-label">Name</label>
-      <input type="text" name="firstname" class="form-control">
+      {{ filter.form.firstname | as_crispy_field }}
     </div>
     <div class="col-6 mb-3">
-      <label class="form-label">Mykad No.</label>
-      <input type="text" name="mykad_no" class="form-control">
+      {{ filter.form.lastname | as_crispy_field }}
     </div>
     <div class="col-6 mb-3">
-      <label class="form-label">Username</label>
-      <input type="text" name="username" class="form-control">
+      {{ filter.form.mykad_no | as_crispy_field }}
     </div>
     <div class="col-6 mb-3">
-      <label class="form-label">Email</label>
-      <input type="text" name="email" class="form-control">
+      {{ filter.form.email | as_crispy_field }}
     </div>
     <div class="col-6 mb-3">
-      <label class="form-label">Account No.</label>
-      <input type="text" name="bank_account_number" class="form-control">
+      {{ filter.form.bank_account_number | as_crispy_field }}
     </div>
     <div class="col-6 mb-3">
-      <label class="form-label">Bank Name</label>
-      <input type="text" name="bank_name" class="form-control">
+      {{ filter.form.bank_name | as_crispy_field }}
     </div>
     <div class="col-3 mb-3">
-      <label class="form-label">Start Date</label>
-      <input type="date" name="start_date" class="form-control">
+      {{ filter.form.start_date | as_crispy_field }}
     </div>
     <div class="col-3 mb-3">
-      <label class="form-label">End Date</label>
-      <input type="date" name="end_date" class="form-control">
-    </div>
-    <!-- <div class="col-6 mb-3">
-      <label class="form-label">Status</label>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Select Status</option>
-        <option value="1">Active</option>
-        <option value="2">Not Active</option>
-      </select>
-    </div> -->
-    <div class="col-6 mb-3">
-      <label class="form-label">Role</label>
-      <select class="form-select" name="role" aria-label="Default select example">
-        <option>Select Role</option>
-        <option value="ADMIN">Admin</option>
-        <option value="ENTREPRENUER">Entreprenuer</option>
-        <option value="INVESTOR">Investor</option>
-      </select>
+      {{ filter.form.end_date | as_crispy_field }}
     </div>
     <div class="col-6 mb-3">
-      <label class="form-label">Category</label>
-      <select class="form-select" name="category" aria-label="Default select example">
-        <option>Select Category</option>
-        <option value="REVIEWER">Reviewer</option>
-        <option value="CHECKER">Checker</option>
-      </select>
+      {{ filter.form.status | as_crispy_field }}
+    </div>
+    <div class="col-6 mb-3">
+      {{ filter.form.role | as_crispy_field }}
+    </div>
+    <div class="col-6 mb-3">
+      {{ filter.form.position | as_crispy_field }}
     </div>
   </div>
   <div class="row">
     <div class="col-12">
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-danger" href="{% url 'user_management_page' %}"><i class="fa-solid fa-xmark"></i>&nbsp;Reset</a>
+        <a class="btn btn-danger" href="{% url 'user_management_page' %}"><i
+            class="fa-solid fa-xmark"></i>&nbsp;Reset</a>
         <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search</button>
       </div>
     </div>
@@ -114,16 +92,21 @@
         <tr>
           <td>{{ x.user.get_full_name }}</td>
           <td>{{ x.user.username }}</td>
-          <td>{{ x.user.email }}</td>
-          <td>{{ x.mobile_no }}</td>
-          <td>{{ x.mykad_no }}</td>
-          <td>{{ x.country }}</td>
-          <td>{{ x.bank_account_number }}</td>
-          <td>{{ x.bank_name }}</td>
+          <td>{{ x.user.email | default:"-" }}</td>
+          <td>{{ x.mobile_no | default:"-" }}</td>
+          <td>{{ x.mykad_no | default:"-" }}</td>
+          <td>{{ x.country | default:"-" }}</td>
+          <td>{{ x.bank_account_number | default:"-" }}</td>
+          <td>{{ x.bank_name | default:"-" }}</td>
           <td>{{ x.role | default:"-" }}</td>
-          <td>{{ x.position }}</td>
-          <td>{{ x.date_joined }}</td>
-          <td>{{ x.is_active }}</td>
+          <td>{{ x.position | default:"-" }}</td>
+          <td>{{ x.user.date_joined }}</td>
+          <td> {% if x.user.is_active %}
+            <span class="badge bg-success">Active</span>
+            {% else %}
+            <span class="badge bg-danger">Inactive</span>
+            {% endif %}
+          </td>
           <td>
             <div class="d-grid gap-2 d-md-block">
               <a href="{% url 'details_user_management_page' x.id %}" class="btn btn-primary" type="button"><i

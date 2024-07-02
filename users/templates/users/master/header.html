@@ -1,28 +1,46 @@
+{% load static %}
 <nav class="navbar navbar-expand-sm navbar-dark bg-warning">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'landing_page' %}">
-      <img src="https://map.muamalat.com.my/media/images/muamalat_logo_white.original.png" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
+    <a class="navbar-brand" href="{% url 'user_management_page' %}">
+      <img src="{% static 'users/img/' %}muamalat_logo_new.png" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
     </a>
   </div>
 </nav>
-
+  
 <nav class="navbar navbar-expand navbar-light bg-light shadow-sm">
   <div class="container">
-    <div class="nav navbar-nav">
-      <!-- <a class="nav-item nav-link active" href="#" aria-current="page">Account Overview <span class="visually-hidden">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Campaign</a>
-      <a class="nav-item nav-link" href="#">Profile</a> -->
-    </div>
+    <ul class="nav navbar-nav">
+      <li class="nav-item">
+        <a class="nav-item nav-link active" href="{% url 'dashboard_page' %}" aria-current="page">Dashboard <span class="visually-hidden">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'user_management_page' %}">User</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'business_profile_page' %}">Company Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'campaign_page' %}">Campaign</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'upload_report_page' %}">Performance Report</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Settings</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'nature_of_business_page' %}">Nature of Business</a></li>
+          <li><a class="dropdown-item" href="{% url 'category_page' %}">Category of Business</a></li>
+        </ul>
+      </li>
+    </ul>
 
     <div class="text-end">
       <div class="dropdown">
-        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Muhammad Alif Tajudin</button>
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">{{request.user.get_full_name}}</button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Home</a></li>
-          <li><a class="dropdown-item" href="#">FAQ</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
+          {% comment %} <li><a class="dropdown-item" href="{% url 'update_user_management_page' %}">Profile</a></li> {% endcomment %}
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="{% url 'login_page' %}">Logout</a></li>
+          <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
         </ul>
       </div>
     </div>
