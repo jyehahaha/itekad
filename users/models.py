@@ -19,12 +19,14 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=100, null=True, blank=True)
     bank_account_number = models.CharField(max_length=50, null=True, blank=True)
     bank_name = models.CharField(max_length=100, null=True, blank=True)
+    password_reset_timestamp = models.DateTimeField(null=True, blank=True)
 
     class Role(models.TextChoices):
         ADMIN = "ADMIN", 'Admin'
         ENTREPRENEUR = "ENTREPRENEUR", 'Entrepreneur'
         INVESTOR = "INVESTOR", 'Investor'
-
+		
+    base_role = Role.INVESTOR
     role = models.CharField(max_length=50, choices=Role.choices, null=True, blank=True)
 
     class Position(models.TextChoices):

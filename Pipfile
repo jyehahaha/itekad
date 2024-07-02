@@ -17,4 +17,4 @@ django-filter = "==24.2"
 [dev-packages]
 
 [requires]
-python_version = "3.9"
+python_version = "3.8"
