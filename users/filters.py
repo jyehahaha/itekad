@@ -13,8 +13,8 @@ class UserFilter(filters.FilterSet):
   start_date = filters.DateFilter(field_name='last_modified', label='Start Date', lookup_expr='gte', widget=forms.DateInput(attrs={'type': 'date'}))
   end_date = filters.DateFilter(field_name='last_modified', label='End Date', lookup_expr='lte', widget=forms.DateInput(attrs={'type': 'date'}))
   # status = filters.ModelChoiceFilter(field_name='is_active', label='Status', lookup_expr='exact')
-  role = filters.ChoiceFilter(choices=UserProfile.Role.choices, label='Role', lookup_expr='exact')
-  category = filters.ChoiceFilter(choices=UserProfile.Position.choices, label='Category', method='exact')
+  role = filters.ChoiceFilter(choices=UserProfile.Role.choices, label='Role', lookup_expr='iexact')
+  position = filters.ChoiceFilter(choices=UserProfile.Position.choices, label='Category', method='iexact')
 
   class Meta:
     model = UserProfile

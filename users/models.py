@@ -28,8 +28,6 @@ class UserProfile(models.Model):
     base_role = Role.INVESTOR
     role = models.CharField(max_length=50, choices=Role.choices, null=True, blank=True)
 
-    role = models.CharField(max_length=50, choices=Role.choices, null=True, blank=True)
-
     class Position(models.TextChoices):
         REVIEWER = "REVIEWER", 'Reviewer'
         CHECKER = "CHECKER", 'Checker'
