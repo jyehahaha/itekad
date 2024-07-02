@@ -7,16 +7,70 @@
 
 {% block content %}
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Search</div>
-<form method="GET">
+<form method="get">
   <div class="row">
-    <div class="col-12">
-      {{ filter.form | crispy }}
+    <div class="col-6">
+      <label class="form-label">Name</label>
+      <input type="text" name="firstname" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Mykad No.</label>
+      <input type="text" name="mykad_no" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Username</label>
+      <input type="text" name="username" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Email</label>
+      <input type="text" name="email" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Account No.</label>
+      <input type="text" name="bank_account_number" class="form-control">
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Bank Name</label>
+      <input type="text" name="bank_name" class="form-control">
+    </div>
+    <div class="col-3 mb-3">
+      <label class="form-label">Start Date</label>
+      <input type="date" name="start_date" class="form-control">
+    </div>
+    <div class="col-3 mb-3">
+      <label class="form-label">End Date</label>
+      <input type="date" name="end_date" class="form-control">
+    </div>
+    <!-- <div class="col-6 mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Select Status</option>
+        <option value="1">Active</option>
+        <option value="2">Not Active</option>
+      </select>
+    </div> -->
+    <div class="col-6 mb-3">
+      <label class="form-label">Role</label>
+      <select class="form-select" name="role" aria-label="Default select example">
+        <option>Select Role</option>
+        <option value="ADMIN">Admin</option>
+        <option value="ENTREPRENUER">Entreprenuer</option>
+        <option value="INVESTOR">Investor</option>
+      </select>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label">Category</label>
+      <select class="form-select" name="category" aria-label="Default select example">
+        <option>Select Category</option>
+        <option value="REVIEWER">Reviewer</option>
+        <option value="CHECKER">Checker</option>
+      </select>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-danger" type="reset"><i class="fa-solid fa-xmark"></i>&nbsp;Reset</button>
+        <a class="btn btn-danger" href="{% url 'user_management_page' %}"><i class="fa-solid fa-xmark"></i>&nbsp;Reset</a>
         <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;Search</button>
       </div>
     </div>
