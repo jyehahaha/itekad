@@ -8,7 +8,6 @@ urlpatterns = [
     path('business/update/<int:id>/', views.UpdateBusinessProfileView, name='update_business_profile_page'),
     path('business/delete/<int:id>/', views.DeleteBusinessProfileView, name='delete_business_profile_page'),
     path('business/details/<int:id>/', views.DetailsBusinessProfileView, name='details_business_profile_page'),
-    path('report/', views.UploadReportView, name='upload_report_page'),
     path('category/', views.CategoryView, name='category_page'),
     path('category/create/', views.CreateCategoryView, name='create_category_page'),
     path('category/update/<int:id>/', views.UpdateCategoryView, name='update_category_page'),
@@ -33,4 +32,8 @@ urlpatterns = [
     path('enterprenuer/create/', views.CreateEnterprenuerView, name='create_enterprenuer_page'),
     path('enterprenuer/update/<int:id>/', views.UpdateEnterprenuerView, name='update_enterprenuer_page'),
     path('enterprenuer/delete/<int:id>/', views.DeleteEnterprenuerView, name='delete_enterprenuer_page'),
+    path('report/<int:id>/', views.UploadReportView, name='upload_report_page'),
+    path('report/create/<int:id>/', views.CreateReportView, name='create_report_page'),
+    path('report/update/<int:campaign>/<int:id>/', views.UpdateReportView, name='update_report_page'),
+    path('report/delete/<int:id>/', views.DeleteReportView, name='delete_report_page'),
 ]

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CategoryOfBusiness, NatureOfBusiness,Campaign,CompanyProfile,TrancheInvestor,TrancheEntreprenuer
+from .models import CategoryOfBusiness, NatureOfBusiness,Campaign,CompanyProfile,TrancheInvestor,TrancheEntreprenuer,TrancheReport
 
 
 # Register your models here.
@@ -14,6 +14,8 @@ admin.site.register(CompanyProfile)
 admin.site.register(TrancheInvestor)
 
 admin.site.register(TrancheEntreprenuer)
+
+admin.site.register(TrancheReport)
 
 
 

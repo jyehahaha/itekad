@@ -9,50 +9,16 @@
     <h4 class="card-title fw-bold text-uppercase">Account Overview</h4>
   </div>
 </div>
-
-<div class="row mt-5">
+<div class="row">
   <div class="col-12">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead class="table-light">
-          <tr>
-            <th scope="col" width="5%" class="text-center">#</th>
-            <th scope="col" class="text-center">Tranche</th>
-            <th scope="col" width="10%" class="text-center">Profile</th>
-            <th scope="col" width="10%" class="text-center">Picture</th>
-            <th scope="col" width="10%" class="text-center">Report</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row" class="text-center">1.</td>
-            <td>Tranche #1</td>
-            <td class="text-center">
-              <a href="{% url 'profile_page' %}" class="text-decoration-none">View</a>
-            </td>
-            <td class="text-center">
-              <a href="{% url 'gallery_page' %}" class="text-decoration-none">View</a>
-            </td>
-            <td class="text-center">
-              <a href="{% url 'report_page' %}" class="text-decoration-none">View</a>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" class="text-center">2.</td>
-            <td>Tranche #2</td>
-            <td class="text-center">
-              <a href="{% url 'profile_page' %}" class="text-decoration-none">View</a>
-            </td>
-            <td class="text-center">
-              <a href="{% url 'gallery_page' %}" class="text-decoration-none">View</a>
-            </td>
-            <td class="text-center">
-              <a href="{% url 'report_page' %}" class="text-decoration-none">View</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <img class="card-img-top" src="holder.js/100x180/" alt="Title" />
+      <div class="card-body">
+        <h4 class="card-title">Title</h4>
+        <p class="card-text">Text</p>
+      </div>
     </div>
+    
   </div>
 </div>
 {% endblock content %}
