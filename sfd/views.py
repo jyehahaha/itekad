@@ -6,9 +6,16 @@ from users.models import User,UserProfile
 
 
 def DashboardView(request):
+ 
   investors = UserProfile.objects.filter(role='INVESTOR')
+ 
+  totalInvestor = investors.count()
+  totalCampaign = Campaign.objects.count()
+
   context = {
-    'investors' : investors
+    'investors' : investors,
+    'totalInvestor': totalInvestor,
+    'totalCampaign': totalCampaign
   }
   return render(request, 'sfd/dashboard.html', context)
 
@@ -78,10 +85,6 @@ def DetailsBusinessProfileView(request, id):
     'company': company
   }
   return render(request, 'sfd/crud_business.html', context)
-
-def UploadReportView(request):
-  context = {}
-  return render(request, 'sfd/report.html', context)
 
 def CategoryView(request):
   query = CategoryOfBusiness.objects.all()
@@ -288,11 +291,14 @@ def AssignCampaignView(request, id):
   campaign = Campaign.objects.get(id=id)
   investors_tranche = TrancheInvestor.objects.filter(campaign__id=id)
   entereprenuers_tranche = TrancheEntreprenuer.objects.filter(campaign__id=id)
+  report_tranche = TrancheReport.objects.filter(campaign__id=id)
+
   context = {
     'view': 'assign',
     'campaign': campaign,
     'investors_tranche': investors_tranche,
-    'entereprenuers_tranche': entereprenuers_tranche
+    'entereprenuers_tranche': entereprenuers_tranche,
+    'report_tranche': report_tranche
   }
   return render(request, 'sfd/assign_page.html', context)
 
@@ -322,7 +328,6 @@ def CreateInvestorView(request, id):
   campaign = Campaign.objects.get(id=id)
   # fetch investor
   investor = UserProfile.objects.get(id=request.GET['user'])
-
   # form
   form = TrancheInvestorForm({ 'campaign': campaign, 'user': investor })
   
@@ -366,32 +371,133 @@ def DeleteInvestorView(request,id):
 def EnterprenuerView(request, id):
   # fetch campaign
   campaign = Campaign.objects.get(id=id)
-  entreprenuers = UserProfile.objects.filter(role='ENTREPRENEUR')
+   # fetch entreprenuer assign
+  e = TrancheEntreprenuer.objects.filter(campaign__id=id)
+
+  # organize user id in list
+  e_entreprenuer = []
+  for x in e:
+    e_entreprenuer.append(x.user.id)
+
+  # fetch and exclude investor already assign
+  entreprenuers = UserProfile.objects.filter(role='ENTREPRENEUR').exclude(id__in=e_entreprenuer)
 
   context = {
+    'view': 'assign',
     'campaign': campaign,
     'entreprenuers': entreprenuers,
   }
   return render(request, 'sfd/crud_entreprenuer.html', context)
 
 def CreateEnterprenuerView(request):
+  # fetch campaign
+  campaign = Campaign.objects.get(id=id)
+  # fetch investor
+  entreprenuer = UserProfile.objects.get(id=request.GET['user'])
+  # form
+  form = TrancheEntreprenuerForm({ 'campaign': campaign, 'user': entreprenuer })
 
+    # form submit
   if request.method == "POST":
-    enterprenuer = TrancheEntreprenuer.objects.all()
+    form = TrancheEntreprenuerForm(request.POST)
+    #  form valid
+    if form.is_valid():
+      # form save
+      form.save()
+      return redirect('assign_campaign_page', campaign.id)
 
   context = {
+    'view': 'create',
+    'form': form,
+    'campaign': campaign,
 
   }
-  return render(request, 'sfd/assign_page.html', context)
+  return render(request, 'sfd/crud_entreprenuer.html', context)
 
 def UpdateEnterprenuerView(request):
+  context = {}
+  return render(request, 'sfd/crud_investor.html', context)
+
+def DeleteEnterprenuerView(request,id):
+  # Fetch entreprenuer tranche
+  entreprenuer_tranche = TrancheEntreprenuer.objects.get(id=id)
+  # Fetch campaign ID
+  campaign = Campaign.objects.get(id=entreprenuer_tranche.campaign.id)
+
+  if request.method == "POST":
+    entreprenuer_tranche.delete()
+    return redirect('assign_campaign_page', campaign.id)
+
   context = {
+    'view': 'delete',
+    'entreprenuer_tranche' : entreprenuer_tranche,
+    'campaign': campaign,
 
   }
   return render(request, 'sfd/crud_investor.html', context)
 
-def DeleteEnterprenuerView(request):
-  context = {
+def UploadReportView(request,id):
+  context = {}
+  return render(request, 'sfd/assign_page.html', context)
 
+def CreateReportView(request,id):
+  # fetch campaign
+  campaign = Campaign.objects.get(id=id)
+  # form
+  form = TrancheReportForm({ 'campaign': campaign })
+
+  # form submit
+  if request.method == "POST":
+    form = TrancheReportForm(request.POST)
+    #  form valid
+    if form.is_valid():
+      # form save
+      form.save()
+      return redirect('assign_campaign_page', campaign.id)
+
+  context = {
+    'view': 'create',
+    'form': form,
+    'campaign': campaign, 
   }
-  return render(request, 'sfd/crud_investor.html', context)
+  return render(request, 'sfd/crud_report.html', context)
+
+def UpdateReportView(request,campaign, id):
+  #fetch campaign
+  campaign = Campaign.objects.get(id=campaign)
+  # fetch report
+  report = TrancheReport.objects.get(id=id)
+  # fetch report 
+  form = TrancheReportForm(instance=report)
+
+  if request.method == "POST":
+    form = TrancheReportForm(request.POST, instance=report)
+
+    if form.is_valid():
+      form.save()
+      return redirect("assign_campaign_page",campaign.id)
+
+  context = {
+    'view': 'update',
+    'form': form,
+    'campaign': campaign
+  }
+  
+  return render(request, 'sfd/crud_report.html', context)
+
+def DeleteReportView(request,id):
+    # Fetch report tranche
+  report_tranche = TrancheReport.objects.get(id=id)
+    # Fetch campaign ID
+  campaign = Campaign.objects.get(id=report_tranche.campaign.id)
+
+  if request.method == "POST":
+    report_tranche.delete()
+    return redirect('assign_campaign_page', campaign.id)
+
+  context = {
+    'view': 'delete',
+    'report_tranche' : report_tranche,
+    'campaign': campaign,
+  }
+  return render(request, 'sfd/crud_report.html', context)

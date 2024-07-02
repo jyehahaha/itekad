@@ -81,11 +81,6 @@ def SendPassword(request, id):
   assert form.is_valid()
 		# send email
   form.save(request=request,from_email="mr.alif.93@gmail.com")
-
-
-		
-      
-  
   
   context = {}
   return render(request, 'users/send_password.html', context)

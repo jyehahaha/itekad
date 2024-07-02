@@ -18,41 +18,50 @@
           </div>
           <form method="POST" action="{% url 'register_page' %}">
           {% csrf_token %}
-          <div class="col-12">
-            <div class="mb-3">
-              <label for="" class="form-label">Username</label>
-              <input type="text" class="form-control" name="username" id="uname" placeholder="">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" id="uname" placeholder="">
+              </div>
             </div>
           </div>
-          <div class="col-12">
-            <div class="mb-3">
-              <label for="" class="form-label">First Name</label>
-              <input type="text" class="form-control" name="first_name" id="fname" placeholder="">
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="" class="form-label">First Name</label>
+                <input type="text" class="form-control" name="first_name" id="fname" placeholder="">
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3">
+                <label for="" class="form-label">Last Name</label>
+                <input type="text" class="form-control" name="last_name" id="lname" placeholder="">
+              </div>
             </div>
           </div>
-          <div class="col-12">
-            <div class="mb-3">
-              <label for="" class="form-label">Last Name</label>
-              <input type="text" class="form-control" name="last_name" id="lname" placeholder="">
-            </div>
-          </div>
+         <div class="row">
           <div class="col-12">
             <div class="mb-3">
               <label for="" class="form-label">Email Address</label>
               <input type="text" class="form-control" name="email" id="email" placeholder="">
             </div>
           </div>
-          <div class="col-12">
+         </div>
+        <div class="row">
+          <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Password</label>
               <input type="password" class="form-control" name="password1" id="password" placeholder="">
             </div>
           </div>
-          <div class="col-12">
+          <div class="col-6">
             <div class="mb-3">
               <label for="" class="form-label">Confirm Password</label>
               <input type="password" class="form-control" name="password2" id="cpassword" placeholder="">
             </div>
+        </div>
+         
           </div>
           <div class="col-12 mt-4">
             <div class="form-check">

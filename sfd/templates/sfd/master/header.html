@@ -11,22 +11,19 @@
   <div class="container">
     <ul class="nav navbar-nav">
       <li class="nav-item">
-        <a class="nav-item nav-link active" href="{% url 'dashboard_page' %}" aria-current="page">Dashboard <span class="visually-hidden">(current)</span></a>
+        <a class="nav-item nav-link active" href="{% url 'dashboard_page' %}" aria-current="page"><i class="fa-solid fa-gauge"></i>&nbspDashboard <span class="visually-hidden">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" href="{% url 'user_management_page' %}">User</a>
+        <a class="nav-item nav-link" href="{% url 'user_management_page' %}"><i class="fa-solid fa-users"></i>&nbspUser</a>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" href="{% url 'business_profile_page' %}">Company Profile</a>
+        <a class="nav-item nav-link" href="{% url 'business_profile_page' %}"><i class="fa-solid fa-building"></i>&nbspCompany Profile</a>
       </li>
       <li class="nav-item">
-        <a class="nav-item nav-link" href="{% url 'campaign_page' %}">Campaign</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-item nav-link" href="{% url 'upload_report_page' %}">Performance Report</a>
+        <a class="nav-item nav-link" href="{% url 'campaign_page' %}"><i class="fa-solid fa-bullhorn"></i>&nbspCampaign</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Settings</a>
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"><i class="fa-solid fa-gear"></i>&nbspSettings</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="{% url 'nature_of_business_page' %}">Nature of Business</a></li>
           <li><a class="dropdown-item" href="{% url 'category_page' %}">Category of Business</a></li>
@@ -36,9 +33,9 @@
 
     <div class="text-end">
       <div class="dropdown">
-        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">{{request.user.get_full_name}}</button>
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown"><i class="fa-solid fa-id-badge"></i>&nbsp{{request.user.get_full_name}}</button>
         <ul class="dropdown-menu">
-          {% comment %} <li><a class="dropdown-item" href="{% url 'update_user_management_page' %}">Profile</a></li> {% endcomment %}
+          <li><a class="dropdown-item" href="#">Profile</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
         </ul>

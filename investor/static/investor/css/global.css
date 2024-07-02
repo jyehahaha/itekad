@@ -5,5 +5,11 @@
 }
 
 .bg-warning {
-  background-color: #fe5000 !important;
+  background-color: #ff8145 !important;
+}
+
+.btn-warning {
+  color: white;
+  border-color: #ff8145 !important;
+  background-color: #ff8145 !important;
 }

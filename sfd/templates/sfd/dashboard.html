@@ -12,7 +12,7 @@
         <div class="card-body">
           <i class='bx bx-user-circle bx-pull-left bx-lg'></i>
           <h4 class="card-title">Investor</h4>
-          <p class="card-subtitle">200</p>
+          <p class="card-subtitle">{{totalInvestor | default:'0' }}</p>
         </div>
       </div>
     </div>
@@ -39,13 +39,13 @@
         <div class="card-body">
           <i class='bx bx-layer bx-pull-left bx-lg'></i>
           <h4 class="card-title">Campaigns</h4>
-          <p class="card-subtitle">50</p>
+          <p class="card-subtitle">{{totalCampaign | default:'0' }}</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="mt-5"></div>
+  {% comment %} <div class="mt-5"></div>
   <div class="row">
     <div class="col-sm-12 col-md-12 col-lg-6">
       <div class="card--container mt-3 ">
@@ -57,7 +57,7 @@
         <canvas id="doughnut"></canvas>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 
   <div class="mt-5"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Investor's Data</div>
@@ -71,6 +71,8 @@
           <th>MyKad No.</th>
           <th>Account No</th>
           <th>Account Name</th>
+          <th>Action</th>
+
         </tr>
     </thead>
     <tbody>
@@ -83,6 +85,7 @@
           <td>{{investor.mykad_no}}</td>
           <td>{{investor.bank_account_number}}</td>
           <td>{{investor.bank_name}}</td>
+          <td><a href="{% url 'update_user_management_page' investor.id %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i>&nbspUpdate</a></td>
         </tr>
         {% endfor %}
     </tbody>

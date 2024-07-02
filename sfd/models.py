@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import User, UserProfile
+from users.models import UserProfile
 
 # Create your models here.
 class NatureOfBusiness(models.Model):
@@ -24,7 +24,7 @@ class CategoryOfBusiness(models.Model):
         return self.title
 
 class CompanyProfile(models.Model):
-    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,related_name="user_company")
     category_of_business = models.ForeignKey(CategoryOfBusiness, on_delete=models.CASCADE,null=True,blank=True)
     company_name = models.CharField(max_length=150, null=True,blank=True)
     company_email = models.CharField(max_length=150, null=True,blank=True)
@@ -77,7 +77,9 @@ class TrancheEntreprenuer(models.Model):
 
 class TrancheReport(models.Model):
     campaign = models.ForeignKey(Campaign, on_delete=models.CASCADE, null=True,blank=True)
-    report = models.CharField(max_length=500, default='https://i.pinimg.com/736x/72/8b/6c/728b6c0d58d7e6b29e91faf8a1a31bc4.jpg')
+    quarter = models.CharField(max_length=200, null=True,blank=True)
+    filename = models.CharField(max_length=300, null=True,blank=True)
+    report = models.CharField(max_length=500, null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
