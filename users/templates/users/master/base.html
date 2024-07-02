@@ -23,7 +23,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css" />
 
   <!-- Global CSS -->
-  <link rel="stylesheet" href="{% static 'investor/css/global.css' %}">
+  <link rel="stylesheet" href="{% static 'sfd/css/globals.css' %}">
 
   <!-- Custom CSS -->
   {% block css %}{% endblock css %}
@@ -31,10 +31,10 @@
 
 <body>
   <!-- Header -->
-  {% include 'investor/master/header.html' %}
+  {% include 'users/master/header.html' %}
   
   <!-- Body -->
-  <div class="container mt-5 mb-5">
+  <div class="container-fluid mb-5 p-5">
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -46,11 +46,19 @@
     </ul>
     {% endif %}
 
+    {% if form.errors %}
+        {% for field in form %}
+            {% for error in field.errors %}
+                <p> {{ error }} </p>
+            {% endfor %}
+        {% endfor %}
+    {% endif %}
+
     {% block content %}{% endblock content %}
   </div>
 
   <!-- Footer -->
-  {% include 'investor/master/footer.html' %}
+  {% include 'sfd/master/footer.html' %}
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   
@@ -67,7 +75,7 @@
   <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 
   <!-- Global JS -->
-  <link rel="stylesheet" href="{% static 'investor/js/global.js' %}">
+  <link rel="stylesheet" href="{% static 'sfd/js/globals.js' %}">
 
   <!-- Custom JS -->
   {% block js %}{% endblock js %}

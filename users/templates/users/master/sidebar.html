@@ -1,0 +1,68 @@
+{% load static %}
+
+<nav class="sidebar">
+    <div class="logo">
+       <div class="row">
+        <div class="col-12">
+            <img src="{% static 'sfd/img/muamalat_logo.png' %}" width="250px">
+        </div>
+       </div>
+       
+        <ul class="menu mt-3">
+            <li class="active">
+                <a href="{% url 'dashboard_page' %}" >
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'user_management_page' %}" >
+                    <i class="fas fa-user"></i>
+                    <span>User Management</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'campaign_page' %}" >
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Campaign</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'business_profile_page' %}">
+                    <i class="fa-solid fa-building"></i>
+                    <span>Enterprenuer</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'upload_report_page' %}">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>Performance Report</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'tranche_page' %}">
+                    <i class="fa-solid fa-tags"></i>
+                    <span>Tranche</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'nature_of_business_page' %}">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Nature of Business</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'category_page' %}">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Category</span>
+                </a>
+            </li>
+            <li class="logout">
+                <a href="#">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
