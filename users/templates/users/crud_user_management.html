@@ -1,4 +1,4 @@
-{% extends 'sfd/master/base.html' %}
+{% extends 'users/master/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -6,90 +6,64 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
+
+{% if form1.errors %}
+{% for field in form1 %}
+  {% for error in field.errors %}
+    <p> {{ error }} </p>
+  {% endfor %}
+{% endfor %}
+{% endif %}
+
+{% if form2.errors %}
+{% for field in form2 %}
+  {% for error in field.errors %}
+    <p> {{ error }} </p>
+  {% endfor %}
+{% endfor %}
+{% endif %}
+
+
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">General Details</div>
 {% if view == 'create' %}
 <form method="POST">
   <div class="row">
     {% csrf_token %}
     <div class="col-6">
-      {{ user_form.first_name|as_crispy_field }}
+      {{ form1.first_name|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ user_form.last_name|as_crispy_field }}
+      {{ form1.last_name|as_crispy_field }}
     </div>
     <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-light">
-          {% csrf_token %}
-          {{ user_form.as_p }}
-          <!-- <tbody>
-            <tr>
-              <th width="15%" class="align-middle">Full Name</th>
-              <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Full Name">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Username</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Username">
-              </td>
-              <th width="15%" class="align-middle">MyKad No.</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="MyKad No.">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Email Address</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Email Address">
-              </td>
-              <th width="15%" class="align-middle">Mobile No.</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Mobile No.">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Address Line 1</th>
-              <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Address Line 1">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Address Line 2</th>
-              <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Address Line 2">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Address Line 3</th>
-              <td width="35%" colspan="3">
-                <input type="text" class="form-control" placeholder="Address Line 3">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Postcode</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Postcode">
-              </td>
-              <th width="15%" class="align-middle">City</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="City">
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">State</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="State">
-              </td>
-              <th width="15%" class="align-middle">Country</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="" value="Malaysia">
-              </td>
-            </tr>
-          </tbody> -->
-        </table>
-      </div>
+      {{ form2.mykad_no|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form1.email|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form2.mobile_no|as_crispy_field }}
+    </div>
+    <div class="col-12">
+      {{ form2.address_line_one|as_crispy_field }}
+    </div>
+    <div class="col-12">
+      {{ form2.address_line_two|as_crispy_field }}
+    </div>
+    <div class="col-12">
+      {{ form2.address_line_three|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form2.postcode|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form2.city|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form2.state|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form2.country|as_crispy_field }}
     </div>
   </div>
 
@@ -97,23 +71,13 @@
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
   <div class="row">
     <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-light">
-          {{ profile_form.as_p }}
-          <!-- <tbody>
-            <tr>
-              <th width="15%" class="align-middle">Bank Name</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Bank Name">
-              </td>
-              <th width="15%" class="align-middle">Bank Account No.</th>
-              <td width="35%">
-                <input type="text" class="form-control" placeholder="Bank Account No.">
-              </td>
-            </tr>
-          </tbody> -->
-        </table>
-      </div>
+      {% csrf_token %}
+    </div>
+    <div class="col-12">
+      {{ form2.bank_name|as_crispy_field }}
+    </div>
+    <div class="col-12">
+      {{ form2.bank_account_number|as_crispy_field }}
     </div>
   </div>
 
@@ -121,43 +85,10 @@
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
   <div class="row">
     <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-light">
-          <!-- <tbody>
-            <tr>
-              <th width="15%" class="align-middle">Role</th>
-              <td width="35%">
-                <select class="form-select">
-                  <option selected>-- Select --</option>
-                  <option value="1">Admin</option>
-                  <option value="2">Entreprenuer</option>
-                  <option value="3">Investor</option>
-                </select>
-              </td>
-              <th width="15%" class="align-middle">Category</th>
-              <td width="35%">
-                <select class="form-select">
-                  <option selected>-- Select --</option>
-                  <option value="1">Reviewer</option>
-                  <option value="2">Approver</option>
-                </select>
-              </td>
-            </tr>
-            <tr>
-              <th width="15%" class="align-middle">Status</th>
-              <td width="35%">
-                <select class="form-select">
-                  <option selected>-- Select --</option>
-                  <option value="1">Active</option>
-                  <option value="2">Not Active</option>
-                </select>
-              </td>
-              <th width="15%" class="align-middle"></th>
-              <td width="35%"></td>
-            </tr>
-          </tbody> -->
-        </table>
-      </div>
+      {{ form2.role|as_crispy_field }}
+    </div>
+    <div class="col-12">
+      {{ form2.position|as_crispy_field }}
     </div>
   </div>
 
@@ -165,22 +96,14 @@
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
   <div class="row">
     <div class="col-12">
-      <div class="table-responsive">
-        <table class="table table-light">
-          <!-- <tbody>
-            <tr>
-              <th width="15%" class="align-middle">Password</th>
-              <td width="35%" class="align-middle">
-                <input type="text" class="form-control" placeholder="Password">
-              </td>
-              <th width="15%" class="align-middle">Confirm Password</th>
-              <td width="35%" class="align-middle">
-                <input type="text" class="form-control" placeholder="Confirm Password">
-              </td>
-            </tr>
-          </tbody> -->
-        </table>
-      </div>
+      {{ form1.username|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form1.password1|as_crispy_field }}
+    </div>
+    <div class="col-6">
+      {{ form1.password2|as_crispy_field }}
+      {{ form1.terms_agreement.as_hidden }}
     </div>
   </div>
   <div class="mb-3"></div>
@@ -340,8 +263,8 @@
   <div class="mb-3"></div>
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
   <div class="row">
-    <div class="col-12 text-end">
-      <a href="#" type="button" class="btn btn-secondary"><i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link
+    <div class="col-12">
+      <a href="{% url 'send_password_page' id %}" type="button" class="btn btn-info"><i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link
         Reset Password</a>
       <div class="mb-3"></div>
     </div>
@@ -373,6 +296,7 @@
     </div>
   </div>
 
+  
   <div class="mb-3"></div>
   <div class="row">
     <div class="col-12 text-end">
@@ -527,6 +451,26 @@
     },
     order: [[1, 'asc']]
   });
+
+
+$(document).ready(function() {
+    // Initially hide the position field
+    var positionField = $('#id_position').closest('.col-12');
+    positionField.hide();
+
+    // Function to show/hide position field based on role selection
+    $('#id_role').change(function() {
+        if ($(this).val() === 'ADMIN') {
+            positionField.show();
+        } else {
+            positionField.hide();
+        }
+    });
+
+    $('#id_terms_agreement').attr('checked', true);
+    // $('#id_terms_agreement').prop('checked');
+});
+
 </script>
 
 {% endblock js%}

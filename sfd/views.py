@@ -436,7 +436,7 @@ def DeleteEnterprenuerView(request,id):
   }
   return render(request, 'sfd/crud_investor.html', context)
 
-def UploadReportView(request,id):
+def UploadReportView(request):
   context = {}
   return render(request, 'sfd/assign_page.html', context)
 

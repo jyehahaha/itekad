@@ -70,7 +70,7 @@ def EnableDisableView(request):
   context = {}
   return render(request, 'users/user_management.html', context)
 
-def SendPassword(request, id):
+def  SendPassword(request, id):
 	# Fetch User
   user = User.objects.get(id=id)
   
@@ -126,9 +126,14 @@ def UserManagementView(request):
         return redirect('login_page')
     
 def CreateUserManagementView(request):
-    if request.method == 'POST':
-        user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
+  if request.method == 'POST':
+    user_form = UserForm(request.POST)
+    profile_form = UserProfileForm(request.POST)
+    user_form.terms_agreement = True
+
+    if user_form.is_valid() and profile_form.is_valid():
+      user = user_form.save(commit=False)
+      user.save()
         
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save(commit=False)
@@ -143,11 +148,17 @@ def CreateUserManagementView(request):
             profile_form = UserProfileForm(request.POST, instance=profile)
             profile_form.save()
 
-            return redirect('user_management_page')  # Redirect to the user management page after registration
-    else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
-    return render(request, 'users/crud_user_management.html', {'user_form': user_form, 'profile_form': profile_form, 'view': 'create'})
+      return redirect('user_management_page')  # Redirect to the user management page after registration
+  else:
+    user_form = UserForm()
+    profile_form = UserProfileForm()
+
+  context = {
+     'view': 'create',
+     'form1': user_form,
+     'form2': profile_form,
+  }
+  return render(request, 'users/crud_user_management.html', context)
 
 def UpdateUserManagementView(request,id=None):
     if request.method == "POST":
@@ -159,20 +170,28 @@ def UpdateUserManagementView(request,id=None):
         form = UserUpdateForm(request.POST or None, instance=current_user)
         profile_form = UserProfileForm(request.POST or None, instance=profile_user)
 
-        if form.is_valid() and profile_form.is_valid():
-          form.save()
-          profile_form.save()
-          messages.success(request, "Your Info Has Been Updated!!")
-          return redirect('user_management_page')
+    if form.is_valid() and profile_form.is_valid():
+      form.save()
+      profile_form.save()
+      messages.success(request, "Your Info Has Been Updated!!")
+      return redirect('user_management_page')
     else:
-      messages.success(request, "You Must Be Logged In To Access That Page!!")
+       print(form.errors)
+       print(profile_form.errors)
+  else:
+    current_user = User.objects.get(id=id or request.user.id)
+    profile_user = UserProfile.objects.get(user__id=id or request.user.id)
 
-      current_user = User.objects.get(id=id or request.user.id)
-      profile_user = UserProfile.objects.get(user__id=id or request.user.id)
-
-      form = UserUpdateForm(instance=current_user)
-      profile_form = UserProfileForm(instance=profile_user)
-      return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+  form = UserUpdateForm(instance=current_user)
+  profile_form = UserProfileForm(instance=profile_user)
+  
+  context = {
+     'form':form, 
+     'profile_form':profile_form, 
+     'view': 'update',
+     'id' : id
+     }
+  return render(request, "users/crud_user_management.html", context)
       	
 def DeleteUserManagementView(request, id):
     
