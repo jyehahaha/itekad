@@ -75,7 +75,7 @@ def EnableDisableView(request):
   context = {}
   return render(request, 'users/user_management.html', context)
 
-def SendPassword(request, id):
+def  SendPassword(request, id):
 	# Fetch User
   user = User.objects.get(id=id)
   
@@ -129,7 +129,8 @@ def CreateUserManagementView(request):
   if request.method == 'POST':
     user_form = UserForm(request.POST)
     profile_form = UserProfileForm(request.POST)
-      
+    user_form.terms_agreement = True
+
     if user_form.is_valid() and profile_form.is_valid():
       user = user_form.save(commit=False)
       user.save()
@@ -147,7 +148,13 @@ def CreateUserManagementView(request):
   else:
     user_form = UserForm()
     profile_form = UserProfileForm()
-  return render(request, 'users/crud_user_management.html', {'user_form': user_form, 'profile_form': profile_form, 'view': 'create'})
+
+  context = {
+     'view': 'create',
+     'form1': user_form,
+     'form2': profile_form,
+  }
+  return render(request, 'users/crud_user_management.html', context)
 
 def UpdateUserManagementView(request,id=None):
   if request.method == "POST":
@@ -164,13 +171,23 @@ def UpdateUserManagementView(request,id=None):
       profile_form.save()
       messages.success(request, "Your Info Has Been Updated!!")
       return redirect('user_management_page')
+    else:
+       print(form.errors)
+       print(profile_form.errors)
   else:
     current_user = User.objects.get(id=id or request.user.id)
     profile_user = UserProfile.objects.get(user__id=id or request.user.id)
 
-    form = UserUpdateForm(instance=current_user)
-    profile_form = UserProfileForm(instance=profile_user)
-  return render(request, "users/crud_user_management.html", {'form':form, 'profile_form':profile_form, 'view': 'update'})
+  form = UserUpdateForm(instance=current_user)
+  profile_form = UserProfileForm(instance=profile_user)
+  
+  context = {
+     'form':form, 
+     'profile_form':profile_form, 
+     'view': 'update',
+     'id' : id
+     }
+  return render(request, "users/crud_user_management.html", context)
       	
 def DeleteUserManagementView(request, id):
     # Search user

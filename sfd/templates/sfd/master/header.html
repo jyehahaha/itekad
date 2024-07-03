@@ -35,7 +35,7 @@
       <div class="dropdown">
         <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown">{{request.user.get_full_name}}</button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="{% url 'update_user_management_page' %}">Profile</a></li>
+          {% comment %} <li><a class="dropdown-item" href="{% url 'update_user_management_page' %}">Profile</a></li> {% endcomment %}
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>
         </ul>
