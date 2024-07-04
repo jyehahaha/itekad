@@ -54,7 +54,7 @@ def RegisterView(request):
 
       messages.success(request, ("Username Created - Please Fill Out Your User Info Below..."))
       return redirect('home_page')
-      return redirect('home_page')
+
     else:
       messages.success(request, ("Whoops! There was a problem Registering, please try again..."))
       return redirect('register_page')
@@ -211,7 +211,13 @@ def DetailsUserManagementView(request,id):
   if request.user.is_authenticated:
     user_record = User.objects.get(id=id)
     user_profile_record = UserProfile.objects.get(user_id=id)
-    return render(request, 'users/crud_user_management.html', {'user_record':user_record, 'user_profile_record': user_profile_record, 'view':'details'})
+    context =  {
+       'user_record':user_record, 
+       'user_profile_record': user_profile_record, 
+       'view':'details',
+       'id':id
+    }
+    return render(request, 'users/crud_user_management.html',context)
   else:
     messages.success(request, "You Must Be Logged In To View That Page...")
     return redirect('login_page')
