@@ -411,7 +411,7 @@
   <div class="col-12 text-end">
     <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i
         class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
-    <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-warning" type="button" style="width: 100px;"><i
+    <a href="{% url 'update_user_management_page' id %}" class="btn btn-warning" type="button" style="width: 100px;"><i
         class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
   </div>
 </div>
@@ -454,16 +454,21 @@
 
 
 $(document).ready(function() {
-    // Initially hide the position field
-    var positionField = $('#id_position').closest('.col-12');
-    positionField.hide();
+     // Initially hide the position field if it's empty
+    var positionField = $('#id_position');
+    var positionContainer = positionField.closest('.col-12');
+    if (positionField.val().trim() === '') {
+        positionContainer.hide();
+    }
 
     // Function to show/hide position field based on role selection
     $('#id_role').change(function() {
         if ($(this).val() === 'ADMIN') {
-            positionField.show();
+            positionContainer.show();
         } else {
-            positionField.hide();
+            if (positionField.val().trim() === '') {
+                positionContainer.hide();
+            }
         }
     });
 

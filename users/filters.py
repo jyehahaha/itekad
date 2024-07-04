@@ -14,7 +14,7 @@ class UserFilter(filters.FilterSet):
   end_date = filters.DateFilter(field_name='user__date_joined', label='End Date', lookup_expr='lte', widget=forms.DateInput(attrs={'type': 'date'}))
   status = filters.ChoiceFilter(choices=((True, 'Active'), (False, 'Inactive')), field_name='user__is_active', label='Status', lookup_expr='exact')
   role = filters.ChoiceFilter(choices=UserProfile.Role.choices, label='Role', lookup_expr='iexact')
-  position = filters.ChoiceFilter(choices=UserProfile.Position.choices, label='Position', method='iexact')
+  position = filters.ChoiceFilter(choices=UserProfile.Position.choices, label='Position', lookup_expr='iexact')
 
   class Meta:
     model = UserProfile
