@@ -37,9 +37,20 @@ def LogoutView(request):
 def RegisterView(request):
   if request.method == "POST":
     form = UserForm(request.POST)
-    
-    if form.is_valid() and form.cleaned_data['terms_agreement']:
-      form.save()
+    profile_form = UserProfileForm(request.POST)
+
+    if form.is_valid() and profile_form.is_valid() and form.cleaned_data['terms_agreement']:
+      user = form.save(commit=False)
+      user.save()
+      
+      try:
+        profile = UserProfile.objects.get(user=user)
+      except UserProfile.DoesNotExist:
+        profile = UserProfile(user=user)
+
+      # Update the profile fields from the form
+      profile_form = UserProfileForm(request.POST, instance=profile)
+      profile_form.save()
       
       username = form.cleaned_data['username']
       password = form.cleaned_data['password1']
@@ -55,8 +66,9 @@ def RegisterView(request):
       return redirect('register_page')
   else:
     form = UserForm()
+    profile_form = UserProfileForm()
   
-  return render(request, 'users/register.html', {'form':form})
+  return render(request, 'users/register.html', {'form':form, 'profile_form':profile_form})
 
 def ResetPasswordView(request):
   context = {}
