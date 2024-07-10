@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from .forms import CompanyProfileForm,CampaignForm,TrancheEntreprenuerForm,TrancheInvestorForm,TrancheReportForm,NatureOfBusinessForm,CategoryOfBusinessForm
 from .models import CategoryOfBusiness,NatureOfBusiness,Campaign,CompanyProfile,TrancheEntreprenuer,TrancheInvestor,TrancheReport
 from users.models import User,UserProfile
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib import messages
+from .filters import CompanyFilter, CampaignFilter
 # Create your views here.
 
 
@@ -20,11 +23,42 @@ def DashboardView(request):
   return render(request, 'sfd/dashboard.html', context)
 
 def BusinessProfileView(request):
-  companies = CompanyProfile.objects.all()
-  context = {
-      'companies' : companies
-  }
-  return render(request, 'sfd/business.html', context)
+  if request.user.is_authenticated:
+        # Look Up Records
+        companies = CompanyProfile.objects.all()
+        # user_profile_record = UserProfile.objects.filter(user__is_superuser=False)
+
+        # filter
+        f = CompanyFilter(request.GET, queryset=companies)
+
+        # variable for paginator
+        page_num = request.GET.get('page', 1)
+        limit = request.GET.get('limit', 10)
+
+        # pass the list for pagination
+        paginator = Paginator(f.qs, limit)
+
+        # paginator
+        try:
+            page_obj = paginator.page(page_num)
+        except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            # if the page is out of range, deliver the last page
+            page_obj = paginator.page(paginator.num_pages)
+
+        context = {
+          'filter': f,
+          'page_obj': page_obj,
+          'dashboard_view': True,
+        }
+
+        return render(request, 'sfd/business.html', context)
+  else:
+        messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect('login_page')
+
 
 def CreateBusinessProfileView(request):
 
@@ -221,11 +255,40 @@ def DetailsNatureView(request, id):
   return render(request, 'sfd/crud_nature_business.html', context)
 
 def CampaignView(request):
-  query = Campaign.objects.all()
-  context = {
-    'campaigns' : query
-  }
-  return render(request, 'sfd/campaign.html', context)
+  if request.user.is_authenticated:
+        # Look Up Records
+        query = Campaign.objects.all()
+
+        # filter
+        f = CampaignFilter(request.GET, queryset=query)
+
+        # variable for paginator
+        page_num = request.GET.get('page', 1)
+        limit = request.GET.get('limit', 10)
+
+        # pass the list for pagination
+        paginator = Paginator(f.qs, limit)
+
+        # paginator
+        try:
+            page_obj = paginator.page(page_num)
+        except PageNotAnInteger:
+            # if page is not an integer, deliver the first page
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            # if the page is out of range, deliver the last page
+            page_obj = paginator.page(paginator.num_pages)
+
+        context = {
+          'filter': f,
+          'page_obj': page_obj,
+          'dashboard_view': True,
+        }
+
+        return render(request, 'sfd/campaign.html', context)
+  else:
+        messages.success(request, "You Must Be Logged In To View That Page...")
+        return redirect('login_page')
 
 def CreateCampaignView(request):
 
