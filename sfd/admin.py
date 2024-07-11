@@ -1,21 +1,11 @@
 from django.contrib import admin
-from .models import CategoryOfBusiness, NatureOfBusiness,Campaign,CompanyProfile,TrancheInvestor,TrancheEntreprenuer,TrancheReport
-
+from . import models
 
 # Register your models here.
-admin.site.register(CategoryOfBusiness)
-
-admin.site.register(NatureOfBusiness)
-
-admin.site.register(Campaign)
-
-admin.site.register(CompanyProfile)
-
-admin.site.register(TrancheInvestor)
-
-admin.site.register(TrancheEntreprenuer)
-
-admin.site.register(TrancheReport)
-
-
-
+admin.site.register(models.CategoryOfBusiness)
+admin.site.register(models.NatureOfBusiness)
+admin.site.register(models.Campaign)
+admin.site.register(models.CompanyProfile)
+admin.site.register(models.TrancheInvestor)
+admin.site.register(models.TrancheEntrepreneur)
+admin.site.register(models.TrancheReport)

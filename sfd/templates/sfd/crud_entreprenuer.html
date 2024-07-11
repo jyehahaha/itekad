@@ -18,11 +18,11 @@
     <div class="col-12">
         <div class="card border-0 shadow-sm">
             <div class="card-body">
-                <h4 class="card-title">List of Entreprenuer</h4>
+                <h4 class="card-title">List of Entrepreneur</h4>
                 <div class="row">
                     <div class="col-12">
                         <div class="table-responsive table-striped">
-                            <table id="tblEntreprenuer" class="table table-striped" style="width:100%">
+                            <table id="tblEntrepreneur" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -34,13 +34,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for entreprenuer in entreprenuers %}
+                                    {% for Entrepreneur in Entrepreneurs %}
                                     <tr>
-                                        <td>{{ entreprenuer.user.get_full_name }}</td>
-                                        <td>{{ entreprenuer.user.email }}</td>
-                                        <td>{{ entreprenuer.mobile_no }}</td>
-                                        <td>{{ entreprenuer.role }}</td>
-                                        <td>{% for company in entreprenuer.user_company.all %}
+                                        <td>{{ Entrepreneur.user.get_full_name }}</td>
+                                        <td>{{ Entrepreneur.user.email }}</td>
+                                        <td>{{ Entrepreneur.mobile_no }}</td>
+                                        <td>{{ Entrepreneur.role }}</td>
+                                        <td>{% for company in Entrepreneur.user_company.all %}
                                             {{company.company_name}}
                                             {% endfor %}</td>
                                         <td class="text-end">
@@ -81,7 +81,7 @@
         <div class="card border-0 shadow-sm bg-light">
             <div class="card-body text-center p-4">
                 <h4 class="card-title">Deletion</h4>
-                <p class="card-subtitle">Are you confirm to delete <b>{{ entreprenuer_tranche.user.user.get_full_name }}</b> ?</p>
+                <p class="card-subtitle">Are you confirm to delete <b>{{ Entrepreneur_tranche.user.user.get_full_name }}</b> ?</p>
 
                 <form method="post" class="mt-4">
                     {% csrf_token %}
@@ -97,6 +97,6 @@
 
 {% block js%}
 <script>
-    new DataTable('#tblEntreprenuer');
+    new DataTable('#tblEntrepreneur');
   </script>
 {% endblock js %}

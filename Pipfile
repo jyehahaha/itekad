@@ -6,16 +6,19 @@ name = "pypi"
 [packages]
 asgiref = "==3.7.2"
 crispy-bootstrap5 = "==2024.2"
-django = "==4.2.4"
-django-crispy-forms = "==2.1"
+dataclasses = "==0.6"
+django = "*"
+django-crispy-forms = "*"
 django-environ = "==0.10.0"
 django-filter = "==24.2"
+djongo = "==1.2.31"
+dnspython = "==2.6.1"
+pymongo = "==4.7.2"
+pytz = "==2024.1"
 sqlparse = "==0.4.4"
 typing-extensions = "==4.7.1"
-djongo = "*"
-pytz = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"

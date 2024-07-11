@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from sfd.models import Campaign,CompanyProfile, TrancheInvestor, TrancheEntreprenuer
+from sfd.models import Campaign, CompanyProfile,TrancheInvestor, TrancheEntrepreneur
 
 # Create your views here.
 def LandingPageView(request):
@@ -32,13 +32,13 @@ def CampaignsInfoPageView(request, id):
     campaign = Campaign.objects.get(id=id)
     company_profile = CompanyProfile.objects.all()
     investors = TrancheInvestor.objects.filter(campaign_id=campaign.id)
-    entreprenuers = TrancheEntreprenuer.objects.filter(campaign_id=campaign.id)
+    Entrepreneurs = TrancheEntrepreneur.objects.filter(campaign_id=campaign.id)
     
     context = {
         'title': 'Campaigns',
         'campaign' : campaign,
         'investors' : investors,
-        'entreprenuers' : entreprenuers,
+        'Entrepreneurs' : Entrepreneurs,
         'company_profile' : company_profile
     }
     return render(request, 'website/campaign_info.html', context)

@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-sm navbar-dark bg-warning">
   <div class="container">
     <a class="navbar-brand" href="{% url 'home_page' %}">
-      <img src="{% static 'website/images/itekad.jpg' %}" class="img-fluid rounded-top" alt="BMMB Logo" width="150">
+      <img src="{% static 'website/images/itekad.jpg' %}" class="img-fluid rounded-top" alt="iTekad BMMB" width="100">
     </a>
   </div>
 </nav>
@@ -10,17 +10,16 @@
 <nav class="navbar navbar-expand navbar-light bg-light shadow-sm">
   <div class="container">
     <div class="nav navbar-nav">
-      <!-- <a class="nav-item nav-link active" href="#" aria-current="page">Account Overview <span class="visually-hidden">(current)</span></a>
-      <a class="nav-item nav-link" href="#">Campaign</a>
-      <a class="nav-item nav-link" href="#">Profile</a> -->
+      <a class="nav-item nav-link active" href="{% url 'home_page' %}" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
+      <a class="nav-item nav-link" href="{% url 'campaign_investor_page' %}">Campaign</a>
     </div>
 
     <div class="text-end">
       <div class="dropdown">
-        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{request.user.get_full_name}}</button>
+        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ request.user.get_full_name | default:'-' }}</button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="#">Home</a></li>
-          <li><a class="dropdown-item" href="#">FAQ</a></li>
+          <li><a class="dropdown-item" href="#">Profile</a></li>
           <li><a class="dropdown-item" href="#">Settings</a></li>
           <li><hr class="dropdown-divider"></li>
           <li><a class="dropdown-item" href="{% url 'logout_page' %}">Logout</a></li>

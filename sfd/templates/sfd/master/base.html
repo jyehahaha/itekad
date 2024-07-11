@@ -34,7 +34,7 @@
   {% include 'sfd/master/header.html' %}
   
   <!-- Body -->
-  <div class="container-fluid mb-5 p-5">
+  <div class="container-fluid mb-5 pb-5">
     {% if messages %}
     <ul class="messages">
         {% for message in messages %}
@@ -54,7 +54,9 @@
         {% endfor %}
     {% endif %}
 
-    {% block content %}{% endblock content %}
+    <div class="p-4">
+      {% block content %}{% endblock content %}
+    </div>
   </div>
 
   <!-- Footer -->

@@ -30,40 +30,40 @@
   <div class="row">
     {% csrf_token %}
     <div class="col-6">
-      {{ user_form.first_name|as_crispy_field }}
+      {{ form1.first_name|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ user_form.last_name|as_crispy_field }}
+      {{ form1.last_name|as_crispy_field }}
     </div>
     <div class="col-12">
-      {{ profile_form.mykad_no|as_crispy_field }}
+      {{ form2.mykad_no|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ user_form.email|as_crispy_field }}
+      {{ form1.email|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ profile_form.mobile_no|as_crispy_field }}
+      {{ form2.mobile_no|as_crispy_field }}
     </div>
     <div class="col-12">
-      {{ profile_form.address_line_one|as_crispy_field }}
+      {{ form2.address_line_one|as_crispy_field }}
     </div>
     <div class="col-12">
-      {{ profile_form.address_line_two|as_crispy_field }}
+      {{ form2.address_line_two|as_crispy_field }}
     </div>
     <div class="col-12">
-      {{ profile_form.address_line_three|as_crispy_field }}
+      {{ form2.address_line_three|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ profile_form.postcode|as_crispy_field }}
+      {{ form2.postcode|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ profile_form.city|as_crispy_field }}
+      {{ form2.city|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ profile_form.state|as_crispy_field }}
+      {{ form2.state|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ profile_form.country|as_crispy_field }}
+      {{ form2.country|as_crispy_field }}
     </div>
   </div>
   
@@ -74,10 +74,10 @@
       {% csrf_token %}
     </div>
     <div class="col-12">
-      {{ profile_form.bank_name|as_crispy_field }}
+      {{ form2.bank_name|as_crispy_field }}
     </div>
     <div class="col-12">
-      {{ profile_form.bank_account_number|as_crispy_field }}
+      {{ form2.bank_account_number|as_crispy_field }}
     </div>
   </div>
 
@@ -85,10 +85,10 @@
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
   <div class="row">
     <div class="col-12">
-      {{ profile_form.role|as_crispy_field }}
+      {{ form2.role|as_crispy_field }}
     </div>
     <div class="col-12">
-      {{ profile_form.position|as_crispy_field }}
+      {{ form2.position|as_crispy_field }}
     </div>
   </div>
 
@@ -96,13 +96,14 @@
   <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
   <div class="row">
     <div class="col-12">
-      {{ user_form.username|as_crispy_field }}
+      {{ form1.username|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ user_form.password1|as_crispy_field }}
+      {{ form1.password1|as_crispy_field }}
     </div>
     <div class="col-6">
-      {{ user_form.password2|as_crispy_field }}
+      {{ form1.password2|as_crispy_field }}
+      {{ form1.terms_agreement | as_crispy_field }}
     </div>
   </div>
   <div class="mb-3"></div>
@@ -180,7 +181,7 @@
 
   <div class="row">
     <div class="col-12">
-      <a href="{% url 'send_password_page' current_user.id %}" type="button" class="btn btn-info"><i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link
+      <a href="{% url 'send_password_page' id %}" type="button" class="btn btn-info"><i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link
         Reset Password</a>
       <div class="mb-3"></div>
     </div>
@@ -295,7 +296,7 @@
   <div class="col-12 text-end">
     <a href="{% url 'user_management_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i
         class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
-    <a href="{% url 'update_user_management_page' 1 %}" class="btn btn-warning" type="button" style="width: 100px;"><i
+    <a href="{% url 'update_user_management_page' id %}" class="btn btn-warning" type="button" style="width: 100px;"><i
         class='bx bx-edit bx-pull-left bx-sm'></i>Edit</a>
   </div>
 </div>
@@ -338,26 +339,26 @@
 
 
 $(document).ready(function() {
-     // Initially hide the position field if it's empty
-    var positionField = $('#id_position');
-    var positionContainer = positionField.closest('.col-12');
-    if (positionField.val().trim() === '') {
+  // Initially hide the position field if it's empty
+  var positionField = $('#id_position');
+  var positionContainer = positionField.closest('.col-12');
+  if (positionField.val().trim() === '') {
+    positionContainer.hide();
+  }
+
+  // Function to show/hide position field based on role selection
+  $('#id_role').change(function() {
+    if ($(this).val() === 'ADMIN') {
+      positionContainer.show();
+    } else {
+      if (positionField.val().trim() === '') {
         positionContainer.hide();
+      }
     }
+  });
 
-    // Function to show/hide position field based on role selection
-    $('#id_role').change(function() {
-        if ($(this).val() === 'ADMIN') {
-            positionContainer.show();
-        } else {
-            if (positionField.val().trim() === '') {
-                positionContainer.hide();
-            }
-        }
-    });
-
-    $('#id_terms_agreement').attr('checked', true);
-    // $('#id_terms_agreement').prop('checked');
+  $('#id_terms_agreement').attr('checked', true);
+  // $('#id_terms_agreement').prop('checked');
 });
 
 </script>

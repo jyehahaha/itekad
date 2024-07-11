@@ -1,84 +1,71 @@
 {% extends 'investor/master/base.html' %}
 {% load static %}
-{% block title %}iTekad{% endblock title %}
-{% block css %}{% endblock css %}
+
+{% block title %} iTekad - Home {% endblock title %}
+{% block css %}
+<style>
+  .avatar {
+    vertical-align: middle;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+</style>
+{% endblock css %}
 
 {% block content %}
-<div class="row mt-3 mb-5 p-5">
-  <div class="col-sm-12 col-md-3 col-lg-3">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">
-          Profile Details
-        </h4>
-      </div>
-      <div class="card-body">
-        <img class="card-img-top" src="{% static 'website/images/picture3.jpg' %}" alt="Title" />
-        <div class="row">
-          <div class="col-12 mt-2">
-            <h5 class="card-title">Name</h5>
-            <p class="card-text">{{user.user.get_full_name}}</p>
-          </div>
-          <div class="col-12 mt-2">
-            <h5 class="card-title">Mykad</h5>
-            <p class="card-text">{{user.mykad_no}}</p>
-          </div>
-          <div class="col-12 mt-2">
-            <h5 class="card-title">No Phone</h5>
-            <p class="card-text">{{user.mobile_no}}</p>
-          </div>
-          <div class="col-12 mt-2">
-            <h5 class="card-title">Email</h5>
-            <p class="card-text">{{user.user.email}}</p>
-          </div>
-          <div class="col-12 mt-2">
-            <hr>
-          </div>
-          <div class="col-12 mt-2">
-            <h5 class="card-title">Account Bank</h5>
-            <p class="card-text">{{user.bank_name}}</p>
-          </div>
-          <div class="col-12 mt-2">
-            <h5 class="card-title">Account Number</h5>
-            <p class="card-text">{{user.bank_account_number}}</p>
-          </div>
-          <div class="col-12 mt-3 p-3 text-center">
-            <div class="d-grid gap-2 d-md-block">
-              <a href="{% url 'profile_investor_page' %}" class="btn btn-warning" type="button">Edit Profile</a>
-              <a href="{% url 'change_password_page' %}" class="btn btn-warning" type="button">Change Password</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-12 col-md-9 col-lg-9">
+<div class="row mt-4">
+  <div class="col-12">
     <div class="card border-0 shadow-sm bg-light">
+      <div class="card-header border-0">
+        <h4 class="card-title">Account Overview</h4>
+      </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-sm-10 col-md-10 col-lg-11">
-            <div class="card-title">
-              <h4 class="card-title fw-bold text-uppercase">Test</h4>
-              <p class="card-subtitle">Test</p>
-            </div>
+          <div class="col-3 text-center align-self-center">
+            <img class="avatar avatar-xxl" src="{% static 'website/images/picture3.jpg' %}" alt="Profile Picture" />
           </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-12">
-            <div class="card">
-              
-              <div class="card-body">
-              
+          <div class="col-9">
+            <div class="row">
+              <div class="col-6 mt-2">
+                <dt>Name</dt>
+                <dd>{{user.user.get_full_name}}</dd>
+              </div>
+              <div class="col-6 mt-2">
+                <dt>MyKad No.</dt>
+                <dd>{{user.mykad_no}}</dd>
+              </div>
+              <div class="col-6 mt-2">
+                <dt>No. Phone</dt>
+                <dd>{{user.mobile_no}}</dd>
+              </div>
+              <div class="col-6 mt-2">
+                <dt>Email</dt>
+                <dd>{{user.user.email}}</dd>
+              </div>
+              <div class="col-12 mt-2">
+                <hr>
+              </div>
+              <div class="col-6 mt-2">
+                <dt>Account Bank</dt>
+                <dd>{{user.bank_name}}</dd>
+              </div>
+              <div class="col-6 mt-2">
+                <dt>Account Number</dt>
+                <dd>{{user.bank_account_number}}</dd>
+              </div>
+              <div class="offset-6 col-6 mt-3 text-end">
+                <div class="d-grid gap-2 d-md-block">
+                  <a href="{% url 'profile_investor_page' %}" class="btn btn-warning" type="button">Edit Profile</a>
+                  <a href="{% url 'change_password_page' %}" class="btn btn-warning" type="button">Change Password</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-
   </div>
-
 </div>
 {% endblock content %}
 

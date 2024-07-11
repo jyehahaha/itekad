@@ -104,15 +104,15 @@
                         <div class="mt-5">
                             <div class="row">
                                 <div class="col-6">
-                                    <h4>Entreprenuer</h4>
+                                    <h4>Entrepreneur</h4>
                                </div>
                                <div class="col-6 text-end">
-                                <a href="{% url 'enterprenuer_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fa-solid fa-plus"></i>&nbspAdd Entreprenuer</a>
+                                <a href="{% url 'enterprenuer_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fa-solid fa-plus"></i>&nbspAdd Entrepreneur</a>
                                </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="col-12">
-                                    <table id="tblEntreprenuer" class="table table-striped" style="width:100%">
+                                    <table id="tblEntrepreneur" class="table table-striped" style="width:100%">
                                         <thead>
                                           <tr>
                                             <th>Name</th>
@@ -124,17 +124,17 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          {% for entreprenuer in entereprenuers_tranche %}
+                                          {% for Entrepreneur in entereprenuers_tranche %}
                                           <tr>
-                                            <td>{{entreprenuer.user.user.get_full_name}}</td>
-                                            <td>{{entreprenuer.user.mykad_no}}</td>
-                                            <td>{{entreprenuer.user.user.email}}</td>
-                                            <td>{{entreprenuer.user.mobile_no}}</td>
-                                            <td>{% for company in entreprenuer.user.user_company.all %}
+                                            <td>{{Entrepreneur.user.user.get_full_name}}</td>
+                                            <td>{{Entrepreneur.user.mykad_no}}</td>
+                                            <td>{{Entrepreneur.user.user.email}}</td>
+                                            <td>{{Entrepreneur.user.mobile_no}}</td>
+                                            <td>{% for company in Entrepreneur.user.user_company.all %}
                                                 {{company.company_name}}
                                               {% endfor %}</td>
                                             <td class="text-end">
-                                              <a href="{% url 'delete_enterprenuer_page' entreprenuer.id %}">
+                                              <a href="{% url 'delete_enterprenuer_page' Entrepreneur.id %}">
                                                 <i class="fa-solid text-danger fa-trash"></i>
                                               </a>
                                             </td>
@@ -201,7 +201,7 @@
 {% block js %}
 <script>
   new DataTable('#tblInvestor');
-  new DataTable('#tblEntreprenuer');
+  new DataTable('#tblEntrepreneur');
   new DataTable('#tblReport');
 
 </script>
