@@ -46,13 +46,13 @@
            </div>
            <div class="row mt-2">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>19</h2>
+                <h2>{{investors.count}}</h2>
                 <small>INVESTORS</small>
             </div>
            </div>
            <div class="row mt-2">
             <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>RM {{Investor.invest_amount}}</h2>
+                <h2>RM {{investor.invest_amount}}</h2>
                 <small>LARGEST INVESTMENT</small>
             </div>
            </div>
@@ -81,7 +81,7 @@
     </div>
    <div class="container">
     <div class="row mt-5">
-        <div class="col-sm-12 col-md-8 col-lg-8">
+        <div class="col-sm-12 col-md-7 col-lg-7">
             <div class="show" id="view1">
                 <div class="card card-body border-0">
                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
@@ -104,104 +104,36 @@
                     <object data="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf"  width="800" height="1000"></object>
                 </div>
             </div>
-            <div class="collapse mt-3" id="view4">
-                <div class="card card-body border-0">
-                    <h6>Investor</h6>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">No Phone</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="">
-                                    <td scope="row">Muhammad Bin Ali</td>
-                                    <td>mohd@gmail.com</td>
-                                    <td>011-11123435</td>
-                                </tr>
-                                <tr class="">
-                                    <td scope="row">Siti Aqilah Binti Hassan</td>
-                                    <td>pinkypromise@gmail.com</td>
-                                    <td>019-881343764</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-4">
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <!-- <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        INVESTMENT SUMMARY
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body">
-                      <div class="row">
-                        <div class="col-12">
-                            <p>Type</p>
-                            <h5>Equity - OS</h5>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <p>Equity Offered</p>
-                            <h5>~ up to 11.00%</h5>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <p>Valuation</p>
-                            <h5>RM 44,000,000</h5>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <p>Minimum Funding Target</p>
-                            <h5>RM 498,498</h5>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <p>Total Target Amount</p>
-                            <h5>RM 5,483,049</h5>
-                        </div>
-                        <div class="col-12 mt-2">
-                            <p>Tax Relief</p>
-                            <h5>-</h5>
-                        </div>
-                      </div>
+        <div class="col-sm-12 col-md-5 col-lg-5 mb-5">
+            {% for entreprenuer in entreprenuers %}
+            {% for x in entreprenuer.user.user_company.all %}
+            <div class="card mb-2">
+                <div class="card-header">
+                    <div class="card-title text-bold">BUSINESS OVERVIEW</div>
+                </div>
+                <div class="card-body p-4">
+                    <div class="col-12">
+                        <p>Company</p>
+                        <h5>{{x.company_name}}</h5>
                     </div>
-                  </div>
-                </div> -->
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                        BUSINESS OVERVIEW
-                    </button>
-                  </h2>
-                  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse show" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <p>Company/LLP Nam</p>
-                                <h5>Recomn Technologies Sdn Bhd</h5>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <p>Location</p>
-                                <h5>A308 (Block A, Unit 8, Level 3) Phileo Damansara 1, 9 Jalan 16/11, Off Jalan Damansara, Section 16, 46350 Petaling Jaya, Selangor,</h5>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <p>Website</p>
-                                <h5>recommend.my</h5>
-                            </div>
-                            <div class="col-12 mt-2">
-                                <p>Registration No.</p>
-                                <h5>201401020765</h5>
-                            </div>
-                          </div>
+                    <div class="col-12 mt-2">
+                        <p>Location</p>
+                        <h5>{{x.company_address}}</h5>
                     </div>
-                  </div>
+                    <div class="col-12 mt-2">
+                        <p>Website</p>
+                        <h5>{{x.company_website}}</h5>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <p>Registration No.</p>
+                        <h5>{{x.company_registration_number}}</h5>
+                    </div>
                 </div>
               </div>
+               {% endfor %}
+               {% endfor %}
+           
         </div>
     </div>
    </div>
