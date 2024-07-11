@@ -1,50 +1,67 @@
 {% extends 'investor/master/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}iTekad{% endblock title %}
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="row">
-  <div class="col-2">
-    <a href="{% url 'home_page' %}" type="button" class="btn btn-warning"><i
-        class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back</a>
-  </div>
-  <div class="col-10 align-self-center">
-    <h4 class="card-title fw-bold text-uppercase">Entreprenuer Profile</h4>
-  </div>
+<div class="container mt-3 mb-5 pb-5">
+  <form method="POST">
+    <div class="row p-3">
+      <div class="col-12">
+        <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">General Details</div>
+      </div>
+    </div>
+    <div class="row">
+      {% csrf_token %}
+      <div class="col-12">
+        {{ form.mobile_no | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.address_line_one | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.address_line_two | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.address_line_three | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.postcode | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.city | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.state | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.country | as_crispy_field }}
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-12">
+        <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
+      </div>
+    </div>
+    <div class="row">
+      {% csrf_token %}
+      <div class="col-12">
+        {{ form.bank_name | as_crispy_field }}
+      </div>
+      <div class="col-12">
+        {{ form.bank_account_number | as_crispy_field }}
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-12 text-end">
+        <a href="{% url 'home_page' %}" type="button" class="btn btn-danger">Cancel</a>
+        <button type="submit" class="btn btn-success">Update Profile</button>
+      </div>
+  </form>
 </div>
 
-<div class="row mt-5">
-  <div class="col-12">
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead class="table-light">
-          <tr>
-            <th scope="col" width="5%" class="text-center">#</th>
-            <th scope="col" class="text-center">Entreprenuer</th>
-            <th scope="col" width="10%" class="text-center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row" class="text-center">1.</td>
-            <td>ABC Entreprise</td>
-            <td class="text-center">
-              <a href="#" class="text-decoration-none">View</a>
-            </td>
-          </tr>
-          <tr>
-            <td scope="row" class="text-center">2.</td>
-            <td>DEF Sdn Bhd</td>
-            <td class="text-center">
-              <a href="#" class="text-decoration-none">View</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
 {% endblock content %}
 
 {% block js %}{% endblock js %}
