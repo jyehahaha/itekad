@@ -3,11 +3,11 @@ from sfd.models import Campaign, CompanyProfile,TrancheInvestor, TrancheEntrepre
 
 # Create your views here.
 def LandingPageView(request):
-	campaign_info = Campaign.objects.all()
+	campaigns = Campaign.objects.all()
 	context = {
 		'title': 'Home',
 		'landing': True,
-		'campaign_info' : campaign_info,
+		'campaign_info' : campaigns,
 	}
 	return render(request, 'website/landing.html', context)
 
