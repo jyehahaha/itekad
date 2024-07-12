@@ -70,45 +70,58 @@
   <div class="col-12">
     <table id="tblUserManagement" class="table" style="width:100%">
       <thead>
-          <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Mobile Phone</th>
-              <th>MyKad No.</th>
-              <th>Role</th>
-              <th>Position</th>
-              <th>Date/Time Created</th>
-              <th>Status</th>
-              <th>Action</th>
+        <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Mobile Phone</th>
+          <th>MyKad No.</th>
+          <th>Country</th>
+          <th>Account No</th>
+          <th>Account Name</th>
+          <th>Role</th>
+          <th>Category</th>
+          <th>Date/Time Created</th>
+          <th>Status</th>
+          <th>Action</th>
 
         </tr>
       </thead>
       <tbody>
-          {% if user_profile_record %}
-          {% for record in user_profile_record %}
-          <tr>
-              <td>{{ record.user.get_full_name }}</td>
-              <td>{{ record.user.username }}</td>
-              <td>{{ record.user.email }}</td>
-              <td>{{ record.mobile_no }}</td>
-              <td>{{ record.mykad_no }}</td>
-              <td>{{ record.role}}</td>
-              <td>{{ record.position | default:"-"}} </td>
-              <td>{{ record.user.date_joined }}</td>
-              <td>{{ record.user.is_active }}</td>
-              <td> 
-                  <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_management_page' record.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_management_page' record.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  {% if request.user.is_superuser %}
-                  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-user-id="{{ record.id }}" data-username="{{ record.username }}"><i class="fa-solid fa-trash"></i>&nbspDelete</button>
-                  {% endif %}
-                  </div>
-              </td>
-          </tr>
-          {% endfor %}
-          {% endif %}
+        {% for x in page_obj %}
+        <tr>
+          <td>{{ x.user.get_full_name }}</td>
+          <td>{{ x.user.username }}</td>
+          <td>{{ x.user.email | default:"-" }}</td>
+          <td>{{ x.mobile_no | default:"-" }}</td>
+          <td>{{ x.mykad_no | default:"-" }}</td>
+          <td>{{ x.country | default:"-" }}</td>
+          <td>{{ x.bank_account_number | default:"-" }}</td>
+          <td>{{ x.bank_name | default:"-" }}</td>
+          <td>{{ x.role | default:"-" }}</td>
+          <td>{{ x.position | default:"-" }}</td>
+          <td>{{ x.user.date_joined }}</td>
+          <td> {% if x.user.is_active %}
+            <span class="badge bg-success">Active</span>
+            {% else %}
+            <span class="badge bg-danger">Inactive</span>
+            {% endif %}
+          </td>
+          <td>
+            <div class="d-grid gap-2 d-md-block">
+              <a href="{% url 'details_user_management_page' x.id %}" class="btn btn-primary" type="button"><i
+                  class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+              <a href="{% url 'update_user_management_page' x.id %}" class="btn btn-success" type="button"><i
+                  class="fa-solid fa-pen"></i>&nbspEdit</a>
+              {% if request.user.is_superuser %}
+              <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal"
+                data-user-id="{{ record.id }}" data-username="{{ record.username }}"><i
+                  class="fa-solid fa-trash"></i>&nbspDelete</button>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
