@@ -3,4 +3,4 @@ django-environ==0.11.2
 django-crispy-forms==2.2
 crispy-bootstrap5==2024.2
 django-filter==24.2
-psycopg-binary==3.2.1
+psycopg2-binary==2.9.9
