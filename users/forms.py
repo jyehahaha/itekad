@@ -22,21 +22,40 @@ class UserLoginForm(AuthenticationForm):
 		)
 
 class UserForm(UserCreationForm):
-    terms_agreement = forms.BooleanField(label='I accept all Privacy and Policy & Terms and Conditions.')
-    helper = FormHelper()
-    helper.form_tag = False
-    helper.layout = Layout(
-        Div(
-            Div(FieldWithButtons('password1', StrictButton('<i class="fa-solid fa-eye"></i>', type='button', css_class='btn btn-outline-secondary', id='password1Button')), css_class='col-12'
-                ),
-            Div(FieldWithButtons('password2', StrictButton('<i class="fa-solid fa-eye"></i>', type='button', css_class='btn btn-outline-secondary', id='password2Button')), css_class='col-12'
-                ),
-            css_class='row'
-        )
-    )
-    class Meta:
-        model = User
-        fields = ("username", "first_name", "last_name", "email", "password1", "password2", "terms_agreement")
+	terms_agreement = forms.BooleanField(label='I accept all Privacy and Policy & Terms and Conditions.')
+	helper = FormHelper()
+	helper.form_tag = False
+	helper.layout = Layout(
+		Div(
+			Div(FieldWithButtons('password1',StrictButton('<i class="fa-solid fa-eye"></i>', type='button', css_class='btn btn-outline-secondary', id='password1Button')), css_class='col-12'),
+			Div(FieldWithButtons('password2', StrictButton('<i class="fa-solid fa-eye"></i>', type='button', css_class='btn btn-outline-secondary', id='password2Button')), css_class='col-12'),
+			css_class='row'
+		)
+	)
+	class Meta:
+		model = User
+		fields = (
+			"username",
+			"first_name",
+			"last_name",
+			"email",
+			"password1",
+			"password2",
+			"terms_agreement",
+		)
+		labels = {
+			"first_name": "First Name",
+			"last_name": "Last Name",
+			"email": "Email Address",
+		}
+
+	def __init__(self, *args, **kwargs):
+		# first call parent's constructor
+		super(UserForm, self).__init__(*args, **kwargs)
+		# there's a `fields` property now
+		self.fields['first_name'].required = True
+		self.fields['last_name'].required = True
+		self.fields['email'].required = True
 
 class UserUpdateForm(forms.ModelForm):
 	class Meta:
