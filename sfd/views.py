@@ -86,7 +86,7 @@ def UsersView(request):
     'view': 'list',
     'filter': f,
     'page_obj': page_obj,
-    'records':records
+    'records': records,
   }
   return render(request, 'sfd/crud_user.html', context)
 

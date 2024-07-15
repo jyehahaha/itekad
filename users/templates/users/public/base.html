@@ -10,10 +10,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css">
 
-  <!-- Boxicons CSS -->
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <!-- BoxIcons CSS -->
+  <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
+
+  <!-- DataTable -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/select/1.7.0/css/select.dataTables.min.css" />
 
   <!-- Global CSS -->
   <link rel="stylesheet" href="{% static 'users/css/globals.css' %}">
@@ -28,28 +32,27 @@
   
   <!-- Body -->
   <div class="container mt-5">
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-            {{ message }}
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    
+    <!-- Message -->
+    {% include 'sfd/master/message.html' %}
+
+    <!-- Content -->
     {% block content %}{% endblock content %}
   </div>
 
   <!-- Footer -->
   {% include 'users/public/footer.html' %}
+  
   <!-- JQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"></script>
+
+  <!-- DataTable JS -->
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
 
   <!-- Global JS -->
   <link rel="stylesheet" href="{% static 'users/js/globals.js' %}">

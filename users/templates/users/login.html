@@ -1,12 +1,12 @@
 {% extends 'users/public/base.html' %}
+{% load crispy_forms_tags %}
 
-{% block title %}iTekad - Login{% endblock title %}
+{% block title %} iTekad - Login {% endblock title %}
 {% block css %}{% endblock css %}
 
 {% block content %}
-
-<div class="row mt-5">
-  <div class="offset-md-1 col-md-9 offset-lg-4 col-lg-4">
+<div class="row mb-5 pb-5">
+  <div class="col-sm-12 offset-md-2 col-md-8 offset-lg-3 col-lg-6">
     <div class="card border border-2 border-light shadow-sm">
       <div class="card-body p-4">
         <form method="POST" action="{% url 'login_page' %}">
@@ -20,29 +20,20 @@
               <p class="card-subtitle text-muted">Provide your username & password to login</p>
             </div>
             <div class="col-12">
-              <div class="mb-3">
-                <label for="" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" id="" placeholder="Username">
-              </div>
+              {{ form.username | as_crispy_field }}
             </div>
             <div class="col-12">
-              <div class="mb-3">
-                <label for="" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="" placeholder="Password">
-              </div>
+              {{ form.password | as_crispy_field }}
             </div>
             <div class="col-6 text-start">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="txtRememberMe">
-                <label class="form-check-label" for="txtRememberMe">Remember me</label>
-              </div>
+              {{ form.remember | as_crispy_field }}
             </div>
             <div class="col-6 text-end">
               <p>
                 <a href="{% url 'password_reset' %}" class="btn-link text-decoration-none">Forgot Password?</a>
               </p>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-3">
               <div class="d-grid gap-2">
                 <button type="submit" class="btn btn-warning fw-bold text-uppercase">Login</button>
               </div>

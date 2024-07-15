@@ -1,21 +1,22 @@
 
 {% extends 'users/public/base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}iTekad{% endblock title %}
+
+{% block title %} iTekad - Register {% endblock title %}
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="row pt-5">
-  <div class="offset-3 col-6">
-    <div class="card">
-      <div class="card-body">
+<div class="row mb-5 pb-5">
+  <div class="col-sm-12 offset-md-2 col-md-8 offset-lg-2 col-lg-8">
+    <div class="card border border-2 border-light shadow-sm">
+      <div class="card-body p-4">
         <div class="row">
           <div class="col-12 text-center mb-4">
             <i class='bx bx-lock-alt bx-lg bx-border-circle'></i>
           </div>
           <div class="col-12 mb-4 text-center">
             <h4 class="card-title fw-bold">iTekad Sign Up</h4>
-            <p class="card-subtitle text-muted">Please provide your valid infomations to get the benefits form our site.</p>
+            <p class="card-subtitle text-muted">Please provide your valid information to get the benefits form our site.</p>
           </div>
           <form method="POST" action="{% url 'register_page' %}">
           {% csrf_token %}

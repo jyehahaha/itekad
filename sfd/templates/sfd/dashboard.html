@@ -44,84 +44,92 @@
       </div>
     </div>
   </div>
-  <div class="mt-5"></div>
-  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Investor's Data</div>
-  <table id="tblUserManagement" class="table table-striped" style="width:100%">
-    <thead>
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Email</th>
-          <th>Mobile Phone</th>
-          <th>MyKad No.</th>
-          <th>Account No</th>
-          <th>Account Name</th>
-          <th>Action</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        {% for investor in investors %}
-        <tr>
-          <td>{{investor.user.get_full_name}}</td>
-          <td>{{investor.user.username}}</td>
-          <td>{{investor.user.email}}</td>
-          <td>{{investor.mobile_no}}</td>
-          <td>{{investor.mykad_no}}</td>
-          <td>{{investor.bank_account_number}}</td>
-          <td>{{investor.bank_name}}</td>
-          <td><a href="{% url 'update_user_management_page' investor.id %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i>&nbspUpdate</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  </table>
+  <div class="card mt-5">
+    <div class="card-header">
+      <h4 class="card-title">Investor's Data</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table id="tblUserManagement" class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Mobile Phone</th>
+              <th>MyKad No.</th>
+              <th>Account No</th>
+              <th>Account Name</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for investor in investors %}
+            <tr>
+              <td>{{investor.user.get_full_name}}</td>
+              <td>{{investor.user.username}}</td>
+              <td>{{investor.user.email}}</td>
+              <td>{{investor.mobile_no}}</td>
+              <td>{{investor.mykad_no}}</td>
+              <td>{{investor.bank_account_number}}</td>
+              <td>{{investor.bank_name}}</td>
+              <td><a href="{% url 'update_user_management_page' investor.id %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i>&nbspUpdate</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 {% endblock  %}
 
 {% block js%}
 <script>
-    const ctx = document.getElementById("bar").getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ["rice", "yam", "tomato", "potato",
-        "beans", "maize", "oil"],
-        datasets: [{
-          label: 'food Items',
-          backgroundColor: 'rgba(161, 198, 247, 1)',
-          borderColor: 'rgb(47, 128, 237)',
-          data: [300, 400, 200, 500, 800, 900, 200],
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true,
-            }
-          }]
-        }
-      },
-    });
+  $(document).ready(function() {
+    // DataTable
+    var tblUserManagement = new DataTable('#tblUserManagement');
+  });
 
-    const ctxD = document.getElementById("doughnut").getContext('2d');
-      const myChartD = new Chart(ctxD, {
-        type: 'doughnut',
-        data: {
-          labels: ["rice", "yam", "tomato", "potato", "beans",
-           "maize", "oil"],
-          datasets: [{
-            label: 'food Items',
-            data: [30, 40, 20, 50, 80, 90, 20],
-            backgroundColor: ["#0074D9", "#FF4136", "#2ECC40",
-            "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00",
-            "#001f3f", "#39CCCC", "#01FF70", "#85144b",
-            "#F012BE", "#3D9970", "#111111", "#AAAAAA"]
-          }]
-        },
-    });
+    // const ctx = document.getElementById("bar").getContext('2d');
+    // const myChart = new Chart(ctx, {
+    //   type: 'bar',
+    //   data: {
+    //     labels: ["rice", "yam", "tomato", "potato",
+    //     "beans", "maize", "oil"],
+    //     datasets: [{
+    //       label: 'food Items',
+    //       backgroundColor: 'rgba(161, 198, 247, 1)',
+    //       borderColor: 'rgb(47, 128, 237)',
+    //       data: [300, 400, 200, 500, 800, 900, 200],
+    //     }]
+    //   },
+    //   options: {
+    //     scales: {
+    //       yAxes: [{
+    //         ticks: {
+    //           beginAtZero: true,
+    //         }
+    //       }]
+    //     }
+    //   },
+    // });
 
-    // Datatable
-    new DataTable('#tblUserManagement');
-
+    // const ctxD = document.getElementById("doughnut").getContext('2d');
+    //   const myChartD = new Chart(ctxD, {
+    //     type: 'doughnut',
+    //     data: {
+    //       labels: ["rice", "yam", "tomato", "potato", "beans",
+    //        "maize", "oil"],
+    //       datasets: [{
+    //         label: 'food Items',
+    //         data: [30, 40, 20, 50, 80, 90, 20],
+    //         backgroundColor: ["#0074D9", "#FF4136", "#2ECC40",
+    //         "#FF851B", "#7FDBFF", "#B10DC9", "#FFDC00",
+    //         "#001f3f", "#39CCCC", "#01FF70", "#85144b",
+    //         "#F012BE", "#3D9970", "#111111", "#AAAAAA"]
+    //       }]
+    //     },
+    // });
 </script>
 {% endblock js%}

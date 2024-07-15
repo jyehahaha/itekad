@@ -3,49 +3,74 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
-from .models import User, UserProfile
-from .forms import UserForm, UserProfileForm, UserUpdateForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import (
+  Paginator,
+  EmptyPage,
+  PageNotAnInteger,
+)
 from .filters import UserFilter
+from .models import (
+  User,
+  UserProfile,
+)
+from .forms import (
+  UserLoginForm,
+  UserForm,
+  UserProfileForm,
+  UserUpdateForm,
+)
 
 # Create your views here.
 def LoginView(request):
+  # login form
+  form = UserLoginForm()
+
   # form post
   if request.method == "POST":
-    # username & password
-    username = request.POST['username']
-    password = request.POST['password']
+    # form submit
+    form = UserLoginForm(request=request, data=request.POST)
 
-    # authenticate
-    user = authenticate(request, username=username, password=password)
+    # form valid
+    if form.is_valid():
+      # clean data
+      username = form.cleaned_data['username']
+      password = form.cleaned_data['password']
 
-    # user authenticate or not
-    if user is not None:
-      # login user
-      login(request, user)
+      # authenticate
+      user = authenticate(request, username=username, password=password)
 
-      #  fetch user profile
-      profile = UserProfile.objects.get(user=user)
+      # user authenticate or not
+      if user is not None:
+        # login user
+        login(request, user)
 
-      # check user role
-      if profile.role == "INVESTOR":
-        messages.success(request, "You Have Been Logged In!")
-        return redirect('home_page')
+        #  fetch user profile
+        profile = UserProfile.objects.get(user=user)
+
+        # check user role
+        if profile.role == "INVESTOR":
+          # message success
+          messages.success(request, f"Welcome, {username}! You are now logged in.")
+          # redirect to investor home page
+          return redirect('home_page')
+        else:
+          # message success
+          messages.success(request, f"Welcome, {username}! You are now logged in.")
+          # redirect to sfd admin dashboard
+          return redirect('dashboard_page')
+      # user authenticate error
       else:
-        messages.success(request, "You Have Been Logged In!")
-        return redirect('dashboard_page')
-    
-    # user authenticate error
-    else:
-      messages.success(request, ("There was an error, please try again..."))
-      return redirect('login_page')
-  else:
-    return render(request, 'users/login.html', {})
+        messages.error(request, "Your account could not be authenticated. Please verify your login details.")
+
+  context = {
+    'form': form,
+  }
+  return render(request, 'users/login.html', context)
 
 def LogoutView(request):
 	logout(request)
-	messages.success(request, ("You have been logged out...Thanks for stopping by..."))
-	return redirect('landing_page')
+	messages.success(request, "You have been logged out. Come back soon!")
+	return redirect('login_page')
 
 def RegisterView(request):
   if request.method == "POST":
