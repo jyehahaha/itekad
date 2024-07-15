@@ -1,6 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, PasswordResetForm
 from django.utils import timezone
+
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Div
+from crispy_forms.bootstrap import FieldWithButtons, StrictButton
 from django.contrib.auth import get_user_model
 from .models import User, UserProfile
 
@@ -18,31 +22,21 @@ class UserLoginForm(AuthenticationForm):
 		)
 
 class UserForm(UserCreationForm):
-	terms_agreement = forms.BooleanField(label='I accept all Privacy and Policy & Terms and Conditions.')
-	class Meta:
-		model = User
-		fields = (
-			"username",
-			"first_name",
-			"last_name",
-			"email",
-			"password1",
-			"password2",
-			"terms_agreement",
-		)
-		labels = {
-			"first_name": "First Name",
-			"last_name": "Last Name",
-			"email": "Email Address",
-		}
-
-	def __init__(self, *args, **kwargs):
-		# first call parent's constructor
-		super(UserForm, self).__init__(*args, **kwargs)
-		# there's a `fields` property now
-		self.fields['first_name'].required = True
-		self.fields['last_name'].required = True
-		self.fields['email'].required = True
+    terms_agreement = forms.BooleanField(label='I accept all Privacy and Policy & Terms and Conditions.')
+    helper = FormHelper()
+    helper.form_tag = False
+    helper.layout = Layout(
+        Div(
+            Div(FieldWithButtons('password1', StrictButton('<i class="fa-solid fa-eye"></i>', type='button', css_class='btn btn-outline-secondary', id='password1Button')), css_class='col-12'
+                ),
+            Div(FieldWithButtons('password2', StrictButton('<i class="fa-solid fa-eye"></i>', type='button', css_class='btn btn-outline-secondary', id='password2Button')), css_class='col-12'
+                ),
+            css_class='row'
+        )
+    )
+    class Meta:
+        model = User
+        fields = ("username", "first_name", "last_name", "email", "password1", "password2", "terms_agreement")
 
 class UserUpdateForm(forms.ModelForm):
 	class Meta:
@@ -115,13 +109,13 @@ class UserProfileForm(forms.ModelForm):
 		self.fields['position'].required = True
 
 class CustomPasswordResetForm(PasswordResetForm):
-	def save(self, *args, **kwargs):
-		email = self.cleaned_data["email"]
-		users = User.objects.filter(email=email)
-		if not users.exists():
-			raise forms.ValidationError("There is no user registered with the specified email address.")
-		else:
-			for user in users:
-				user.userprofile.password_reset_timestamp = timezone.now()
-				user.userprofile.save()
-		super().save(*args, **kwargs)  
+    def save(self, *args, **kwargs):
+        email = self.cleaned_data["email"]
+        users = User.objects.filter(email=email)
+        if not users.exists():
+            raise forms.ValidationError("There is no user registered with the specified email address.")
+        else:
+            for user in users:
+                user.userprofile.password_reset_timestamp = timezone.now()
+                user.userprofile.save()
+        super().save(*args, **kwargs)  

@@ -41,11 +41,8 @@ class UserProfile(models.Model):
 # Create a user Profile by default when user signs up
 def create_profile(sender, instance, created, **kwargs):
 	if created:
-		if not instance.is_superuser:
-			UserProfile.objects.create(user=instance, role='INVESTOR')
-		else:
-			UserProfile.objects.create(user=instance)
-	instance.userprofile.save()    
+		UserProfile.objects.create(user=instance)
+		instance.userprofile.save()    
 
 # Automate the profile thing
 post_save.connect(create_profile, sender=User)

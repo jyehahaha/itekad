@@ -19,61 +19,58 @@
             <p class="card-subtitle text-muted">Please provide your valid information to get the benefits form our site.</p>
           </div>
           <form method="POST" action="{% url 'register_page' %}">
-          {% csrf_token %}
-          <div class="col-12">
-            <div class="mb-3">
-              {{ form.username | as_crispy_field }}
+            {% csrf_token %}
+            <div class="col-12">
+              <div class="mb-3">
+                {{ form.username | as_crispy_field }}
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              {{ form.first_name | as_crispy_field }}
+            <div class="col-12">
+              <div class="mb-3">
+                {{ form.first_name | as_crispy_field }}
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              {{ form.last_name | as_crispy_field }}
+            <div class="col-12">
+              <div class="mb-3">
+                {{ form.last_name | as_crispy_field }}
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              {{ profile_form.mykad_no | as_crispy_field }}
+            <div class="col-12">
+              <div class="mb-3">
+                {{ profile_form.mykad_no | as_crispy_field }}
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              {{ profile_form.mobile_no | as_crispy_field }}
+            <div class="col-12">
+              <div class="mb-3">
+                {{ profile_form.mobile_no | as_crispy_field }}
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              {{ form.email | as_crispy_field }}
+            <div class="col-12">
+              <div class="mb-3">
+                {{ form.email | as_crispy_field }}
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              {{ form.password1 | as_crispy_field }}
+            <div class="col-12">
+              <div class="mb-3">
+                {% crispy form %}
+              </div>
             </div>
-          </div>
-          <div class="col-12">
-            <div class="mb-3">
-              {{ form.password2 | as_crispy_field }}
+            <div class="col-12 mt-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="terms_agreement" id="terms_agreement">
+                <label class="form-check-label">I accept all <a href="#">Privacy and Policy</a> & <a href="#">Terms and
+                    Conditions</a>.</label>
+              </div>
             </div>
-          </div>
-          <div class="col-12 mt-4">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" name="terms_agreement" id="terms_agreement">
-              <label class="form-check-label">I accept all <a href="#">Privacy and Policy</a> & <a href="#">Terms and Conditions</a>.</label>
+            <div class="col-12 mt-3">
+              <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-warning fw-bold text-uppercase">Signup Now</button>
+              </div>
             </div>
-          </div>
-          <div class="col-12 mt-3">
-            <div class="d-grid gap-2">
-              <button type="submit" class="btn btn-warning fw-bold text-uppercase">Signup Now</button>
-            </div>
-          </div>
           </form>
           <div class="col-12 text-center mt-3">
-            <small class="text-muted">Already have an account? <a href="{% url 'login_page' %}" class="text-decoration-none">Sign In</a></small>
+            <small class="text-muted">Already have an account? <a href="{% url 'login_page' %}"
+                class="text-decoration-none">Sign In</a></small>
           </div>
         </div>
       </div>
@@ -82,4 +79,28 @@
 </div>
 {% endblock content %}
 
-{% block js %}{% endblock js %}
+{% block js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    for (i of [1, 2]) {
+      const togglePassword = document.querySelector(`#password${i}Button`);
+      const password = document.querySelector(`#id_password${i}`);
+
+      togglePassword.addEventListener('click', function (e) {
+
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+
+        if (this.firstChild.classList.contains('fa-eye-slash')) {
+          this.firstChild.classList.remove('fa-eye-slash')
+          this.firstChild.classList.add('fa-eye');
+        }
+        else {
+          this.firstChild.classList.remove('fa-eye');
+          this.firstChild.classList.add('fa-eye-slash');
+        }
+      });
+    }
+  });
+</script>
+{% endblock js %}

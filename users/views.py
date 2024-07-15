@@ -90,6 +90,10 @@ def RegisterView(request):
       profile_form = UserProfileForm(request.POST, instance=profile)
       profile_form.save()
       
+      # Assign role to 'INVESTOR'
+      profile.role = 'INVESTOR'
+      profile.save()
+
       username = form.cleaned_data['username']
       password = form.cleaned_data['password1']
 			
