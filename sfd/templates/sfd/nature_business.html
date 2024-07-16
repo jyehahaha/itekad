@@ -26,7 +26,7 @@
 						<th>Date/Time Created</th>
 						<th>Date/Time Updated</th>
 						<th>Status</th>
-						<th>Action</th>
+						<th class="text-center">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,16 +37,16 @@
 						<td>{{item.created_at | date:'d-m-Y h:i A'}}</td>
 						<td>{{item.updated_at | date:'d-m-Y h:i A'}}</td>
 						<td>{{item.status}}</td>
-						<td>
+						<td class="text-end">
 							<div class="d-grid gap-2 d-md-block">
 								<a href="{% url 'details_nature_of_business_page' item.id %}" class="btn btn-primary" type="button">
-									<i class="fa-solid fa-magnifying-glass"></i>View
+									<i class="bx bx-search-alt bx-sm bx-pull-left"></i>View
 								</a>
 								<a href="{% url 'update_nature_of_business_page' item.id %}" class="btn btn-success" type="button">
-									<i class="fa-solid fa-pen"></i>Edit
+									<i class="bx bx-edit bx-sm bx-pull-left"></i>Edit
 								</a>
 								<a href="{% url 'delete_nature_of_business_page' item.id %}" class="btn btn-danger" type="button">
-									<i class="fa-solid fa-trash"></i>Delete
+									<i class="bx bx-trash bx-sm bx-pull-left"></i>Delete
 								</a>
 							</div>
 						</td>
