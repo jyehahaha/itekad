@@ -102,11 +102,11 @@ def RegisterView(request):
       login(request, user)
 
 
-      messages.success(request, ("Username Created - Please Fill Out Your User Info Below..."))
+      messages.success(request, "Username Created - Please Fill Out Your User Info Below...")
       return redirect('home_page')
 
     else:
-      messages.success(request, ("Whoops! There was a problem Registering, please try again..."))
+      messages.success(request, "Whoops! There was a problem Registering, please try again...")
       return redirect('register_page')
   else:
     form = UserForm()
@@ -140,41 +140,40 @@ def SendPassword(request, id):
   return render(request, 'users/send_password.html', context)
 
 def UserManagementView(request):
-    if request.user.is_authenticated:
-        # Look Up Records
-        user_profile_record = UserProfile.objects.filter(user__is_superuser=False)
+  if request.user.is_authenticated:
+    # Look Up Records
+    records = UserProfile.objects.filter(user__is_superuser=False)
 
-        # filter
-        f = UserFilter(request.GET, queryset=user_profile_record)
+    # filter
+    f = UserFilter(request.GET, queryset=records)
 
-        # variable for paginator
-        page_num = request.GET.get('page', 1)
-        limit = request.GET.get('limit', 10)
+    # variable for paginator
+    page_num = request.GET.get('page', 1)
+    limit = request.GET.get('limit', 10)
 
-        # pass the list for pagination
-        paginator = Paginator(f.qs, limit)
+    # pass the list for pagination
+    paginator = Paginator(f.qs, limit)
 
-        # paginator
-        try:
-            page_obj = paginator.page(page_num)
-        except PageNotAnInteger:
-            # if page is not an integer, deliver the first page
-            page_obj = paginator.page(1)
-        except EmptyPage:
-            # if the page is out of range, deliver the last page
-            page_obj = paginator.page(paginator.num_pages)
+    # paginator
+    try:
+      page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+      # if page is not an integer, deliver the first page
+      page_obj = paginator.page(1)
+    except EmptyPage:
+      # if the page is out of range, deliver the last page
+      page_obj = paginator.page(paginator.num_pages)
 
-        context = {
-          'filter': f,
-          'page_obj': page_obj,
-          'dashboard_view': True,
-          'user_profile_record':user_profile_record
-        }
+    context = {
+      'filter': f,
+      'page_obj': page_obj,
+      'dashboard_view': True,
+    }
 
-        return render(request, 'users/user_management.html', context)
-    else:
-        messages.success(request, "You Must Be Logged In To View That Page...")
-        return redirect('login_page')
+    return render(request, 'users/user_management.html', context)
+  else:
+    messages.success(request, "You Must Be Logged In To View That Page...")
+    return redirect('login_page')
     
 def CreateUserManagementView(request):
   if request.method == 'POST':
@@ -223,8 +222,8 @@ def UpdateUserManagementView(request,id=None):
       messages.success(request, "Your Info Has Been Updated!!")
       return redirect('user_management_page')
     else:
-       print(form.errors)
-       print(profile_form.errors)
+      print(form.errors)
+      print(profile_form.errors)
   else:
     current_user = User.objects.get(id=id or request.user.id)
     profile_user = UserProfile.objects.get(user__id=id or request.user.id)
@@ -233,11 +232,11 @@ def UpdateUserManagementView(request,id=None):
   profile_form = UserProfileForm(instance=profile_user)
   
   context = {
-     'form':form, 
-     'profile_form':profile_form, 
-     'view': 'update',
-     'id' : id
-     }
+    'form':form, 
+    'profile_form':profile_form, 
+    'view': 'update',
+    'id' : id
+  }
   return render(request, "users/crud_user_management.html", context)
       	
 def DeleteUserManagementView(request, id):

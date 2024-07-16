@@ -5,56 +5,58 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">List of Nature of Business</div>
-
-    <div class="card--container">
-        <h3 class="main--title">Nature of Business</h3>
-        <div class="card--container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{% url 'create_nature_of_business_page' %}" class="btn btn-primary me-md-2" type="button"><i class="fa-solid fa-plus"></i>&nbspCreate Nature of Business</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col-12">
-                    <table id="tblNature" class="table table-striped" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Date/Time Created</th>
-                                <th>Date/Time Updated</th>
-                                <th>Status</th>
-                                <th>Action</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in items %}
-                            <tr>
-                                <td>{{item.title}}</td>
-                                <td>{{item.description}}</td>
-                                <td>{{item.created_at | date:'d-m-Y h:i A'}}</td>
-                                <td>{{item.updated_at | date:'d-m-Y h:i A'}}</td>
-                                <td>{{item.status}}</td>
-                                <td>
-                                    <div class="d-grid gap-2 d-md-block">
-                                        <a href="{% url 'details_nature_of_business_page' item.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                        <a href="{% url 'update_nature_of_business_page' item.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                        <a href="{% url 'delete_nature_of_business_page' item.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>                                    
-                                    </div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class="card mt-4">
+	<div class="card-header">
+		<div class="float-start">
+			<h4 class="card-title">List of Nature of Business</h4>
+		</div>
+		<div class="float-end">
+			<a href="{% url 'create_nature_of_business_page' %}" class="btn btn-warning" type="button">
+				<i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create New Nature of Business
+			</a>
+		</div>
+	</div>
+	<div class="card-body p-4">
+		<div class="table-responsive">
+			<table id="tblNature" class="table table-striped" style="width:100%">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Date/Time Created</th>
+						<th>Date/Time Updated</th>
+						<th>Status</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in items %}
+					<tr>
+						<td>{{item.title}}</td>
+						<td>{{item.description}}</td>
+						<td>{{item.created_at | date:'d-m-Y h:i A'}}</td>
+						<td>{{item.updated_at | date:'d-m-Y h:i A'}}</td>
+						<td>{{item.status}}</td>
+						<td>
+							<div class="d-grid gap-2 d-md-block">
+								<a href="{% url 'details_nature_of_business_page' item.id %}" class="btn btn-primary" type="button">
+									<i class="fa-solid fa-magnifying-glass"></i>View
+								</a>
+								<a href="{% url 'update_nature_of_business_page' item.id %}" class="btn btn-success" type="button">
+									<i class="fa-solid fa-pen"></i>Edit
+								</a>
+								<a href="{% url 'delete_nature_of_business_page' item.id %}" class="btn btn-danger" type="button">
+									<i class="fa-solid fa-trash"></i>Delete
+								</a>
+							</div>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 {% endblock  %}
 
 {% block js%}

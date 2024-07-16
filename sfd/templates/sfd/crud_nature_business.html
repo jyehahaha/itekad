@@ -7,99 +7,94 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-    {% if view == 'create' %}
-    <div class="card--container">
-        <h3 class="main--title">Create Nature of Business</h3>
-        <div class="card--container">
-            <div class="row">
-                <div class="col-12 mt-3">
-                    <form method="POST">
-                      {% csrf_token %}
-                      {{form | crispy}}
-                      <div class="mb-5">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <button class="btn btn-md btn-success me-md-2" type="submit">Create</button>
-                          <button class="btn btn-md btn-danger" type="reset">Reset</button>
-                          </div>
-                      </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+  {% if view == 'create' %}
+  <div class="card mt-4">
+    <div class="card-header">
+      <h4 class="card-title">Create New Nature of Business</h4>
     </div>
-    {% elif view == 'update' %}
-    <div class="card--container">
-        <h3 class="main--title">Update Nature Of Business</h3>
-        <div class="card--container">
-            <div class="row">
-                <div class="col-12">
-                    <form method="POST">
-                      {% csrf_token %}
-                      {{form | crispy}}
-                      <div class="mb-5">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{% url 'nature_of_business_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
-                            <button class="btn btn-md btn-danger" type="reset">Reset</button>
-                            <button class="btn btn-md btn-success" type="submit">Update</button>
-                          </div>
-                      </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% elif view == 'details' %}
-    <div class="card--container">
-        <h3 class="main--title">Details Nature of Business</h3>
-        <div class="card--container">
-            <div class="row">
-                <div class="col-12">
-                  {% if item %}
-                      <div class="mb-3">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control"  value="{{item.title}}" disabled>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px" disabled>{{item.description}}</textarea>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Status</label>
-                        <input type="text" class="form-control"  value="{{item.status}}" disabled>
-                      </div>
-                      <div class="mb-3">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a href="{% url 'nature_of_business_page' %}" class="btn btn-md btn-warning me-md-2" type="button">Return to Nature of Business</a>
-                          </div>
-                      </div> 
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-    {% elif view == 'delete' %}
-      <div class="card">
-        <form method="POST">
-          <div class="card-header">
-           <h4 class="card-title"> Delete Nature of Business</h4>
+    <div class="card-body p-4">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <div class="mt-4">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'nature_of_business_page' %}" class="btn btn-secondary" type="button">Back</a>
+            <button class="btn btn-secondary" type="reset">Reset</button>
+            <button class="btn btn-warning" type="submit">Create</button>
           </div>
-         <div class="card-body">
-              {% csrf_token %}
-              <div class="text-center">
-                <p class="card-subtitle">
-                  Are you sure you want to delete {{item.title}}?
-                </p>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% elif view == 'update' %}
+  <div class="card mt-4">
+    <div class="card-header">
+      <h4 class="card-title">Update Nature of Business</h4>
+    </div>
+    <div class="card-body p-4">
+      <form method="POST">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <div class="mt-4">
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'nature_of_business_page' %}" class="btn btn-secondary" type="button">Back</a>
+            <button class="btn btn-secondary" type="reset">Reset</button>
+            <button class="btn btn-warning" type="submit">Create</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% elif view == 'details' %}
+  <div class="card--container">
+      <h3 class="main--title">Details Nature of Business</h3>
+      <div class="card--container">
+          <div class="row">
+              <div class="col-12">
+                {% if item %}
+                    <div class="mb-3">
+                      <label class="form-label">Title</label>
+                      <input type="text" class="form-control"  value="{{item.title}}" disabled>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Description</label>
+                      <textarea class="form-control" style="height: 100px" disabled>{{item.description}}</textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Status</label>
+                      <input type="text" class="form-control"  value="{{item.status}}" disabled>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                          <a href="{% url 'nature_of_business_page' %}" class="btn btn-md btn-warning me-md-2" type="button">Return to Nature of Business</a>
+                        </div>
+                    </div> 
+                  {% endif %}
               </div>
-         </div>
-         <div class="card-footer">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button class="btn btn-md btn-success me-md-2" type="submit">Confirm</button>
-                <a href="{% url 'nature_of_business_page' %}" class="btn btn-md btn-danger me-md-2" type="button">Cancel</a>
-            </div>
           </div>
-        </form>
       </div>
-    {% endif %}
+  </div>
+  {% elif view == 'delete' %}
+  <div class="card mt-4">
+    <form method="POST">
+      <div class="card-header">
+        <h4 class="card-title">Confirmation</h4>
+      </div>
+      <div class="card-body">
+        {% csrf_token %}
+        <div class="text-center">
+          <p class="card-subtitle">Are you sure you want to delete <b>{{ item.title }}</b>?</p>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+          <a href="{% url 'nature_of_business_page' %}" class="btn btn-danger" type="button">Cancel</a>
+          <button class="btn btn-success" type="submit">Confirm</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  {% endif %}
 {% endblock  %}
 
 {% block js%}

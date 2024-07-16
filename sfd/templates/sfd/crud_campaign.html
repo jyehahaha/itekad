@@ -12,18 +12,24 @@
 
 {% block content %}
 {% if view == 'create' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Create Campaign</div>
-<form method="POST">
-  {% csrf_token %}
-  {{form | crispy}}
-  <div class="mb-3">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="{% url 'campaign_page' %}" class="btn btn-md btn-warning" type="button">Back</a>
-      <button class="btn btn-md btn-danger" type="reset">Cancel</button>
-      <button class="btn btn-md btn-success" type="submit">Create</button>
-    </div>
+<div class="card mt-4">
+  <div class="card-header">
+    <h4 class="card-title">Create New Campaign</h4>
   </div>
-</form>
+  <div class="card-body p-4">
+    <form method="POST">
+      {% csrf_token %}
+      {{form | crispy}}
+      <div class="mt-4">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a href="{% url 'campaign_page' %}" class="btn btn-warning" type="button">Back</a>
+          <button class="btn btn-danger" type="reset">Cancel</button>
+          <button class="btn btn-success" type="submit">Create</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 {% elif view == 'update' %}
 <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update Campaign</div>
 <form method="POST">

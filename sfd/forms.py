@@ -26,6 +26,8 @@ class CompanyProfileForm(ModelForm):
       'company_summary': forms.Textarea()
     }
     labels = {
+      "company_name": "Company Name",
+      "company_phone_number": "Company Phone No.",
       'company_email': "E-mail Address",
       'company_website': "Website",
       'company_address': "Address",
