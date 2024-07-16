@@ -8,8 +8,8 @@
   .eye-icon {
       cursor: pointer;
       position: absolute;
-      right: 10px;
-      top: calc(50% - 10px);
+      right: 12px;
+      top: calc(70% - 6px);
   }
 </style>
 {% endblock css %}
@@ -33,7 +33,10 @@
               {{ form.username | as_crispy_field }}
             </div>
             <div class="col-12">
+              <div class="position-relative">
               {{ form.password | as_crispy_field }}
+              <span toggle="#id_password" class="eye-icon fas fa-eye"></span>
+              </div>
             </div>
             <div class="col-6 text-start">
               {{ form.remember | as_crispy_field }}
