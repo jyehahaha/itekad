@@ -3,6 +3,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.tokens import default_token_generator
 from django.core.paginator import (
   Paginator,
   EmptyPage,
@@ -41,23 +47,26 @@ def LoginView(request):
 
       # user authenticate or not
       if user is not None:
-        # login user
-        login(request, user)
+         
+         if user.is_active:
+            login(request, user)
+                    #  fetch user profile
+            profile = UserProfile.objects.get(user=user)
 
-        #  fetch user profile
-        profile = UserProfile.objects.get(user=user)
+            # check user role
+            if profile.role == "INVESTOR":
+              # message success
+              messages.success(request, f"Welcome, {username}! You are now logged in.")
+              # redirect to investor home page
+              return redirect('home_page')
+            else:
+              # message success
+              messages.success(request, f"Welcome, {username}! You are now logged in.")
+              # redirect to sfd admin dashboard
+              return redirect('dashboard_page')
+         else:
+            messages.error(request, "Your account is not activated. Please check your email for activation instructions.")
 
-        # check user role
-        if profile.role == "INVESTOR":
-          # message success
-          messages.success(request, f"Welcome, {username}! You are now logged in.")
-          # redirect to investor home page
-          return redirect('home_page')
-        else:
-          # message success
-          messages.success(request, f"Welcome, {username}! You are now logged in.")
-          # redirect to sfd admin dashboard
-          return redirect('dashboard_page')
       # user authenticate error
       else:
         messages.error(request, "Your account could not be authenticated. Please verify your login details.")
@@ -79,6 +88,7 @@ def RegisterView(request):
 
     if form.is_valid() and profile_form.is_valid() and form.cleaned_data['terms_agreement']:
       user = form.save(commit=False)
+      user.is_active = False
       user.save()
       
       try:
@@ -94,16 +104,28 @@ def RegisterView(request):
       profile.role = 'INVESTOR'
       profile.save()
 
-      username = form.cleaned_data['username']
-      password = form.cleaned_data['password1']
-			
-      # log in user
-      user = authenticate(username=username, password=password)
-      login(request, user)
+      # Generate token for email confirmation
+      token = default_token_generator.make_token(user)
 
+      # Send email verification
+      current_site = get_current_site(request)
+      mail_subject = 'Activate your account'
+      message = render_to_string('users/activation_email.html', {
+          'user': user,
+          'domain': current_site.domain,
+          'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+          'token': token,
+      })
+      to_email = form.cleaned_data.get('email')
+      send_mail(mail_subject, message, 'from@example.com', [to_email])
 
+<<<<<<< Updated upstream
       messages.success(request, "Username Created - Please Fill Out Your User Info Below...")
       return redirect('home_page')
+=======
+      messages.success(request, 'Please check your email to confirm your email address.')
+      return redirect('login_page')  # Redirect to login page after registration
+>>>>>>> Stashed changes
 
     else:
       messages.success(request, "Whoops! There was a problem Registering, please try again...")
@@ -271,4 +293,21 @@ def DetailsUserManagementView(request,id):
   else:
     messages.success(request, "You Must Be Logged In To View That Page...")
     return redirect('login_page')
+  
+def activate_account(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        login(request, user)
+        messages.success(request, 'Your account has been activated.')
+        return redirect('home_page')  # Redirect to home page or any desired page after activation
+    else:
+        messages.error(request, 'Activation link is invalid.')
+        return redirect('login_page')  # Redirect to login page if activation fails
     

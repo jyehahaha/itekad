@@ -107,7 +107,7 @@ class UserProfileForm(forms.ModelForm):
 			"bank_account_number": "Bank Account No.",
 		}
 		widgets = {
-			"mykad_no": forms.TextInput(attrs={"required": "true"}),
+			# "mykad_no": forms.TextInput(attrs={"required": "true"}),
 		}
 
 	def __init__(self, *args, **kwargs):
@@ -116,16 +116,16 @@ class UserProfileForm(forms.ModelForm):
 		# there's a `fields` property now
 		self.fields['mykad_no'].required = True
 		self.fields['mobile_no'].required = True
-		self.fields['address_line_one'].required = True
-		self.fields['address_line_two'].required = True
-		self.fields['city'].required = True
-		self.fields['postcode'].required = True
-		self.fields['state'].required = True
-		self.fields['country'].required = True
-		self.fields['bank_name'].required = True
-		self.fields['bank_account_number'].required = True
-		self.fields['role'].required = True
-		self.fields['position'].required = True
+		# self.fields['address_line_one'].required = True
+		# self.fields['address_line_two'].required = True
+		# self.fields['city'].required = True
+		# self.fields['postcode'].required = True
+		# self.fields['state'].required = True
+		# self.fields['country'].required = True
+		# self.fields['bank_name'].required = True
+		# self.fields['bank_account_number'].required = True
+		# self.fields['role'].required = True
+		# self.fields['position'].required = True
 
 class CustomPasswordResetForm(PasswordResetForm):
     def save(self, *args, **kwargs):
