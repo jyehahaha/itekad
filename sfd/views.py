@@ -615,7 +615,7 @@ def EntrepreneurView(request, id):
     'campaign': campaign,
     'Entrepreneurs': Entrepreneurs,
   }
-  return render(request, 'sfd/crud_Entrepreneur.html', context)
+  return render(request, 'sfd/crud_entrepreneur.html', context)
 
 def CreateEntrepreneurView(request):
   # fetch campaign
@@ -640,7 +640,7 @@ def CreateEntrepreneurView(request):
     'campaign': campaign,
 
   }
-  return render(request, 'sfd/crud_Entrepreneur.html', context)
+  return render(request, 'sfd/crud_entrepreneur.html', context)
 
 def UpdateEntrepreneurView(request):
   context = {}

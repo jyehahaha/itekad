@@ -56,37 +56,45 @@
     </div>
   </div>
   {% elif view == 'details' %}
-  <div class="card--container">
-      <h3 class="main--title">Details Nature of Business</h3>
-      <div class="card--container">
-          <div class="row">
-              <div class="col-12">
-                {% if item %}
-                    <div class="mb-3">
-                      <label class="form-label">Title</label>
-                      <input type="text" class="form-control"  value="{{item.title}}" disabled>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Description</label>
-                      <textarea class="form-control" style="height: 100px" disabled>{{item.description}}</textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label class="form-label">Status</label>
-                      <input type="text" class="form-control"  value="{{item.status}}" disabled>
-                    </div>
-                    <div class="mb-3">
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <a href="{% url 'nature_of_business_page' %}" class="btn btn-md btn-warning me-md-2" type="button">Return to Nature of Business</a>
-                        </div>
-                    </div> 
-                  {% endif %}
+  <div class="row">
+    <div class="offset-3 col-6">
+      <div class="card border-0 shadow mt-4">
+        <div class="card-body p-4">
+          <h4 class="card-title fw-bold">Details Nature of Business</h4>
+          {% if item %}
+            <div class="mt-4">
+              <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control"  value="{{ item.title }}" disabled>
               </div>
-          </div>
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" style="height: 100px; resize: none;" disabled>{{ item.description | default:'-' }}</textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Status</label>
+                <input type="text" class="form-control"  value="{{ item.status }}" disabled>
+              </div>
+              <div class="mb-3">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <a href="{% url 'nature_of_business_page' %}" class="btn btn-warning" type="button">Back</a>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card--container">
+      <h3 class="main--title"></h3>
+      <div class="card--container">
+          
       </div>
   </div>
   {% elif view == 'delete' %}
   <div class="row">
-    <div class="offset-3 col-6">
+    <div class="offset-4 col-4">
       <div class="card border-0 shadow mt-4">
         <div class="card-body p-4">
           <h4 class="card-title fw-bold text-center">Confirmation</h4>
