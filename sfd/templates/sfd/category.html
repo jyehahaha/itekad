@@ -5,18 +5,19 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="card mt-4">
-	<div class="card-header">
-		<div class="float-start">
-			<h4 class="card-title">List of Categories</h4>
-		</div>
-		<div class="float-end">
-			<a href="{% url 'create_category_page' %}" class="btn btn-warning" type="button">
-				<i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create New Category
-			</a>
-		</div>
+<div class="row mt-4">
+	<div class="col-12 text-end">
+		<a href="{% url 'create_category_page' %}" class="btn btn-warning" type="button">
+			<i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create New Category
+		</a>
 	</div>
+</div>
+
+<div class="card border-0 shadow mt-4">
 	<div class="card-body p-4">
+		<div class="mb-4">
+			<h4 class="card-title fw-bold text-uppercase">List of Categories</h4>
+		</div>
 		<div class="table-responsive">
 			<table id="tblCategory" class="table table-striped" style="width:100%">
 				<thead>
@@ -27,7 +28,7 @@
 						<th>Date/Time Created</th>
 						<th>Date/Time Updated</th>
 						<th>Status</th>
-						<th>Action</th>
+						<th class="text-center">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -39,18 +40,18 @@
 						<td>{{item.created_at | date:'d-m-Y h:i A'}}</td>
 						<td>{{item.updated_at | date:'d-m-Y h:i A'}}</td>
 						<td>{{item.status}}</td>
-						<td>
-								<div class="d-grid gap-2 d-md-block">
+						<td class="text-end">
+							<div class="d-grid gap-2 d-md-block">
 								<a href="{% url 'details_category_page' item.id %}" class="btn btn-primary" type="button">
-									<i class="fa-solid fa-magnifying-glass"></i>View
+									<i class="bx bx-search-alt bx-sm bx-pull-left"></i>View
 								</a>
 								<a href="{% url 'update_category_page' item.id %}" class="btn btn-success" type="button">
-									<i class="fa-solid fa-pen"></i>Edit
+									<i class="bx bx-edit bx-sm bx-pull-left"></i>Edit
 								</a>
 								<a href="{% url 'delete_category_page' item.id %}" class="btn btn-danger" type="button">
-									<i class="fa-solid fa-trash"></i>Delete
-								</a>                                    
-								</div>
+									<i class="bx bx-trash bx-sm bx-pull-left"></i>Delete
+								</a>
+							</div>
 						</td>
 					</tr>
 					{% endfor %}

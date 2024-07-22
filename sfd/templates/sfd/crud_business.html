@@ -7,128 +7,179 @@
 
 {% block content %}
   {% if view == 'create' %}
-  <div class="card mt-4">
-    <div class="card-header">
-      <h4 class="card-title">Create Company Profile</h4>
+    <div class="row mt-4">
+      <div class="offset-lg-1 col-lg-10">
+        <a href="{% url 'business_profile_page'%}" class="btn btn-md btn-warning" type="button">
+          <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+        </a>
+      </div>
     </div>
-    <div class="card-body p-4">
-      <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <div class="mb-3">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a href="{% url 'business_profile_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
-          <button class="btn btn-md btn-danger" type="reset"></i>Cancel</button>
-          <button class="btn btn-md btn-warning" type="submit">Create</button>
+    <div class="row mt-4">
+      <div class="offset-lg-1 col-lg-10">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="mb-4">
+              <h4 class="card-title fw-bold text-uppercase">Create Company Profile</h4>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ form | crispy }}
+              <div class="mb-3">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-md btn-secondary" type="reset"></i>Reset</button>
+                <button class="btn btn-md btn-warning" type="submit">Create</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
   {% elif view == 'update' %}
-  <div class="card mt-4">
-    <div class="card-header">
-      <h4 class="card-title">Update Company Profile</h4>
+    <div class="row mt-4">
+      <div class="offset-lg-1 col-lg-10">
+        <a href="{% url 'business_profile_page'%}" class="btn btn-md btn-warning" type="button">
+          <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+        </a>
+      </div>
     </div>
-    <div class="card-body p-4">
-      <form method="POST">
-        {% csrf_token %}
-        {{ form | crispy }}
-        <div class="mb-3">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a href="{% url 'business_profile_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
-          <button class="btn btn-md btn-danger" type="reset"></i>Cancel</button>
-          <button class="btn btn-md btn-warning" type="submit">Update</button>
+    <div class="row mt-4">
+      <div class="offset-lg-1 col-lg-10">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="mb-4">
+              <h4 class="card-title fw-bold text-uppercase">Update Company Profile</h4>
+            </div>
+            <form method="POST">
+              {% csrf_token %}
+              {{ form | crispy }}
+              <div class="mb-3">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-md btn-secondary" type="reset"></i>Reset</button>
+                <button class="btn btn-md btn-warning" type="submit">Update</button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      </div>
     </div>
-  </div>
   {% elif view == 'details' %}
-  <div class="card mt-4">
-    <div class="card-header">
-      <h4 class="card-title">Company Profile Details</h4>
-    </div>
-    <div class="card-body p-4">
-      <div class="row">
-        <div class="col-12">
-          {% if company %}
-          <div class="mb-3">
-            <label class="form-label">Logo</label>
-            <input type="text" class="form-control" value="{{company.company_logo}}"  disabled>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Entrepreneur</label>
-            <input type="text" class="form-control" value="{{company.user}}"  disabled>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Company's Name</label>
-            <input type="text" class="form-control" value="{{company.company_name}}"  disabled>
-          </div>
-          <div class="row mb-3">
-            <div class="col-6">
-                <label class="form-label">Phone Number</label>
-                <input type="text" class="form-control" value="{{company.company_phone_number}}"  disabled>
-            </div>
-            <div class="col-6">
-                <label class="form-label">E-mail Address</label>
-                <input type="text" class="form-control" value="{{company.company_email}}"  disabled>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Website</label>
-            <input type="text" class="form-control" value="{{company.company_email}}"  disabled>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Company Address</label>
-            <textarea class="form-control" disabled>{{company.company_address}}</textarea>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <div class="mb-3">
-                <label class="form-label">Nature of business</label>
-                <input type="text" class="form-control" value="{{company.category_of_business.nature_of_business.title}}"  disabled>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="mb-3">
-                <label class="form-label">Category of business</label>
-                <input type="text" class="form-control" value="{{company.category_of_business}}"  disabled>
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Business Summary</label>
-            <textarea class="form-control" disabled>{{company.company_summary}}</textarea>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <div class="mb-3">
-                <label class="form-label">Financing Amount(RM)</label>
-                <input type="text" class="form-control" value="{{company.financing_amount}}"  disabled>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="mb-3">
-                <label class="form-label">Grant Amount(RM)</label>
-                <input type="text" class="form-control" value="{{company.grant_amount}}"  disabled>
-              </div>
-            </div>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Company Portfolio</label>
-            <input type="text" class="form-control" value="{{company.company_portfolio}}"  disabled>
-          </div>
-          {% endif %}
-        </div>
-      </div>
-      <div class="mb-3"></div>
-      <div class="row">
-        <div class="col-12 text-end">
-          <a href="{% url 'business_profile_page' %}" type="button" class="btn btn-secondary">Back</a>
-          <a href="{% url 'update_business_profile_page' company.id %}" class="btn btn-warning" type="button">Edit</a>
-        </div>
+    <div class="row mt-4">
+      <div class="offset-lg-1 col-lg-10">
+        <a href="{% url 'business_profile_page'%}" class="btn btn-md btn-warning" type="button">
+          <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+        </a>
       </div>
     </div>
-  </div>
+    <div class="row mt-4">
+      <div class="offset-lg-1 col-lg-10">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="mb-4">
+              <h4 class="card-title fw-bold text-uppercase">Company Profile Details</h4>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                {% if company %}
+                <div class="mb-3">
+                  <label class="form-label">Logo</label>
+                  <input type="text" class="form-control" value="{{company.company_logo}}"  disabled>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Entrepreneur</label>
+                  <input type="text" class="form-control" value="{{company.user}}"  disabled>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Company's Name</label>
+                  <input type="text" class="form-control" value="{{company.company_name}}"  disabled>
+                </div>
+                <div class="row mb-3">
+                  <div class="col-6">
+                      <label class="form-label">Phone Number</label>
+                      <input type="text" class="form-control" value="{{company.company_phone_number}}"  disabled>
+                  </div>
+                  <div class="col-6">
+                      <label class="form-label">E-mail Address</label>
+                      <input type="text" class="form-control" value="{{company.company_email}}"  disabled>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Website</label>
+                  <input type="text" class="form-control" value="{{company.company_email}}"  disabled>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Company Address</label>
+                  <textarea class="form-control" disabled>{{company.company_address}}</textarea>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label class="form-label">Nature of business</label>
+                      <input type="text" class="form-control" value="{{company.category_of_business.nature_of_business.title}}"  disabled>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label class="form-label">Category of business</label>
+                      <input type="text" class="form-control" value="{{company.category_of_business}}"  disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Business Summary</label>
+                  <textarea class="form-control" disabled>{{company.company_summary}}</textarea>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label class="form-label">Financing Amount(RM)</label>
+                      <input type="text" class="form-control" value="{{company.financing_amount}}"  disabled>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-3">
+                      <label class="form-label">Grant Amount(RM)</label>
+                      <input type="text" class="form-control" value="{{company.grant_amount}}"  disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Company Portfolio</label>
+                  <input type="text" class="form-control" value="{{company.company_portfolio}}"  disabled>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="row">
+              <div class="col-12 text-end">
+                <a href="{% url 'update_business_profile_page' company.id %}" class="btn btn-warning" type="button">Edit</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% elif view == 'delete' %}
+    <div class="row mt-4">
+      <div class="offset-lg-4 col-lg-4">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-4">
+            <div class="mb-4">
+              <h4 class="card-title fw-bold text-uppercase text-center">Confirmation</h4>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <p class="text-center">Are sure you want to delete ?</p>
+              </div>
+              <div class="col-12 text-center">
+                <button type="reset" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-warning">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   {% else %}
     <div class="text-center">
       <h4 class="card-title mt-5">404 - Not Found</h4>

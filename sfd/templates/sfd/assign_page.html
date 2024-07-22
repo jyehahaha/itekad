@@ -7,194 +7,188 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="card border-0 shadow-sm bg-light">
-    <div class="card-body p-4">
-        <div class="row">
-            <div class="col-sm-10 col-md-10 col-lg-11">
-                <div class="card-title">
-                    <h4 class="card-title fw-bold text-uppercase">{{campaign.title}}</h4>
-                    <p class="card-subtitle">{{campaign.description}}</p>
-                </div>
-            </div>
+<div class="row mt-4">
+  <div class="offset-lg-1 col-lg-10">
+    <a href="{% url 'campaign_page'%}" class="btn btn-md btn-warning" type="button">
+      <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+    </a>
+  </div>
+</div>
+<div class="row mt-4">
+  <div class="offset-lg-1 col-lg-10">
+    <div class="card border-0 shadow">
+      <div class="card-body p-4">
+        <div class="mb-4">
+          <h4 class="card-title fw-bold text-uppercase">{{ campaign.title }}</h4>
+          <p class="card-subtitle">{{ campaign.description }}</p>
         </div>
-        <div class="row mt-3">
-            <div class="col-md-12 col-sm-12 ">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body p-5">
-                        <img  class="img-fluid rounded-top" src="{% static 'sfd/img/' %}muamalat_logo_new.png" alt="Title" />
-                        <div class="mt-3">
-                            <h4 class="card-title">About this campaign</h4>
-                            <p class="card-text">{{campaign.campaign_summary}}</p>
-                        </div>
-                        <hr class="mt-3">
-                        <div class="mt-2">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h4>Info</h4>
-                               </div>
-                            </div>
-                            <div class="row">
-                              <div class="col-6">
-                                <table class="table mt-3">
-                                    <tbody>
-                                      <tr>
-                                        <th>Start Campaign</th>
-                                        <td>{{campaign.start_campaign}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th>End Campaign</th>
-                                        <td>{{campaign.end_campaign}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th>Total Amount</th>
-                                        <td>{{campaign.total_amount}}</td>
-                                      </tr>
-                                      <tr>
-                                        <th>Min Target Amount</th>
-                                        <td>{{campaign.min_target_amount}}</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                              </div>
-                            </div>
-                        </div>
-                        <hr class="mt-3">
-                        <div class="mt-5">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h4>Investor</h4>
-                               </div>
-                               <div class="col-6 text-end">
-                                <a href="{% url 'investor_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fa-solid fa-plus"></i>&nbspAdd Investor</a>
-                               </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                  <table id="tblInvestor" class="table table-striped" style="width:100%">
-                                    <thead>
-                                          <tr>
-                                            <th>Name</th>
-                                            <th>Mykad</th>
-                                            <th>E-mail Address</th>
-                                            <th>Mobile No.</th>
-                                            <th class="text-end">Action</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          {% for person in investors_tranche %}
-                                          <tr>
-                                            <td>{{person.user.user.get_full_name}}</td>
-                                            <td>{{person.user.mykad_no}}</td>
-                                            <td>{{person.user.user.email}}</td>
-                                            <td>{{person.user.mobile_no}}</td>
-                                            <td class="text-end">
-                                              <a href="{% url 'delete_investor_page' person.id %}">
-                                                <i class="fa-solid text-danger fa-trash"></i>
-                                              </a>
-                                            </td>
-                                          </tr>
-                                          {% endfor%}
-                                        </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                        </div>
-
-                        <hr class="mt-3">
-                        <div class="mt-5">
-                            <div class="row">
-                                <div class="col-6">
-                                    <h4>Entrepreneur</h4>
-                               </div>
-                               <div class="col-6 text-end">
-                                <a href="{% url 'entrepreneur_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fa-solid fa-plus"></i>&nbspAdd Entrepreneur</a>
-                               </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-12">
-                                    <table id="tblEntrepreneur" class="table table-striped" style="width:100%">
-                                        <thead>
-                                          <tr>
-                                            <th>Name</th>
-                                            <th>Mykad</th>
-                                            <th>E-mail Address</th>
-                                            <th>Mobile No.</th>
-                                            <th>Company Name</th>
-                                            <th class="text-end">Action</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          {% for Entrepreneur in entereprenuers_tranche %}
-                                          <tr>
-                                            <td>{{Entrepreneur.user.user.get_full_name}}</td>
-                                            <td>{{Entrepreneur.user.mykad_no}}</td>
-                                            <td>{{Entrepreneur.user.user.email}}</td>
-                                            <td>{{Entrepreneur.user.mobile_no}}</td>
-                                            <td>{% for company in Entrepreneur.user.user_company.all %}
-                                                {{company.company_name}}
-                                              {% endfor %}</td>
-                                            <td class="text-end">
-                                              <a href="{% url 'delete_entrepreneur_page' Entrepreneur.id %}">
-                                                <i class="fa-solid text-danger fa-trash"></i>
-                                              </a>
-                                            </td>
-                                          </tr>
-                                          {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
-                              </div>
-                        </div>
-                        <hr class="mt-3">
-                        <div class="mt-5">
-                          <div class="row">
-                            <div class="col-6">
-                                <h4>Campaign Report</h4>
-                           </div>
-                           <div class="col-6 text-end">
-                            <a href="{% url 'create_report_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fas fa-upload"></i>&nbspUpload Report</a>
-                           </div>
-                        </div>
-                          <div class="row mt-3">
-                              <div class="col-12">
-                                <div class="mb-3">
-                                   <table id="tblReport" class="table table-striped" style="width:100%">
-                                    <thead>
-                                          <tr>
-                                            <th>Quarter</th>
-                                            <th>File Name</th>
-                                            <th class="text-end">Action</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          {% for item in report_tranche %}
-                                          <tr>
-                                            <td>{{item.quarter}}</td>
-                                            <td>{{item.filename}}</td>
-                                            <td class="text-end">
-                                              <a href="{{ item.report }}" target="_blank" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                                              <a href="{% url 'update_report_page' campaign.id item.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                                              <a href="{% url 'delete_report_page' item.id  %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-                                              </a>
-                                            </td>
-                                          </tr>
-                                          {% endfor %}
-                                        </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-12">
-            <a href="{% url 'campaign_page'%}" class="btn btn-md btn-warning" type="button"><i class="fa-solid fa-arrow-left"></i>&nbspBack</a>
+          <img  class="img-fluid rounded-top" src="{% static 'sfd/img/' %}muamalat_logo_new.png" alt="Title" />
+          <div class="mt-3">
+            <h4 class="card-title">About this campaign</h4>
+            <p class="card-text">{{campaign.campaign_summary}}</p>
           </div>
+          <hr class="mt-3">
+          <div class="mt-2">
+              <div class="row">
+                <div class="col-12">
+                  <h4 class="card-title">Info</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <table class="table mt-3">
+                      <tbody>
+                        <tr>
+                          <th>Start Campaign</th>
+                          <td>{{campaign.start_campaign}}</td>
+                        </tr>
+                        <tr>
+                          <th>End Campaign</th>
+                          <td>{{campaign.end_campaign}}</td>
+                        </tr>
+                        <tr>
+                          <th>Total Amount</th>
+                          <td>{{campaign.total_amount}}</td>
+                        </tr>
+                        <tr>
+                          <th>Min Target Amount</th>
+                          <td>{{campaign.min_target_amount}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+          <hr class="mt-3">
+          <div class="mt-5">
+              <div class="row">
+                  <div class="col-6">
+                      <h4>Investor</h4>
+                  </div>
+                  <div class="col-6 text-end">
+                  <a href="{% url 'investor_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fa-solid fa-plus"></i>&nbspAdd Investor</a>
+                  </div>
+              </div>
+              <div class="row mt-3">
+                  <div class="col-12">
+                    <table id="tblInvestor" class="table table-striped" style="width:100%">
+                      <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Mykad</th>
+                              <th>E-mail Address</th>
+                              <th>Mobile No.</th>
+                              <th class="text-end">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for person in investors_tranche %}
+                            <tr>
+                              <td>{{person.user.user.get_full_name}}</td>
+                              <td>{{person.user.mykad_no}}</td>
+                              <td>{{person.user.user.email}}</td>
+                              <td>{{person.user.mobile_no}}</td>
+                              <td class="text-end">
+                                <a href="{% url 'delete_investor_page' person.id %}">
+                                  <i class="fa-solid text-danger fa-trash"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            {% endfor%}
+                          </tbody>
+                    </table>
+                  </div>
+                </div>
+          </div>
+
+          <hr class="mt-3">
+          <div class="mt-5">
+              <div class="row">
+                  <div class="col-6">
+                      <h4>Entrepreneur</h4>
+                  </div>
+                  <div class="col-6 text-end">
+                  <a href="{% url 'entrepreneur_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fa-solid fa-plus"></i>&nbspAdd Entrepreneur</a>
+                  </div>
+              </div>
+              <div class="row mt-3">
+                  <div class="col-12">
+                      <table id="tblEntrepreneur" class="table table-striped" style="width:100%">
+                          <thead>
+                            <tr>
+                              <th>Name</th>
+                              <th>Mykad</th>
+                              <th>E-mail Address</th>
+                              <th>Mobile No.</th>
+                              <th>Company Name</th>
+                              <th class="text-end">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for Entrepreneur in entereprenuers_tranche %}
+                            <tr>
+                              <td>{{Entrepreneur.user.user.get_full_name}}</td>
+                              <td>{{Entrepreneur.user.mykad_no}}</td>
+                              <td>{{Entrepreneur.user.user.email}}</td>
+                              <td>{{Entrepreneur.user.mobile_no}}</td>
+                              <td>{% for company in Entrepreneur.user.user_company.all %}
+                                  {{company.company_name}}
+                                {% endfor %}</td>
+                              <td class="text-end">
+                                <a href="{% url 'delete_entrepreneur_page' Entrepreneur.id %}">
+                                  <i class="fa-solid text-danger fa-trash"></i>
+                                </a>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                      </table>
+                  </div>
+                </div>
+          </div>
+          <hr class="mt-3">
+          <div class="mt-5">
+            <div class="row">
+              <div class="col-6">
+                  <h4>Campaign Report</h4>
+              </div>
+              <div class="col-6 text-end">
+              <a href="{% url 'create_report_page' campaign.id %}" class="btn btn-md btn-primary" type="button"><i class="fas fa-upload"></i>&nbspUpload Report</a>
+              </div>
+          </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                  <div class="mb-3">
+                      <table id="tblReport" class="table table-striped" style="width:100%">
+                      <thead>
+                            <tr>
+                              <th>Quarter</th>
+                              <th>File Name</th>
+                              <th class="text-end">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for item in report_tranche %}
+                            <tr>
+                              <td>{{item.quarter}}</td>
+                              <td>{{item.filename}}</td>
+                              <td class="text-end">
+                                <a href="{{ item.report }}" target="_blank" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
+                                <a href="{% url 'update_report_page' campaign.id item.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
+                                <a href="{% url 'delete_report_page' item.id  %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
+                                </a>
+                              </td>
+                            </tr>
+                            {% endfor %}
+                          </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock content %}
 

@@ -11,111 +11,157 @@
 {% endblock css %}
 
 {% block content %}
-{% if view == 'create' %}
-<div class="card mt-4">
-  <div class="card-header">
-    <h4 class="card-title">Create New Campaign</h4>
+  {% if view == 'create' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'campaign_page' %}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
   </div>
-  <div class="card-body p-4">
-    <form method="POST">
-      {% csrf_token %}
-      {{form | crispy}}
-      <div class="mt-4">
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <a href="{% url 'campaign_page' %}" class="btn btn-warning" type="button">Back</a>
-          <button class="btn btn-danger" type="reset">Cancel</button>
-          <button class="btn btn-success" type="submit">Create</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-{% elif view == 'update' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Update Campaign</div>
-<form method="POST">
-  {% csrf_token %}
-  {{form | crispy}}
-  <div class="mb-3">
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-    <a href="{% url 'campaign_page' %}" class="btn btn-md btn-danger" type="button">Cancel</a>
-    <button class="btn btn-md btn-success" type="submit">Update</a>
-  </div>
-</div>
-</form>
-{% elif view == 'details' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Details Campaign</div>
-<div class="row">
-  <div class="col-12">
-    {% if campaign %}
-    <div class="mb-5 text-center">
-      <img src="{{campaign.campaign_logo}}" class="img-fluid rounded-top" alt=""/>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Title</label>
-      <input type="text" class="form-control" value="{{campaign.title}}"  disabled>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Description</label>
-      <input type="text" class="form-control" value="{{campaign.description}}"  disabled>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Summary</label>
-      <textarea class="form-control" style="height: 100px" disabled>{{ campaign.campaign_summary }}</textarea>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Start Campaign</label>
-      <input type="text" class="form-control" value="{{ campaign.start_campaign }}"  disabled>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">End Campaign</label>
-      <input type="text" class="form-control" value="{{ campaign.end_campaign }}"  disabled>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Total Amount</label>
-      <input type="text" class="form-control" value="{{ campaign.total_amount }}"  disabled>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Min Target Amount</label>
-      <input type="text" class="form-control" value="{{ campaign.min_target_amount }}"  disabled>
-    </div>
-    <div class="mb-5">
-      <label class="form-label">Status</label>
-      <input type="text" class="form-control" value="{{ campaign.status }}"  disabled>
-    </div>
-    <div class="mb-5">
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="{% url 'campaign_page' %}" type="button" class="btn btn-warning">Back</a>
-        <a href="{% url 'update_campaign_page' campaign.id %}" class="btn btn-success" type="button">Edit</a>
-        </div>
-    </div>
-  {% endif %}
-  </div>
-</div>
-{% elif view == 'delete' %}
-<div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Delete Entrepreneur</div>
-<div class="row mt-5">
-  <div class="offset-4 col-4">
-      <div class="card border-0 shadow-sm bg-light">
-          <div class="card-body text-center p-4">
-              <h4 class="card-title">Deletion</h4>
-              <p class="card-subtitle">Are you confirm to delete <b>{{ investors_tranche.user.user.get_full_name }}</b> ?</p>
-
-              <form method="post" class="mt-4">
-                  {% csrf_token %}
-                  <button type="submit" class="btn btn-danger">Delete</button>
-                  <a href="{% url 'assign_campaign_page' campaign.id %}" class="btn btn-secondary">Cancel</a>
-              </form>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title">Create New Campaign</h4>
           </div>
+
+          <form method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="mt-4">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-secondary" type="reset">Reset</button>
+                <button class="btn btn-warning" type="submit">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
+    </div>
   </div>
-</div>
-<div class="mb-3"></div>
-<div class="row">
-  <div class="col-12 text-end">
-    <a href="{% url 'campaign_page' %}" type="button" class="btn btn-secondary" style="width: 100px;"><i class='bx bx-chevron-left bx-pull-left bx-sm'></i>Back</a>
+  {% elif view == 'update' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'campaign_page' %}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
   </div>
-</div>
-{% endif %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-upprcase">Update Campaign</h4>
+          </div>
+
+          <form method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="mb-3">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-md btn-secondary" type="reset">Reset</button>
+              <button class="btn btn-md btn-warning" type="submit">Update</a>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% elif view == 'details' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'campaign_page' %}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-uppercase">Details Campaign</h4>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              {% if campaign %}
+              <div class="mb-5 text-center">
+                <img src="{{campaign.campaign_logo}}" class="img-fluid rounded-top" alt=""/>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">Title</label>
+                <input type="text" class="form-control" value="{{campaign.title}}"  disabled>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" value="{{campaign.description}}"  disabled>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">Summary</label>
+                <textarea class="form-control" style="height: 100px" disabled>{{ campaign.campaign_summary }}</textarea>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">Start Campaign</label>
+                <input type="text" class="form-control" value="{{ campaign.start_campaign }}"  disabled>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">End Campaign</label>
+                <input type="text" class="form-control" value="{{ campaign.end_campaign }}"  disabled>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">Total Amount</label>
+                <input type="text" class="form-control" value="{{ campaign.total_amount }}"  disabled>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">Min Target Amount</label>
+                <input type="text" class="form-control" value="{{ campaign.min_target_amount }}"  disabled>
+              </div>
+              <div class="mb-5">
+                <label class="form-label">Status</label>
+                <input type="text" class="form-control" value="{{ campaign.status }}"  disabled>
+              </div>
+              <div class="mb-5">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                  <a href="{% url 'update_campaign_page' campaign.id %}" class="btn btn-warning" type="button">Edit</a>
+                </div>
+              </div>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% elif view == 'delete' %}
+  <div class="row mt-4">
+    <div class="offset-lg-4 col-lg-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body text-center p-4">
+          <div class="mb-4">
+          <h4 class="card-title">Confirmation</h4>
+          </div>
+
+          <div class="row">
+          <div class="col-12">
+            <p>Are you sure want to delete <b>{{ investors_tranche.user.user.get_full_name }}</b> ?</p>
+          </div>
+          <div class="col-12">
+            <form method="post" class="mt-4">
+              {% csrf_token %}
+              <a href="{% url 'campaign_page' %}" class="btn btn-secondary">Cancel</a>
+              <button type="submit" class="btn btn-warning">Confirm</button>
+            </form>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 {% endblock content %}
 
 {% block js %}{% endblock js %}

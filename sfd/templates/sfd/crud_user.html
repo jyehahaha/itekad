@@ -3,498 +3,345 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block title %}iTekad - Users{% endblock title %}
+{% block title %} iTekad - Users {% endblock title %}
 {% block css %}{% endblock css %}
 
 {% block content %}
-{% if view == 'list' %}
-<div class="card mt-4">
-  <div class="card-header">
-    <h4 class="card-title">Search</h4>
-  </div>
-  <div class="card-body">
-    <form method="get">
-      <div class="row">
-        <div class="col-3">
-          {{ filter.form.firstname | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.lastname | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.mykad_no | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.email | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.bank_account_number | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.bank_name | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.start_date | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.end_date | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.status | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.role | as_crispy_field }}
-        </div>
-        <div class="col-3">
-          {{ filter.form.position | as_crispy_field }}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a class="btn btn-secondary" href="{% url 'users_page' %}">
-              <i class="bx bx-refresh bx-sm bx-pull-left"></i>&nbsp;Reset
-            </a>
-            <button class="btn btn-warning" type="submit">
-              <i class="bx bx-search bx-sm bx-pull-left"></i>&nbsp;Search
-            </button>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-
-<div class="card mt-4">
-  <div class="card-header">
-    <div class="float-start">
-      <h4 class="card-title">List of Users</h4>
-    </div>
-    <div class="float-end">
-      <a href="{% url 'create_user_page' %}" class="btn btn-primary" type="button">
-        <i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create
+  {% if view == 'create' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'users_page'%}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
       </a>
     </div>
   </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-12">
-        <div class="table-responsive">
-          <table id="tblUser" class="table" style="width:100%">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Mobile Phone</th>
-                <th>MyKad No.</th>
-                <th>Role</th>
-                <th>Position</th>
-                <th>Date/Time Created</th>
-                <th>Status</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% if page_obj %}
-              {% for record in page_obj %}
-              <tr>
-                <td>{{ record.user.get_full_name }}</td>
-                <td>{{ record.user.username }}</td>
-                <td>{{ record.user.email }}</td>
-                <td>{{ record.mobile_no }}</td>
-                <td>{{ record.mykad_no }}</td>
-                <td>{{ record.role}}</td>
-                <td>{{ record.position | default:"-"}} </td>
-                <td>{{ record.user.date_joined }}</td>
-                <td>{{ record.user.is_active }}</td>
-                <td> 
-                  <div class="d-grid gap-2 d-md-block">
-                  <a href="{% url 'details_user_page' record.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                  <a href="{% url 'update_user_page' record.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                  {% if request.user.is_superuser %}
-                  <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" data-user-id="{{ record.id }}" data-username="{{ record.username }}"><i class="fa-solid fa-trash"></i>&nbspDelete</button>
-                  {% endif %}
-                  </div>
-                </td>
-              </tr>
-              {% endfor %}
-              {% endif %}
-            </tbody>
-          </table>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-uppercase">Create New User</h4>
+          </div>
+          <form method="POST">
+            <div class="row">
+              {% csrf_token %}
+              <div class="col-6">
+                {{ form1.first_name|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form1.last_name|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form1.username|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.mykad_no|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form1.email|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.mobile_no|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ form2.address_line_one|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ form2.address_line_two|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ form2.address_line_three|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.postcode|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.city|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.state|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.country|as_crispy_field }}
+              </div>
+            </div>
+            
+            <div class="mt-5"></div>
+            <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
+            <div class="row">
+              <div class="col-12">
+                {% csrf_token %}
+              </div>
+              <div class="col-6">
+                {{ form2.bank_name|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.bank_account_number|as_crispy_field }}
+              </div>
+            </div>
+          
+            <div class="mt-5"></div>
+            <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
+            <div class="row">
+              <div class="col-6">
+                {{ form2.role|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form2.position|as_crispy_field }}
+              </div>
+            </div>
+          
+            <div class="mt-5"></div>
+            <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
+            <div class="row">
+              <div class="col-6">
+                {{ form1.password1|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form1.password2|as_crispy_field }}
+                {{ form1.terms_agreement.as_hidden }}
+              </div>
+            </div>
+            <div class="mb-3"></div>
+            <div class="row">
+              <div class="col-12 text-end">
+                <button class="btn btn-secondary" type="reset">Reset</button>
+                <button class="btn btn-warning" type="submit">Create</button>
+              </div>
+            </div>
+          </form>
         </div>
-      </div>
-  
-      <nav>
-        <ul class="pagination justify-content-center">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link" href="{% my_url 1 'page' request.GET.urlencode %}">First</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="{% my_url page_obj.previous_page_number 'page' request.GET.urlencode %}"
-              aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          {% endif %}
-  
-          <li class="page-item">
-            <span class="page-link">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
-          </li>
-  
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="{% my_url page_obj.next_page_number 'page' request.GET.urlencode %}"
-              aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" href="{% my_url page_obj.paginator.num_pages 'page' request.GET.urlencode %}">Last</a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
-    </div>
-  </div>
-</div>
-
-<!-- Bootstrap Modal -->
-<div class="modal fade" id="confirmDeleteModal" tabindex="-1">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete <strong id="modal-username"></strong>?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <a id="confirm-delete-button" href="" class="btn btn-danger">Confirm</a>
       </div>
     </div>
   </div>
-</div>
-{% elif view == 'create' %}
-<div class="card mt-4">
-  <div class="card-header">
-    <h4 class="card-title">Create New User</h4>
+  {% elif view == 'update' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'users_page'%}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
   </div>
-  <div class="card-body p-4">
-    <form method="POST">
-      <div class="row">
-        {% csrf_token %}
-        <div class="col-6">
-          {{ form1.first_name|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form1.last_name|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form1.username|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.mykad_no|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form1.email|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.mobile_no|as_crispy_field }}
-        </div>
-        <div class="col-12">
-          {{ form2.address_line_one|as_crispy_field }}
-        </div>
-        <div class="col-12">
-          {{ form2.address_line_two|as_crispy_field }}
-        </div>
-        <div class="col-12">
-          {{ form2.address_line_three|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.postcode|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.city|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.state|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.country|as_crispy_field }}
-        </div>
-      </div>
-      
-      <div class="mt-5"></div>
-      <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
-      <div class="row">
-        <div class="col-12">
-          {% csrf_token %}
-        </div>
-        <div class="col-6">
-          {{ form2.bank_name|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.bank_account_number|as_crispy_field }}
-        </div>
-      </div>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-uppercase">General Details</h4>
+          </div>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="row"> 
+              <div class="col-6">
+                {{ form.first_name|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form.last_name|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ profile_form.mykad_no|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ form.email|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ profile_form.mobile_no|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ profile_form.address_line_one|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ profile_form.address_line_two|as_crispy_field }}
+              </div>
+              <div class="col-12">
+                {{ profile_form.address_line_three|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ profile_form.postcode|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ profile_form.city|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ profile_form.state|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ profile_form.country|as_crispy_field }}
+              </div>
+            </div>
     
-      <div class="mt-5"></div>
-      <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
-      <div class="row">
-        <div class="col-6">
-          {{ form2.role|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form2.position|as_crispy_field }}
-        </div>
-      </div>
+            <div class="mb-3"></div>
+            <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
+            <div class="row">
+              <div class="col-6">
+                {{ profile_form.bank_name|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ profile_form.bank_account_number|as_crispy_field }}
+              </div>
+            </div>
     
-      <div class="mt-5"></div>
-      <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
-      <div class="row">
-        <div class="col-6">
-          {{ form1.password1|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form1.password2|as_crispy_field }}
-          {{ form1.terms_agreement.as_hidden }}
-        </div>
-      </div>
-      <div class="mb-3"></div>
-      <div class="row">
-        <div class="col-12 text-end">
-          <button class="btn btn-secondary" type="reset">Reset</button>
-          <button class="btn btn-warning" type="submit">Create</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-{% elif view == 'update' %}
-<div class="card mt-4">
-  <div class="card-header">
-    <h4 class="card-title">Update User</h4>
-  </div>
-  <div class="card-body p-4">
-    <form method="POST">
-      {% csrf_token %}
-      <div class="row"> 
-        <div class="col-6">
-          {{ form.first_name|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form.last_name|as_crispy_field }}
-        </div>
-        <div class="col-12">
-          {{ profile_form.mykad_no|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ form.email|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ profile_form.mobile_no|as_crispy_field }}
-        </div>
-        <div class="col-12">
-          {{ profile_form.address_line_one|as_crispy_field }}
-        </div>
-        <div class="col-12">
-          {{ profile_form.address_line_two|as_crispy_field }}
-        </div>
-        <div class="col-12">
-          {{ profile_form.address_line_three|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ profile_form.postcode|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ profile_form.city|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ profile_form.state|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ profile_form.country|as_crispy_field }}
-        </div>
-      </div>
-
-      <div class="mb-3"></div>
-      <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Account Details</div>
-      <div class="row">
-        <div class="col-6">
-          {{ profile_form.bank_name|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ profile_form.bank_account_number|as_crispy_field }}
-        </div>
-      </div>
-
-      <div class="mb-3"></div>
-      <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
-      <div class="row">
-        <div class="col-6">
-          {{ profile_form.role|as_crispy_field }}
-        </div>
-        <div class="col-6">
-          {{ profile_form.position|as_crispy_field }}
-        </div>
-      </div>
-
-      <div class="mb-3"></div>
-      <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
+            <div class="mb-3"></div>
+            <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Role Details</div>
+            <div class="row">
+              <div class="col-6">
+                {{ profile_form.role|as_crispy_field }}
+              </div>
+              <div class="col-6">
+                {{ profile_form.position|as_crispy_field }}
+              </div>
+            </div>
     
-      <div class="row">
-        <div class="col-12">
-          <a href="{% url 'send_password_page' id %}" type="button" class="btn btn-info">
-            <i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link Reset Password
-          </a>
-        </div>
-      </div>
-
-      <div class="mb-3"></div>
-      <div class="row">
-        <div class="col-12 text-end">
-          <a href="{% url 'users_page' %}" type="button" class="btn btn-secondary">Cancel</a>
-          <button class="btn btn-warning" type="submit">Update</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
-{% elif view == 'delete' %}
-<div class="row">
-  <h4 class="card-title">Delete User</h4>
-  <p class="card-subtitle">All users..</p>
-</div>
-
-<div class="row">
-  <div class="col-12">
-    <p>Form</p>
-  </div>
-</div>
-{% elif view == 'details' %}
-<div class="card mt-4">
-  <div class="card-header">
-    <h4 class="card-title">General Details</h4>
-  </div>
-  <div class="card-body p-4">
-    <div class="row">
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Username</label>
-          <input type="text" class="form-control"  value="{{ user_record.username }}" disabled>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">MyKad No. / Identification No.</label>
-          <input type="text" class="form-control"  value="{{  user_profile_record.mykad_no }}" disabled>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">First Name</label>
-          <input type="text" class="form-control"  value="{{ user_record.first_name }}" disabled>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Last Name</label>
-          <input type="text" class="form-control"  value="{{ user_record.last_name }}" disabled>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">E-mail Address</label>
-          <input type="text" class="form-control"  value="{{ user_record.email }}" disabled>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">No. Phone</label>
-          <input type="text" class="form-control"  value="{{ user_profile_record.mobile_no }}" disabled>
-        </div>
-      </div>
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Full Address</label>
-          <textarea class="form-control" style="height: 100px; resize: none;" disabled>{{user_profile_record.address_line_one}} {{user_profile_record.address_line_two}} {{user_profile_record.address_line_three}} {{user_profile_record.postcode}} {{user_profile_record.city}} {{user_profile_record.state}} {{user_profile_record.country}}</textarea>
+            <div class="mb-3"></div>
+            <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Password Details</div>
+          
+            <div class="row">
+              <div class="col-12">
+                <a href="{% url 'send_password_page' id %}" type="button" class="btn btn-info">
+                  <i class='bx bx-mail-send bx-pull-left bx-sm'></i>Send Link Reset Password
+                </a>
+              </div>
+            </div>
+    
+            <div class="mb-3"></div>
+            <div class="row">
+              <div class="col-12 text-end">
+                <a href="{% url 'users_page' %}" type="button" class="btn btn-secondary">Cancel</a>
+                <button class="btn btn-warning" type="submit">Update</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
-    <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark mt-3">Account Details</div>
-    <div class="row">
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Bank Name</label>
-          <input type="text" class="form-control"  value="{{ user_profile_record.bank_name }}" disabled>
-        </div>
-      </div>
-      <div class="col-6">
-        <div class="mb-3">
-          <label class="form-label">Bank Account Number</label>
-          <input type="text" class="form-control"  value="{{ user_profile_record.bank_account_number }}" disabled>
-        </div>
-      </div>
+  </div>
+  {% elif view == 'details' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'users_page'%}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
     </div>
+  </div>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-uppercase">General Details</h4>
+          </div>
 
-    <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark mt-3">Role Details</div>
-    <div class="row">
-      <div class="col-12">
-        <div class="mb-3">
-          <label class="form-label">Role</label>
-          <input type="text" class="form-control"  value="{{ user_profile_record.role }}" disabled>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">Username</label>
+                <input type="text" class="form-control"  value="{{ user_record.username }}" disabled>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">MyKad No. / Identification No.</label>
+                <input type="text" class="form-control"  value="{{  user_profile_record.mykad_no }}" disabled>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">First Name</label>
+                <input type="text" class="form-control"  value="{{ user_record.first_name }}" disabled>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">Last Name</label>
+                <input type="text" class="form-control"  value="{{ user_record.last_name }}" disabled>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">E-mail Address</label>
+                <input type="text" class="form-control"  value="{{ user_record.email }}" disabled>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">No. Phone</label>
+                <input type="text" class="form-control"  value="{{ user_profile_record.mobile_no }}" disabled>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="mb-3">
+                <label class="form-label">Full Address</label>
+                <textarea class="form-control" style="height: 100px; resize: none;" disabled>{{user_profile_record.address_line_one}} {{user_profile_record.address_line_two}} {{user_profile_record.address_line_three}} {{user_profile_record.postcode}} {{user_profile_record.city}} {{user_profile_record.state}} {{user_profile_record.country}}</textarea>
+              </div>
+            </div>
+          </div>
+    
+          <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark mt-3">Account Details</div>
+          <div class="row">
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">Bank Name</label>
+                <input type="text" class="form-control"  value="{{ user_profile_record.bank_name }}" disabled>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="mb-3">
+                <label class="form-label">Bank Account Number</label>
+                <input type="text" class="form-control"  value="{{ user_profile_record.bank_account_number }}" disabled>
+              </div>
+            </div>
+          </div>
+    
+          <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark mt-3">Role Details</div>
+          <div class="row">
+            <div class="col-12">
+              <div class="mb-3">
+                <label class="form-label">Role</label>
+                <input type="text" class="form-control"  value="{{ user_profile_record.role }}" disabled>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Position</label>
+                <input type="text" class="form-control"  value="{{ user_profile_record.position | default:'-' }}" disabled>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Status</label>
+                <input type="text" class="form-control"  value="{{ user_record.is_active }}" disabled>
+              </div>
+            </div>
+          </div>
+    
+          <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark mt-3">Password Details</div>
+          <div class="row">
+            <div class="col-6">
+              <label class="form-label">Password Expiry</label>
+              <input type="text" class="form-control"  value="-" disabled>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Last Reset</label>
+              <input type="text" class="form-control"  value="-" disabled>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Status</label>
+              <input type="text" class="form-control"  value="-" disabled>
+            </div>
+          </div>
+    
+          <div class="row mt-4">
+            <div class="col-12 text-end">
+              <a href="{% url 'update_user_page' id %}" class="btn btn-warning" type="button">
+                Edit
+              </a>
+            </div>
+          </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Position</label>
-          <input type="text" class="form-control"  value="{{ user_profile_record.position | default:'-' }}" disabled>
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Status</label>
-          <input type="text" class="form-control"  value="{{ user_record.is_active }}" disabled>
-        </div>
-      </div>
-    </div>
-
-    <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark mt-3">Password Details</div>
-    <div class="row">
-      <div class="col-6">
-        <label class="form-label">Password Expiry</label>
-        <input type="text" class="form-control"  value="-" disabled>
-      </div>
-      <div class="col-6">
-        <label class="form-label">Last Reset</label>
-        <input type="text" class="form-control"  value="-" disabled>
-      </div>
-      <div class="col-12">
-        <label class="form-label">Status</label>
-        <input type="text" class="form-control"  value="-" disabled>
-      </div>
-    </div>
-
-    <div class="row mt-4">
-      <div class="col-12 text-end">
-        <a href="{% url 'users_page' %}" type="button" class="btn btn-secondary" style="width: 100px;">
-          <i class='bx bxs-chevron-left bx-pull-left bx-sm'></i>Back
-        </a>
-        <a href="{% url 'update_user_page' id %}" class="btn btn-warning" type="button" style="width: 100px;">
-          <i class='bx bx-edit bx-pull-left bx-sm'></i>Edit
-        </a>
       </div>
     </div>
   </div>
-</div>
-{% else %}
-  <div class="text-center">
-    <h4 class="card-title mt-5">404 - Not Found</h4>
-  </div>
-{% endif %}
+  {% else %}
+    <div class="text-center">
+      <h4 class="card-title mt-5">404 - Not Found</h4>
+    </div>
+  {% endif %}
 {% endblock content %}
 
 {% block js %}

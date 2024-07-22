@@ -5,18 +5,19 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="card mt-4">
-	<div class="card-header">
-		<div class="float-start">
+<div class="row mt-4">
+	<div class="col-12 text-end">
+		<a href="{% url 'create_nature_of_business_page' %}" class="btn btn-warning" type="button">
+			<i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create New Nature of Business
+		</a>
+	</div>
+</div>
+
+<div class="card border-0 shadow mt-4">
+	<div class="card-body p-4">
+		<div class="mb-5">
 			<h4 class="card-title">List of Nature of Business</h4>
 		</div>
-		<div class="float-end">
-			<a href="{% url 'create_nature_of_business_page' %}" class="btn btn-warning" type="button">
-				<i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create New Nature of Business
-			</a>
-		</div>
-	</div>
-	<div class="card-body p-4">
 		<div class="table-responsive">
 			<table id="tblNature" class="table table-striped" style="width:100%">
 				<thead>

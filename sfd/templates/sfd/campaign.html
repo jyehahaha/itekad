@@ -6,11 +6,11 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="card mt-4">
-  <div class="card-header">
-    <h4 class="card-title">Search</h4>
-  </div>
+<div class="card border-0 shadow-sm mt-4">
   <div class="card-body p-4">
+    <div class="mb-4">
+      <h4 class="card-title fw-bold text-uppercase">Search</h4>
+    </div>
     <form method="POST">
       <div class="row">
         <div class="col-6 mb-3">
@@ -44,18 +44,17 @@
   </div>
 </div>
 
-<div class="card mt-4">
-  <div class="card-header">
-    <div class="float-start">
-      <h4 class="card-title">List of Campaigns</h4>
-    </div>
-    <div class="float-end">
-      <a href="{% url 'create_campaign_page' %}" class="btn btn-primary" type="button">
-        <i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create New Campaign
-      </a>
-    </div>
-  </div>
+<div class="mt-4 text-end">
+  <a href="{% url 'create_campaign_page' %}" class="btn btn-warning" type="button">
+    <i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create New Campaign
+  </a>
+</div>
+
+<div class="card border-0 shadow-sm mt-4">
   <div class="card-body p-4">
+    <div class="mb-4">
+      <h4 class="card-title fw-bold text-uppercase">List of Campaigns</h4>
+    </div>
     <div class="table-responsive">
       <table id="tblCampaign" class="table table-striped" style="width:100%">
         <thead>
@@ -68,7 +67,7 @@
             <th>Date/Time Created</th>
             <th>Date/Time Updated</th>
             <th>Status</th>
-            <th>Action</th>
+            <th class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -82,14 +81,22 @@
             <td>{{campaign.created_at | date:'d-m-Y h:i A'}}</td>
             <td>{{campaign.updated_at | date:'d-m-Y h:i A'}}</td>
             <td>{{campaign.status}}</td>
-            <td> 
-              <div class="d-grid gap-2 d-md-block">
-                <a href="{% url 'assign_campaign_page' campaign.id %}" class="btn btn-info" type="button"><i class="fa-solid fa-user"></i>&nbspAssign</a>
-                <a href="{% url 'details_campaign_page' campaign.id %}" class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                <a href="{% url 'update_campaign_page' campaign.id %}" class="btn btn-success" type="button"><i class="fa-solid fa-pen"></i>&nbspEdit</a>
-                <a href="{% url 'delete_campaign_page' campaign.id %}" class="btn btn-danger" type="button"><i class="fa-solid fa-trash"></i>&nbspDelete</a>
-              </div>
-            </td>
+            <td class="text-end">
+							<div class="d-grid gap-2 d-md-block">
+                <a href="{% url 'assign_campaign_page' campaign.id %}" class="btn btn-info" type="button">
+									<i class="bx bx-user bx-sm bx-pull-left"></i>Assign
+								</a>
+								<a href="{% url 'details_campaign_page' campaign.id %}" class="btn btn-primary" type="button">
+									<i class="bx bx-search-alt bx-sm bx-pull-left"></i>View
+								</a>
+								<a href="{% url 'update_campaign_page' campaign.id %}" class="btn btn-success" type="button">
+									<i class="bx bx-edit bx-sm bx-pull-left"></i>Edit
+								</a>
+								<a href="{% url 'delete_campaign_page' campaign.id %}" class="btn btn-danger" type="button">
+									<i class="bx bx-trash bx-sm bx-pull-left"></i>Delete
+								</a>
+							</div>
+						</td>
           </tr>
           {% endfor %}
         </tbody>

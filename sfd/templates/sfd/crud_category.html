@@ -6,99 +6,132 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-    {% if view == 'create' %}
-    <div class="card mt-4">
-      <div class="card-header">
-        <h4 class="card-title">Create New Category of Business</h4>
-      </div>
-      <div class="card-body p-4">
-        <form method="POST">
-          {% csrf_token %}
-          {{ form | crispy }}
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-md btn-secondary" type="reset">Reset</button>
-            <button class="btn btn-md btn-warning" type="submit">Create</button>
+  {% if view == 'create' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'category_page'%}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow mt-4">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title">Create New Category of Business</h4>
           </div>
-        </form>
+          <form method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-md btn-secondary" type="reset">Reset</button>
+              <button class="btn btn-md btn-warning" type="submit">Create</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    {% elif view == 'update' %}
-    <div class="card mt-4">
-      <div class="card-header">
-        <h4 class="card-title">Update Category of Business</h4>
-      </div>
-      <div class="card-body p-4">
-        <form method="POST">
-          {% csrf_token %}
-          {{ form | crispy }}
-          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="{% url 'category_page' %}" class="btn btn-md btn-secondary" type="button">Back</a>
-            <button class="btn btn-md btn-secondary" type="reset">Reset</button>
-            <button class="btn btn-md btn-warning" type="submit">Update</button>
+  </div>
+  {% elif view == 'update' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'category_page'%}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow mt-4">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title">Update Category of Business</h4>
           </div>
-        </form>
+          <form method="POST">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-md btn-secondary" type="reset">Reset</button>
+              <button class="btn btn-md btn-warning" type="submit">Update</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-    {% elif view == 'details' %}
-    <div class="card--container">
-        <h3 class="main--title">Details Category of Business</h3>
-        <div class="card--container">
-            <div class="row">
-                <div class="col-12">
-                    {% if item %}
-                    <div class="mb-3">
-                      <label class="form-label">Nature of business</label>
-                      <input class="form-control"  value="{{item.nature_of_business }}" disabled>
-                    </div>
-                      <div class="mb-3">
-                        <label class="form-label">Title</label>
-                        <input type="text" class="form-control" value="{{item.title}}"  disabled>
-                      </div>
-                     
-                      <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" style="height: 100px" disabled>{{item.description }}</textarea>
-                      </div>
-                      <div class="mb-3">
-                        <label class="form-label">Status</label>
-                        <input type="text" class="form-control" value="{{ item.status }}" disabled>
-                      </div>
-                      <div class="mb-3">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <a href="{% url 'category_page' %}" type="button" class="btn btn-secondary">Back</a>
-                          <a href="{% url 'update_category_page' item.id %}" class="btn btn-warning" type="button">Edit</a>
-                          </div>
-                      </div>
-                    {% endif %}
+  </div>
+  {% elif view == 'details' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'category_page'%}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow mt-4">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-uppercase">Details Category of Business</h4>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              {% if item %}
+                <div class="mb-3">
+                  <label class="form-label">Nature of business</label>
+                  <input class="form-control"  value="{{item.nature_of_business }}" disabled>
                 </div>
+                  <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    <input type="text" class="form-control" value="{{item.title}}"  disabled>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" style="height: 100px" disabled>{{item.description }}</textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <input type="text" class="form-control" value="{{ item.status }}" disabled>
+                  </div>
+                  <div class="mb-3">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <a href="{% url 'update_category_page' item.id %}" class="btn btn-warning" type="button">Edit</a>
+                    </div>
+                  </div>
+                {% endif %}
             </div>
         </div>
-    </div>
-    {% elif view == 'delete' %}
-    <div class="card--container">
-      <h3 class="main--title">Delete Category</h3>
-      <div class="card--container">
-          <div class="row">
-              <div class="col-12">
-                  <form method="POST">
-                    {% csrf_token %}
-                    <div class="text-center">
-                      <h4 class="card-title">
-                        Are you sure you want to delete {{item.title}}?
-                      </h4>
-                    </div>
-                    <div class="mb-5">
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                          <button class="btn btn-md btn-primary me-md-2" type="submit">Confirm</button>
-                        </div>
-                    </div>
-                  </form>
-              </div>
-          </div>
+        </div>
       </div>
     </div>
-
-    {% endif %}
+  </div>
+  {% elif view == 'delete' %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <div class="card border-0 shadow mt-4">
+        <div class="card-body p-4">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-uppercase text-center">Confirmation</h4>
+          </div>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="text-center">
+              <h4 class="card-title">Are you sure you want to delete {{item.title}} ?</h4>
+            </div>
+            <div class="mt-4 mb-4">
+              <div class="d-grid gap-2 d-flex justify-content-center">
+                <a href="{% url 'category_page'%}" class="btn btn-secondary" type="button">Cancel</a>
+                <button class="btn btn-warning" type="submit">Confirm</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
 {% endblock  %}
 
 {% block js%}

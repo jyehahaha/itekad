@@ -5,80 +5,95 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-  <div class="h4 pb-2 mb-4 text-dark border-bottom border-dark">Quick Stat</div>
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-4">
+        <h4 class="card-title fw-bold text-uppercase">Quick Stat</h4>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-3">
-      <div class="card">
+      <div class="card border-0 shadow-sm">
         <div class="card-body">
           <i class='bx bx-user-circle bx-pull-left bx-lg'></i>
           <h4 class="card-title">Investor</h4>
-          <p class="card-subtitle">{{totalInvestor | default:'0' }}</p>
+          <p class="card-subtitle">{{ total.investors | default:'-' }}</p>
         </div>
       </div>
     </div>
     <div class="col-3">
-      <div class="card">
+      <div class="card border-0 shadow-sm">
         <div class="card-body">
           <i class='bx bx-wallet bx-pull-left bx-lg'></i>
           <h4 class="card-title">Total Fund</h4>
-          <p class="card-subtitle">1500</p>
+          <p class="card-subtitle">{{ total.fund }}</p>
         </div>
       </div>
     </div>
     <div class="col-3">
-      <div class="card">
+      <div class="card border-0 shadow-sm">
         <div class="card-body">
           <i class='bx bx-credit-card bx-pull-left bx-lg'></i>
           <h4 class="card-title">Collected Fund</h4>
-          <p class="card-subtitle">1500</p>
+          <p class="card-subtitle">{{ total.collected_fund }}</p>
         </div>
       </div>
     </div>
     <div class="col-3">
-      <div class="card">
+      <div class="card border-0 shadow-sm">
         <div class="card-body">
           <i class='bx bx-layer bx-pull-left bx-lg'></i>
           <h4 class="card-title">Campaigns</h4>
-          <p class="card-subtitle">{{totalCampaign | default:'0' }}</p>
+          <p class="card-subtitle">{{ total.campaigns | default:'-' }}</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="card mt-5">
-    <div class="card-header">
-      <h4 class="card-title">Investor's Data</h4>
-    </div>
-    <div class="card-body">
-      <div class="table-responsive">
-        <table id="tblUserManagement" class="table table-striped" style="width:100%">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Mobile Phone</th>
-              <th>MyKad No.</th>
-              <th>Account No</th>
-              <th>Account Name</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for investor in investors %}
-            <tr>
-              <td>{{investor.user.get_full_name}}</td>
-              <td>{{investor.user.username}}</td>
-              <td>{{investor.user.email}}</td>
-              <td>{{investor.mobile_no}}</td>
-              <td>{{investor.mykad_no}}</td>
-              <td>{{investor.bank_account_number}}</td>
-              <td>{{investor.bank_name}}</td>
-              <td><a href="{% url 'update_user_management_page' investor.id %}" class="btn btn-warning"><i class="fa-solid fa-file-pen"></i>&nbspUpdate</a></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+  <div class="row">
+    <div class="col-12">
+      <div class="card border-0 shadow-sm mt-5">
+        <div class="card-body">
+          <div class="mb-4">
+            <h4 class="card-title fw-bold text-uppercase">Investor's Data</h4>
+          </div>
+          <div class="table-responsive">
+            <table id="tblUserManagement" class="table table-striped" style="width:100%">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Username</th>
+                  <th>Email</th>
+                  <th>Mobile Phone</th>
+                  <th>MyKad No.</th>
+                  <th>Account No</th>
+                  <th>Account Name</th>
+                  <th class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for investor in investors %}
+                <tr>
+                  <td>{{investor.user.get_full_name}}</td>
+                  <td>{{investor.user.username}}</td>
+                  <td>{{investor.user.email}}</td>
+                  <td>{{investor.mobile_no}}</td>
+                  <td>{{investor.mykad_no}}</td>
+                  <td>{{investor.bank_account_number}}</td>
+                  <td>{{investor.bank_name}}</td>
+                  <td class="text-end">
+                    <a href="{% url 'update_user_management_page' investor.id %}" class="btn btn-warning">
+                      <i class="bx bx-edit bx-sm bx-pull-left"></i>Update
+                    </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   </div>

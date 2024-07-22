@@ -6,11 +6,11 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="card mt-4">
-  <div class="card-header">
-    <h4 class="card-title">Search</h4>
-  </div>
+<div class="card border-0 shadow-sm mt-4">
   <div class="card-body p-4">
+    <div class="mb-4">
+      <h4 class="card-title fw-bold text-uppercase">Search</h4>
+    </div>
     <form method="get">
       <div class="row">
         <div class="col-6">
@@ -43,20 +43,19 @@
   </div>
 </div>
 
-<div class="card mt-4">
-  <div class="card-header">
-    <div class="float-start">
-      <h4 class="card-title">List of Entrepreneurs</h4>
-    </div>
-    <div class="float-end">
-      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a href="{% url 'create_business_profile_page' %}" class="btn btn-primary" type="button">
-          <i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create Company Profile
-        </a>
-      </div>
-    </div>
+<div class="mt-4">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="{% url 'create_business_profile_page' %}" class="btn btn-warning" type="button">
+      <i class="bx bx-list-plus bx-sm bx-pull-left"></i>Create Company Profile
+    </a>
   </div>
+</div>
+
+<div class="card border-0 shadow-sm mt-4">
   <div class="card-body p-4">
+    <div class="mb-4">
+      <h4 class="card-title fw-bold text-uppercase">List of Entrepreneurs</h4>
+    </div>
     <div class="table-responsive">
       <table id="tblBusinessProfile" class="table table-striped" style="width:100%">
         <thead>
@@ -67,7 +66,7 @@
             <th>Date/Time Created</th>
             <th>Date/Time Updated</th>
             <th>Status</th>
-            <th>Action</th>
+            <th class="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -78,22 +77,26 @@
             <td>{{company.company_registration_number}}</td>
             <td>{{company.created_at | date:'d-m-Y h:i A'}}</td>
             <td>{{company.updated_at | date:'d-m-Y h:i A'}}</td>
-            <td>{% if company.company_status %}
-              <span class="badge bg-success">Active</span>
+            <td>
+              {% if company.company_status %}
+                <span class="badge bg-success">Active</span>
               {% else %}
-              <span class="badge bg-danger">Inactive</span>
+                <span class="badge bg-danger">Inactive</span>
               {% endif %}
             </td>
-            <td>
-              <div class="d-grid gap-2 d-md-block">
-                <a href="{% url 'details_business_profile_page'  company.id %}" class="btn btn-primary" type="button"><i
-                    class="fa-solid fa-magnifying-glass"></i>&nbspView</a>
-                <a href="{% url 'update_business_profile_page'  company.id %}" class="btn btn-success" type="button"><i
-                    class="fa-solid fa-pen"></i>&nbspEdit</a>
-                <a href="{% url 'delete_business_profile_page'  company.id %}" class="btn btn-danger" type="button"><i
-                    class="fa-solid fa-trash"></i>&nbspDelete</a>
-              </div>
-            </td>
+            <td class="text-end">
+							<div class="d-grid gap-2 d-md-block">
+								<a href="{% url 'details_business_profile_page' company.id %}" class="btn btn-primary" type="button">
+									<i class="bx bx-search-alt bx-sm bx-pull-left"></i>View
+								</a>
+								<a href="{% url 'update_business_profile_page' company.id %}" class="btn btn-success" type="button">
+									<i class="bx bx-edit bx-sm bx-pull-left"></i>Edit
+								</a>
+								<a href="{% url 'delete_business_profile_page' company.id %}" class="btn btn-danger" type="button">
+									<i class="bx bx-trash bx-sm bx-pull-left"></i>Delete
+								</a>
+							</div>
+						</td>
           </tr>
           {% endfor %}
         </tbody>

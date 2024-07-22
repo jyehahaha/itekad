@@ -7,9 +7,16 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
+  <div class="row mt-4">
+    <div class="offset-lg-1 col-lg-10">
+      <a href="{% url 'nature_of_business_page'%}" class="btn btn-md btn-warning" type="button">
+        <i class="fa-solid fa-arrow-left"></i>&nbsp;Back
+      </a>
+    </div>
+  </div>
   {% if view == 'create' %}
   <div class="row">
-    <div class="offset-3 col-6">
+    <div class="offset-lg-1 col-lg-10">
       <div class="card border-0 shadow mt-4">
         <div class="card-body p-4">
           <h4 class="card-title fw-bold">Create New Nature of Business</h4>
@@ -20,7 +27,6 @@
               {{ form | crispy }}
               <div class="mt-4">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <a href="{% url 'nature_of_business_page' %}" class="btn btn-secondary" type="button">Back</a>
                   <button class="btn btn-secondary" type="reset">Reset</button>
                   <button class="btn btn-warning" type="submit">Create</button>
                 </div>
@@ -33,7 +39,7 @@
   </div>
   {% elif view == 'update' %}
   <div class="row">
-    <div class="offset-3 col-6">
+    <div class="offset-lg-1 col-lg-10">
       <div class="card border-0 shadow mt-4">
         <div class="card-body p-4">
           <h4 class="card-title fw-bold">Update Nature of Business</h4>
@@ -44,7 +50,6 @@
               {{ form | crispy }}
               <div class="mt-4">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <a href="{% url 'nature_of_business_page' %}" class="btn btn-secondary" type="button">Back</a>
                   <button class="btn btn-secondary" type="reset">Reset</button>
                   <button class="btn btn-warning" type="submit">Update</button>
                 </div>
@@ -57,7 +62,7 @@
   </div>
   {% elif view == 'details' %}
   <div class="row">
-    <div class="offset-3 col-6">
+    <div class="offset-lg-1 col-lg-10">
       <div class="card border-0 shadow mt-4">
         <div class="card-body p-4">
           <h4 class="card-title fw-bold">Details Nature of Business</h4>
@@ -75,22 +80,11 @@
                 <label class="form-label">Status</label>
                 <input type="text" class="form-control"  value="{{ item.status }}" disabled>
               </div>
-              <div class="mb-3">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <a href="{% url 'nature_of_business_page' %}" class="btn btn-warning" type="button">Back</a>
-                </div>
-              </div>
             </div>
           {% endif %}
         </div>
       </div>
     </div>
-  </div>
-  <div class="card--container">
-      <h3 class="main--title"></h3>
-      <div class="card--container">
-          
-      </div>
   </div>
   {% elif view == 'delete' %}
   <div class="row">

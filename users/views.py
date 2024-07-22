@@ -48,24 +48,24 @@ def LoginView(request):
       # user authenticate or not
       if user is not None:
          
-         if user.is_active:
-            login(request, user)
-                    #  fetch user profile
-            profile = UserProfile.objects.get(user=user)
+        if user.is_active:
+          login(request, user)
+                  #  fetch user profile
+          profile = UserProfile.objects.get(user=user)
 
-            # check user role
-            if profile.role == "INVESTOR":
-              # message success
-              messages.success(request, f"Welcome, {username}! You are now logged in.")
-              # redirect to investor home page
-              return redirect('home_page')
-            else:
-              # message success
-              messages.success(request, f"Welcome, {username}! You are now logged in.")
-              # redirect to sfd admin dashboard
-              return redirect('dashboard_page')
-         else:
-            messages.error(request, "Your account is not activated. Please check your email for activation instructions.")
+          # check user role
+          if profile.role == "INVESTOR":
+            # message success
+            messages.success(request, f"Welcome, {username}! You are now logged in.")
+            # redirect to investor home page
+            return redirect('home_page')
+          else:
+            # message success
+            messages.success(request, f"Welcome, {username}! You are now logged in.")
+            # redirect to sfd admin dashboard
+            return redirect('dashboard_page')
+        else:
+          messages.error(request, "Your account is not activated. Please check your email for activation instructions.")
 
       # user authenticate error
       else:
@@ -119,13 +119,8 @@ def RegisterView(request):
       to_email = form.cleaned_data.get('email')
       send_mail(mail_subject, message, 'from@example.com', [to_email])
 
-<<<<<<< Updated upstream
-      messages.success(request, "Username Created - Please Fill Out Your User Info Below...")
-      return redirect('home_page')
-=======
       messages.success(request, 'Please check your email to confirm your email address.')
       return redirect('login_page')  # Redirect to login page after registration
->>>>>>> Stashed changes
 
     else:
       messages.success(request, "Whoops! There was a problem Registering, please try again...")
@@ -161,42 +156,40 @@ def SendPassword(request, id):
   context = {}
   return render(request, 'users/send_password.html', context)
 
+@login_required
 def UserManagementView(request):
-  if request.user.is_authenticated:
-    # Look Up Records
-    records = UserProfile.objects.filter(user__is_superuser=False)
+  # Look Up Records
+  records = UserProfile.objects.filter(user__is_superuser=False)
 
-    # filter
-    f = UserFilter(request.GET, queryset=records)
+  # filter
+  f = UserFilter(request.GET, queryset=records)
 
-    # variable for paginator
-    page_num = request.GET.get('page', 1)
-    limit = request.GET.get('limit', 10)
+  # variable for paginator
+  page_num = request.GET.get('page', 1)
+  limit = request.GET.get('limit', 10)
 
-    # pass the list for pagination
-    paginator = Paginator(f.qs, limit)
+  # pass the list for pagination
+  paginator = Paginator(f.qs, limit)
 
-    # paginator
-    try:
-      page_obj = paginator.page(page_num)
-    except PageNotAnInteger:
-      # if page is not an integer, deliver the first page
-      page_obj = paginator.page(1)
-    except EmptyPage:
-      # if the page is out of range, deliver the last page
-      page_obj = paginator.page(paginator.num_pages)
+  # paginator
+  try:
+    page_obj = paginator.page(page_num)
+  except PageNotAnInteger:
+    # if page is not an integer, deliver the first page
+    page_obj = paginator.page(1)
+  except EmptyPage:
+    # if the page is out of range, deliver the last page
+    page_obj = paginator.page(paginator.num_pages)
 
-    context = {
-      'filter': f,
-      'page_obj': page_obj,
-      'dashboard_view': True,
-    }
+  context = {
+    'filter': f,
+    'page_obj': page_obj,
+    'dashboard_view': True,
+  }
 
-    return render(request, 'users/user_management.html', context)
-  else:
-    messages.success(request, "You Must Be Logged In To View That Page...")
-    return redirect('login_page')
+  return render(request, 'users/user_management.html', context)
     
+@login_required
 def CreateUserManagementView(request):
   if request.method == 'POST':
     user_form = UserForm(request.POST)
@@ -228,6 +221,7 @@ def CreateUserManagementView(request):
   }
   return render(request, 'users/crud_user_management.html', context)
 
+@login_required
 def UpdateUserManagementView(request,id=None):
   if request.method == "POST":
     # Get Current User
@@ -260,39 +254,37 @@ def UpdateUserManagementView(request,id=None):
     'id' : id
   }
   return render(request, "users/crud_user_management.html", context)
-      	
+
+@login_required
 def DeleteUserManagementView(request, id):
-    # Search user
-    user = get_object_or_404(User, id=id)
-    
-    # search user either superuser or not
-    if not request.user.is_superuser:
-      messages.error(request, "You do not have permission to delete users.")
-      return redirect('user_management_page')
-
-    # cannot delete current user
-    if user == request.user:
-      messages.error(request, "You cannot delete yourself.")
-      return redirect('user_management_page')
-
-    user.delete()
-    messages.success(request, "User deleted successfully.")
-    return redirect('user_management_page')
+  # Search user
+  user = get_object_or_404(User, id=id)
   
+  # search user either superuser or not
+  if not request.user.is_superuser:
+    messages.error(request, "You do not have permission to delete users.")
+    return redirect('user_management_page')
+
+  # cannot delete current user
+  if user == request.user:
+    messages.error(request, "You cannot delete yourself.")
+    return redirect('user_management_page')
+
+  user.delete()
+  messages.success(request, "User deleted successfully.")
+  return redirect('user_management_page')
+
+@login_required
 def DetailsUserManagementView(request,id):
-  if request.user.is_authenticated:
-    user_record = User.objects.get(id=id)
-    user_profile_record = UserProfile.objects.get(user_id=id)
-    context =  {
-       'user_record':user_record, 
-       'user_profile_record': user_profile_record, 
-       'view':'details',
-       'id':id
-    }
-    return render(request, 'users/crud_user_management.html',context)
-  else:
-    messages.success(request, "You Must Be Logged In To View That Page...")
-    return redirect('login_page')
+  user_record = User.objects.get(id=id)
+  user_profile_record = UserProfile.objects.get(user_id=id)
+  context =  {
+      'user_record':user_record, 
+      'user_profile_record': user_profile_record, 
+      'view':'details',
+      'id':id
+  }
+  return render(request, 'users/crud_user_management.html',context)
   
 def activate_account(request, uidb64, token):
     try:

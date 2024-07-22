@@ -47,13 +47,16 @@ def DashboardView(request):
   campaigns = Campaign.objects.all()
 
   # get total
-  totalInvestor = investors.count()
-  totalCampaign = campaigns.count()
+  total = {
+    'investors': investors.count(),
+    'fund': 0,
+    'collected_fund': 0,
+    'campaigns': campaigns.count(),
+  };
 
   context = {
     'investors' : investors,
-    'totalInvestor': totalInvestor,
-    'totalCampaign': totalCampaign
+    'total': total,
   }
   return render(request, 'sfd/dashboard.html', context)
 
@@ -87,7 +90,7 @@ def UsersView(request):
     'filter': f,
     'page_obj': page_obj,
   }
-  return render(request, 'sfd/crud_user.html', context)
+  return render(request, 'sfd/user_page.html', context)
 
 @login_required
 def CreateUserView(request):
