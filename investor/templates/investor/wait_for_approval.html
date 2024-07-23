@@ -1,0 +1,23 @@
+{% extends 'investor/master/base.html' %}
+{% load static %}
+
+{% block title %} Waiting for Approval {% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card-body text-center">
+        <h2 class="card-title">Your Profile is Pending Approval</h2>
+        <p class="card-text">
+          Your profile is currently pending approval from the admin.
+          Please wait patiently for the approval process to complete.
+        </p>
+        <p class="card-text">
+          If you have any urgent questions or need assistance, please contact support.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

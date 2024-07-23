@@ -1,6 +1,10 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.db.models import Q
 from .forms import (
   CompanyProfileForm,
   CampaignForm,
@@ -91,6 +95,86 @@ def UsersView(request):
     'page_obj': page_obj,
   }
   return render(request, 'sfd/user_page.html', context)
+
+@login_required
+def UsersApplicationView(request):
+  # fetch user profile
+  records = UserProfile.objects.filter(Q(user__is_superuser=False, is_approved=True, is_edited=False) | Q(user__is_superuser=False, is_approved=False, is_edited=True)
+                                       ) 
+
+  # filter
+  f = UserFilter(request.GET, queryset=records)
+
+  # variable for paginator
+  page_num = request.GET.get('page', 1)
+  limit = request.GET.get('limit', 10)
+
+  # pass the list for pagination
+  paginator = Paginator(f.qs, limit)
+
+  # paginator
+  try:
+    page_obj = paginator.page(page_num)
+  except PageNotAnInteger:
+    # if page is not an integer, deliver the first page
+    page_obj = paginator.page(1)
+  except EmptyPage:
+    # if the page is out of range, deliver the last page
+    page_obj = paginator.page(paginator.num_pages)
+
+  context = {
+    'view': 'list',
+    'filter': f,
+    'page_obj': page_obj,
+  }
+  return render(request, 'sfd/user_application.html', context)
+
+@login_required
+def approve_profile(request, user_id):
+    user_profile = get_object_or_404(UserProfile, user_id=user_id)
+
+    if not user_profile.is_edited and not user_profile.is_approved:
+        # Approve profile edit
+        user_profile.is_edited = True
+        user_profile.edited_approved_by = request.user
+        user_profile.save()
+
+        messages.success(request, f"Profile edit for {user_profile.user.get_full_name()} approved successfully.")
+
+    elif user_profile.is_edited and not user_profile.is_approved:
+        # Approve profile approval
+        user_profile.is_approved = True
+        user_profile.approved_by = request.user
+        user_profile.save()
+
+        # Send email notification for profile approval
+        subject = f"Profile Approved for {user_profile.user.get_full_name()}"
+        html_message = render_to_string('sfd/profile_approved.html', {'user_profile': user_profile})
+        plain_message = strip_tags(html_message)
+        sender_email = 'your-sender-email@example.com'
+        send_mail(subject, plain_message, sender_email, [user_profile.user.email], html_message=html_message)
+
+        messages.success(request, f"Profile approval for {user_profile.user.get_full_name()} approved successfully.")
+    else:
+        messages.error(request, f"Unable to approve profile for {user_profile.user.get_full_name()}.")
+
+    return redirect('users_application_page')
+
+@login_required
+def decline_profile(request, user_id):
+    user_profile = get_object_or_404(UserProfile, user_id=user_id)
+    if not user_profile.is_edited:
+        user_profile.is_edited = None  # Reset edit status if declined
+        user_profile.save()
+        messages.info(request, f"Profile edit for {user_profile.user.get_full_name()} declined successfully.")
+    elif not user_profile.is_approved:
+        user_profile.is_approved = None  # Reset edit status if declined
+        user_profile.save()
+        messages.info(request, f"Profile approval for {user_profile.user.get_full_name()} declined successfully.")
+    else:
+        messages.error(request, f"Unable to decline profile edit for {user_profile.user.get_full_name()}.")
+
+    return redirect('users_application_page')  # Redirect to the user list page
 
 @login_required
 def CreateUserView(request):

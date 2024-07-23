@@ -20,6 +20,13 @@
           <i class="fa-solid fa-user"></i>&nbsp; User
         </a>
       </li>
+      {% if user.userprofile.position == 'CHECKER' or user.is_superuser %}
+      <li class="nav-item">
+        <a class="nav-item nav-link" href="{% url 'users_application_page' %}">
+          <i class="fas fa-file-alt"></i>&nbsp; Application
+        </a>
+      </li>
+      {% endif %}
       <li class="nav-item">
         <a class="nav-item nav-link" href="{% url 'business_profile_page' %}">
           <i class="fa-solid fa-building"></i>&nbsp; Company Profile

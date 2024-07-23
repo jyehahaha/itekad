@@ -20,6 +20,10 @@ class UserProfile(models.Model):
 	bank_account_number = models.CharField(max_length=50, null=True, blank=True)
 	bank_name = models.CharField(max_length=100, null=True, blank=True)
 	password_reset_timestamp = models.DateTimeField(null=True, blank=True)
+	is_approved = models.BooleanField(null=True,default=False)  # New field for approval status by admin
+	approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='approved_profiles_after_register')
+	is_edited = models.BooleanField(null=True,default=True)  # New field for edit profile status by admin
+	edited_approved_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='approved_profiles_after_edit')
 
 	class Role(models.TextChoices):
 		ADMIN = "ADMIN", 'Admin'

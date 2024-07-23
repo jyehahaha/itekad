@@ -15,12 +15,19 @@ from users.forms import (
 from sfd.models import (
 	TrancheInvestor,
 )
+def approved_required(view_func):
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated or not request.user.userprofile.is_approved:
+            return redirect('wait_for_approval_page')  # Redirect to a page that informs the user to wait for approval
+        return view_func(request, *args, **kwargs)
+    return wrapper
 
 # Create your views here.
 def LandingView(request):
 	context = {}
 	return render(request, 'investor/landing.html', context)
 
+@approved_required
 @login_required(login_url='login_page')
 def HomePageView(request):
 	if request.user.is_authenticated:
@@ -40,6 +47,8 @@ def ProfilePageView(request):
 		form = UserProfileForm(request.POST,instance=profile)
 		if form.is_valid():
 			investor = form.save()
+			investor.is_edited = False  # Set is_edited to False
+			investor.save()  # Save the updated profile
 			update_session_auth_hash(request, investor)  # Important!
 			messages.success(request, 'Your profile was successfully updated!')
 			return redirect('home_page')
@@ -88,3 +97,6 @@ def GalleryPageView(request):
 def ReportPageView(request):
 	context = {}
 	return render(request, 'investor/report.html', context)
+
+def wait_for_approval_page(request):
+    return render(request, 'investor/wait_for_approval.html')

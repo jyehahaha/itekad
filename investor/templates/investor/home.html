@@ -21,6 +21,12 @@
         <h4 class="card-title">Account Overview</h4>
       </div>
       <div class="card-body">
+        {% if not user.userprofile.is_approved %}
+          <div class="alert alert-warning" role="alert">
+            Your profile is not yet approved. Please wait for approval from the admin.
+          </div>
+        {% endif %}
+
         <div class="row">
           <div class="col-3 text-center align-self-center">
             <img class="avatar avatar-xxl" src="{% static 'website/images/picture3.jpg' %}" alt="Profile Picture" />
@@ -33,11 +39,11 @@
               </div>
               <div class="col-6 mt-2">
                 <dt>MyKad No.</dt>
-                <dd>{{user.mykad_no}}</dd>
+                <dd>{{user.userprofile.mykad_no}}</dd>
               </div>
               <div class="col-6 mt-2">
                 <dt>No. Phone</dt>
-                <dd>{{user.mobile_no}}</dd>
+                <dd>{{user.userprofile.mobile_no}}</dd>
               </div>
               <div class="col-6 mt-2">
                 <dt>Email</dt>
@@ -48,11 +54,11 @@
               </div>
               <div class="col-6 mt-2">
                 <dt>Account Bank</dt>
-                <dd>{{user.bank_name}}</dd>
+                <dd>{{user.userprofile.bank_name}}</dd>
               </div>
               <div class="col-6 mt-2">
                 <dt>Account Number</dt>
-                <dd>{{user.bank_account_number}}</dd>
+                <dd>{{user.userprofile.bank_account_number}}</dd>
               </div>
               <div class="offset-6 col-6 mt-3 text-end">
                 <div class="d-grid gap-2 d-md-block">

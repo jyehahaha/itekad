@@ -116,10 +116,11 @@ def RegisterView(request):
           'uid': urlsafe_base64_encode(force_bytes(user.pk)),
           'token': token,
       })
+      
       to_email = form.cleaned_data.get('email')
       send_mail(mail_subject, message, 'from@example.com', [to_email])
 
-      messages.success(request, 'Please check your email to confirm your email address.')
+      messages.success(request, f"Your Account has been created succesfully!! Please check your email to confirm your email address in order to activate your account.")
       return redirect('login_page')  # Redirect to login page after registration
 
     else:

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Approved</title>
+</head>
+<body>
+    <h2>Profile Approved</h2>
+    <p>
+        Dear {{ user_profile.user.get_full_name }},
+    </p>
+    <p>
+        Your profile has been approved successfully by {{ user_profile.edited_approved_by.get_full_name }}.
+    </p>
+    <p>
+        Thank you for registering as investor
+    </p>
+    <p>
+        Regards,<br>
+        iTEKAD Team
+    </p>
+</body>
+</html>
