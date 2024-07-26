@@ -142,8 +142,10 @@
 {% block js %}
 <script>
   var tblBusinessProfile = new DataTable('#tblBusinessProfile', {
-    "paging": false,
-    "searching": true,
+    info: true,
+    ordering: true,
+    paging: false,
+    searching: false,
   });
 </script>
 {% endblock js %}

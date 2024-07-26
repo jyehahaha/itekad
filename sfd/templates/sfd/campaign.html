@@ -80,7 +80,13 @@
             <td>{{campaign.end_campaign | date:'d-m-Y'}}</td>
             <td>{{campaign.created_at | date:'d-m-Y h:i A'}}</td>
             <td>{{campaign.updated_at | date:'d-m-Y h:i A'}}</td>
-            <td>{{campaign.status}}</td>
+            <td class="text-center">
+							{% if campagin.status %}
+								<span class="badge bg-success">Active</span>
+							{% else %}
+								<span class="badge bg-danger">Inactive</span>
+							{% endif %}
+						</td>
             <td class="text-end">
 							<div class="d-grid gap-2 d-md-block">
                 <a href="{% url 'assign_campaign_page' campaign.id %}" class="btn btn-info" type="button">
@@ -140,6 +146,11 @@
 
 {% block js %}
 <script>
-    new DataTable('#tblCampaign');
+  var tblCampaign = new DataTable('#tblCampaign', {
+    info: true,
+    ordering: true,
+    paging: false,
+    searching: false,
+  });
 </script>
 {% endblock js %}

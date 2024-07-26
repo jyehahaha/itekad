@@ -27,7 +27,7 @@
 						<th>Description</th>
 						<th>Date/Time Created</th>
 						<th>Date/Time Updated</th>
-						<th>Status</th>
+						<th class="text-center">Status</th>
 						<th class="text-center">Action</th>
 					</tr>
 				</thead>
@@ -39,7 +39,13 @@
 						<td>{{item.description | default:'-'}}</td>
 						<td>{{item.created_at | date:'d-m-Y h:i A'}}</td>
 						<td>{{item.updated_at | date:'d-m-Y h:i A'}}</td>
-						<td>{{item.status}}</td>
+						<td class="text-center">
+							{% if item.status %}
+								<span class="badge bg-success">Active</span>
+							{% else %}
+								<span class="badge bg-danger">Inactive</span>
+							{% endif %}
+						</td>
 						<td class="text-end">
 							<div class="d-grid gap-2 d-md-block">
 								<a href="{% url 'details_category_page' item.id %}" class="btn btn-primary" type="button">

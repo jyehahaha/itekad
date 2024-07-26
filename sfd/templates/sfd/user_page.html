@@ -89,7 +89,7 @@
                 <th>Role</th>
                 <th>Position</th>
                 <th>Date/Time Created</th>
-                <th>Status</th>
+                <th class="text-center">Status</th>
                 <th class="text-center">Action</th>
               </tr>
             </thead>
@@ -105,7 +105,13 @@
                 <td>{{ record.role}}</td>
                 <td>{{ record.position | default:"-"}} </td>
                 <td>{{ record.user.date_joined }}</td>
-                <td>{{ record.user.is_active }}</td>
+                <td>
+                  {% if record.user.is_active %}
+                    <span class="badge bg-success">Active</span>
+                  {% else %}
+                    <span class="badge bg-danger">Inactive</span>
+                  {% endif %}
+                </td>
                 <td class="text-end">
                   <div class="d-grid gap-2 d-md-block">
                     <a href="{% url 'details_user_page' record.id %}" class="btn btn-primary" type="button">
@@ -191,7 +197,10 @@
   $(document).ready(function() {
     // data table user
     var tblUser =  new DataTable('#tblUser', {
+      info: true,
+      ordering: true,
       paging: false,
+      searching: false,
     });
 
     $('#confirmDeleteModal').on('show.bs.modal', function (event) {

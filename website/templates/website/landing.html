@@ -5,18 +5,15 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-
-
-<div class="row">
-  <div class="offset-1 col-10">
+<div class="row bg-secondary bg-opacity-10">
+  <div class="col-12 pt-4 mb-4">
     <div class="row">
-      <div class="col-6 text-start align-middle p-4">
-        <img src="{% static 'website/images/mawaddah.png' %}" class="img-thumbnail rounded-top" alt="">
+      <div class="col-auto mx-auto text-center p-4">
+        <img src="{% static 'website/images/mawaddah.png' %}" class="img-fluid rounded" alt="">
       </div>
-      <div class="col-6 align-self-center">
+      <div class="col-auto text-center align-self-center">
         <h4 class="card-title mb-3">iTekad Mawaddah</h4>
-        <p class="card-subtitle lh-base justify-content-evenly">
-          Program kewangan sosial berkonsepkan Mudarabah (pelaburan dan perkongsian keuntungan) untuk membantu usahawan daripada golongan B40 dan Asnaf bagi memulakan dan meneruskan kesinambungan perniagaan.</p>
+        <p class="card-subtitle lh-base justify-content-evenly">Program kewangan sosial berkonsepkan Mudarabah (pelaburan dan perkongsian keuntungan) untuk membantu usahawan daripada golongan B40 dan Asnaf bagi memulakan dan meneruskan kesinambungan perniagaan.</p>
         <div class="mt-4">
           <button type="button" class="btn btn-warning fw-bold text-uppercase">Learn More</button>
         </div>
@@ -24,34 +21,40 @@
     </div>
   </div>
 </div>
-<div class="row">
-  <div class="offset-1 col-10">
+
+<div class="mt-4"></div>
+<div class="row bg-light bg-opacity-10">
+  <div class="col-12 pt-4 mb-4">
     <div class="row">
-      <div class="col-6 align-self-center">
+      <div class="col-auto text-center align-self-center">
         <h4 class="card-title mb-3">iTEKAD MAHABBAH</h4>
-        <p class="card-subtitle lh-base justify-content-evenly">
-          Program pembangunan usahawan mikro berkolaborasi dengan Kerajaan Negeri yang merupakan inisiatif kewangan sosial yang berasaskan kepada konsep Qard (pinjaman) untuk membantu usahawan mikro B40 dan Asnaf.</p>
+        <p class="card-subtitle lh-base justify-content-evenly">Program pembangunan usahawan mikro berkolaborasi dengan Kerajaan Negeri yang merupakan inisiatif kewangan sosial yang berasaskan kepada konsep Qard (pinjaman) untuk membantu usahawan mikro B40 dan Asnaf.</p>
         <div class="mt-4">
           <button type="button" class="btn btn-warning fw-bold text-uppercase">Learn More</button>
         </div>
       </div>
-      <div class="col-6 text-end align-middle p-4">
-        <img src="{% static 'website/images/mahabbah.png' %}" class="img-thumbnail rounded-top" alt="">
+      <div class="col-auto mx-auto text-center p-4">
+        <img src="{% static 'website/images/mahabbah.png' %}" class="img-fluid rounded mx-auto d-block" alt="">
       </div>
     </div>
   </div>
 </div>
-<div class="row bg-light">
-  <div class="offset-1 col-10">
-    <div class="row mt-5 mb-5">
-     <div class="col-12 text-center lh-base">
+
+<div class="mt-4"></div>
+<div class="row bg-secondary bg-opacity-10">
+  <div class="col-12 pt-4 mb-4">
+    <div class="mt-4"></div>
+    <div class="row">
+      <div class="col-12 text-center">
         <h4 class="card-title fw-bold text-uppercase">Our Latest Campaigns</h4>
         <p class="card-subtitle">Get the latest campaigns update and news here and be connected with us Always</p>
-     </div>
-     <div class="col-12 mt-5">
-      <div class="row">
-        {% for campaign in campaign_info%}
-        <div class="col-3">
+      </div>
+    </div>
+
+    <div class="mt-4"></div>
+    <div class="row">
+      {% for campaign in campaign_info %}
+        <div class="col mt-3">
           <div class="card border-0 shadow-sm">
             <img src="{{ campaign.campaign_logo }}" class="card-img-top" alt="Picture 4">
             <div class="card-body text-center">
@@ -63,12 +66,12 @@
             </div>
           </div>
         </div>
-        {% endfor %}
-      </div>
-     </div>
-     <div class="col-12 mt-5 text-center">
+      {% endfor %}
+    </div>
+
+    <div class="mt-4"></div>
+    <div class="text-center">
       <a href="{% url 'campaigns_page' %}" type="button" class="btn btn-warning fw-bold text-uppercase">Show All Campaign</a>
-     </div>
     </div>
   </div>
 </div>

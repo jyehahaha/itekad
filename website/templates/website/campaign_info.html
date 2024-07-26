@@ -5,169 +5,98 @@
 {% block css %}{% endblock css %}
 
 {% block content %}
-<div class="row">
-    <div class="col-sm-12 col-md-12 col-lg-12 bg-light">
-      <div class="container mb-3">
-        <div class="row mt-5 mb-4">
-          <div class="col-12 text-center">
-            <h2 class="card-title fw-bold">Campaigns Info</h2>
-            <!-- <p class="-card-subtitle fw-bold text-uppercase">- All Campigns -</p> -->
+<div class="row bg-secondary bg-opacity-10">
+  <div class="col-12 text-center pt-4 mb-4">
+    <h2 class="card-title fw-bold">Campaigns Info</h2>
+  </div>
+</div>
+
+<div class="mt-4"></div>
+<div class="row bg-light bg-opacity-10">
+  <div class="col-12 pt-4 mb-4">
+    <div class="row">
+      <div class="col-4 text-end">
+        <img src="https://png.pngtree.com/template/20190214/ourmid/pngtree-banking-logo-image_55107.jpg" class="img-fluid rounded-top" alt="Logo" width="50px" />
+      </div>
+      <div class="col-6 align-self-center">
+        <h4 class="card-title fw-bold text-uppercase">{{ campaign.title }}</h4>
+        <p class="card-subtitle">{{ campaign.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-4"></div>
+<div class="row bg-secondary bg-opacity-10">
+  <div class="col-12 text-center pt-4 mb-4">
+    <div class="row">
+      <div class="col-6 text-end">
+        <img src="https://png.pngtree.com/template/20190214/ourmid/pngtree-banking-logo-image_55107.jpg" class="img-fluid rounded-top" alt="Logo" width="200px" />
+      </div>
+      <div class="col-6 text-start">
+        <div class="row mt-2">
+         <div class="col-12">
+          <h2>RM {{ campaign.total_amount }}</h2>
+          <small>120% OF THE MIN.TARGET (RM 498,498)</small>
+         </div>
+        </div>
+        <div class="row mt-2">
+         <div class="col-12">
+          <h2>{{investors.count}}</h2>
+          <small>INVESTORS</small>
+         </div>
+        </div>
+        <div class="row mt-2">
+         <div class="col-12">
+          <h2>RM {{investor.invest_amount}}</h2>
+          <small>LARGEST INVESTMENT</small>
+         </div>
+        </div>
+     </div>
+    </div>
+  </div>
+</div>
+
+<div class="" id="info">
+  <div class="mt-4"></div>
+  <div class="row bg-light bg-opacity-10">
+    <div class="offset-1 col-10">
+      <ul class="nav justify-content-center">
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#campaign" href="#campaign">Campaign Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="collapse" data-bs-target="#financial" href="#financial">Financial & Documents</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-4"></div>
+  <div class="row bg-secondary bg-opacity-10">
+    <div class="col-12 text-center pt-4 mb-4">
+      <div class="container">
+        <div id="campaign" data-bs-parent="#info" class="row mt-4 mb-4 collapse show indent">
+          <div class="col-12">
+            {{ campaign.campaign_summary }}
+          </div>
+        </div>
+
+        <div id="financial" data-bs-parent="#info" class="row mt-4 mb-4 collapse indent">
+          <div class="col-12">
+            <object data="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf"  width="800" height="1000"></object>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
-<div class="section">
-   <div class="container">
-    <div class="row mt-5">
-        <div class="col-sm-2 col-md-2 col-lg-1">
-            <img src="{{ campaign.campaign_logo }}" width="100%" class="rounded">
-        </div>
-        <div class="col-sm-10 col-md-10 col-lg-11">
-        <h1>{{campaign.title}}</h1>
-        <p>{{campaign.description}}</p> 
-        </div>
-    </div>
-   </div>
-</div>
-<div class="section">
-   <div class="container">
-    <div class="row mt-5">
-        <div class="col-sm-12 col-md-12 col-lg-6">
-            <img src="{{campaign.campaign_logo}}" class="rounded">
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-6 mt-2">
-           <div class="row mt-2">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>RM {{ campaign.total_amount }}</h2>
-                <small>120% OF THE MIN.TARGET (RM 498,498)</small>
-            </div>
-           
-           </div>
-           <div class="row mt-2">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>{{investors.count}}</h2>
-                <small>INVESTORS</small>
-            </div>
-           </div>
-           <div class="row mt-2">
-            <div class="col-sm-12 col-md-12 col-lg-12">
-                <h2>RM {{investor.invest_amount}}</h2>
-                <small>LARGEST INVESTMENT</small>
-            </div>
-           </div>
-        </div>
-    </div>
-   </div>
-</div>
-<section>
-    <div class="row">
-        <div class="col-12 mt-5">
-            <nav class="navbar navbar-expand-sm navbar-light bg-light">
-                  <div class="container">
-                    <div class="collapse navbar-collapse" id="collapsibleNavId">
-                        <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-                            <a class="btn btn-link" id="btn1" href="#btn1" role="button" aria-expanded="false" aria-controls="collapseExample">
-                               Campaign Info
-                            </a>
-                            <a class="btn btn-link" id="btn2" href="#btn2" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Financial & Documents
-                            </a>
-                        </ul>
-                    </div>
-              </div>
-            </nav>
-        </div>
-    </div>
-   <div class="container">
-    <div class="row mt-5">
-        <div class="col-sm-12 col-md-7 col-lg-7">
-            <div class="show" id="view1">
-                <div class="card card-body border-0">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                        <div class="d-flex align-items-start">
-                            <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                              <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Summary</button>
-                            </div>
-                            <div class="tab-content" id="v-pills-tabContent">
-                              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
-                                {{campaign.campaign_summary}}
-                              </div>
-                            </div>
-                          </div>
-                    </div>
-                </div>
-            </div>
-            <div class="collapse mt-3" id="view2">
-                <div class="card card-body border-0">
-                    <h6>Financial & Documents</h6>
-                    <object data="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210101201653/PDF.pdf"  width="800" height="1000"></object>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-12 col-md-5 col-lg-5 mb-5">
-            {% for Entrepreneur in Entrepreneurs %}
-            {% for x in Entrepreneur.user.user_company.all %}
-            <div class="card mb-2">
-                <div class="card-header">
-                    <div class="card-title text-bold">BUSINESS OVERVIEW</div>
-                </div>
-                <div class="card-body p-4">
-                    <div class="col-12">
-                        <p>Company</p>
-                        <h5>{{x.company_name}}</h5>
-                    </div>
-                    <div class="col-12 mt-2">
-                        <p>Location</p>
-                        <h5>{{x.company_address}}</h5>
-                    </div>
-                    <div class="col-12 mt-2">
-                        <p>Website</p>
-                        <h5>{{x.company_website}}</h5>
-                    </div>
-                    <div class="col-12 mt-2">
-                        <p>Registration No.</p>
-                        <h5>{{x.company_registration_number}}</h5>
-                    </div>
-                </div>
-              </div>
-               {% endfor %}
-               {% endfor %}
-           
-        </div>
-    </div>
-   </div>
-</section>
-
 {% endblock content %}
 
 {% block js %}
 <script>
-    $(document).ready(function() {
-        $('#btn1').on("click", function() {
-        $("#view2, #view3, #view4").removeClass('show');
-        $("#view2, #view3, #view4").addClass('collapse');
-        $("#view1").addClass("show");
-        });
+  $(document).ready(function() {
 
-        $('#btn2').on("click", function() {
-        $("#view1, #view3, #view4").removeClass('show');
-        $("#view1, #view3, #view4").addClass('collapse');
-        $("#view2").addClass("show");
-        });
-
-        $('#btn3').on("click", function() {
-        $("#view1, #view2, #view4").removeClass('show');
-        $("#view1, #view2, #view4").addClass('collapse');
-        $("#view3").addClass("show");
-        });
-
-        $('#btn4').on("click", function() {
-        $("#view1, #view2, #view3").removeClass('show');
-        $("#view1, #view2, #view3").addClass('collapse');
-        $("#view4").addClass("show");
-        });
-    });
+  });
 </script>
-
 {% endblock js %}
