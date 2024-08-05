@@ -1,5 +1,22 @@
 from django.db import models
+from .helper import check_file_type
 from users.models import UserProfile
+
+
+# Validate File
+def validate_file_image(value):
+	if not check_file_type(value, ['pdf']):
+		raise ValidationError(
+			('%(value)s is not a valid file.'),
+			params={'value': value},
+		)
+
+def validate_file_document(value):
+	if not check_file_type(value, ['png', 'jpg']):
+		raise ValidationError(
+			('%(value)s is not a valid file.'),
+			params={'value': value},
+		)
 
 # Create your models here.
 class NatureOfBusiness(models.Model):
@@ -31,8 +48,8 @@ class CompanyProfile(models.Model):
 	company_phone_number = models.CharField(max_length=150, null=True,blank=True)
 	company_website = models.CharField(max_length=150, null=True,blank=True)
 	company_address = models.CharField(max_length=300, null=True,blank=True)
-	company_logo = models.CharField(max_length=500, default='https://i.pinimg.com/736x/72/8b/6c/728b6c0d58d7e6b29e91faf8a1a31bc4.jpg')
-	company_portfolio = models.CharField(max_length=500, default='https://i.pinimg.com/736x/72/8b/6c/728b6c0d58d7e6b29e91faf8a1a31bc4.jpg')
+	company_logo = models.FileField(upload_to='company/logo/', verbose_name='Company Logo', blank=True, null=True, validators=[validate_file_image], help_text='Format Image is PNG and JPG only')
+	company_portfolio = models.FileField(upload_to='company/portfolio/', verbose_name='Company Portfolio', blank=True, null=True, validators=[validate_file_image], help_text='Format Image is PNG and JPG only')
 	company_registration_number = models.CharField(max_length=150, null=True,blank=True)
 	company_summary = models.CharField(max_length=1000, null=True,blank=True)
 	financing_amount = models.CharField(max_length=100, null=True,blank=True)
@@ -48,7 +65,7 @@ class Campaign(models.Model):
 	title = models.CharField(max_length=150, null=True,blank=True)
 	description = models.CharField(max_length=150, null=True,blank=True)
 	campaign_summary = models.CharField(max_length=300, null=True,blank=True)
-	campaign_logo = models.CharField(max_length=500, default='https://i.pinimg.com/736x/72/8b/6c/728b6c0d58d7e6b29e91faf8a1a31bc4.jpg')
+	campaign_logo = models.FileField(upload_to='campaign/logo/', verbose_name="Campaign Logo", blank=True, null=True, validators=[validate_file_image], help_text="Format Image is PNG and JPG only")
 	total_amount = models.CharField(max_length=50, null=True,blank=True)
 	min_target_amount = models.CharField(max_length=50, null=True,blank=True)
 	status = models.BooleanField(default=False)

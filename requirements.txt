@@ -4,3 +4,4 @@ django-crispy-forms==2.2
 django-environ==0.10.0
 django-filter==24.2
 psycopg2-binary==2.9.9
+google-cloud-storage==2.18.0

@@ -24,6 +24,10 @@
   background-color: #ff8145 !important;
 }
 
+.border-warning {
+  border: 1px solid #ff8145 !important;
+}
+
 .btn-warning {
   color: white;
   border-color: #ff8145 !important;

@@ -11,11 +11,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from google.oauth2 import service_account
 import environ
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), os.pardir)
 
 env = environ.Env(
     # set casting, default value
@@ -58,6 +60,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_filters',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -147,11 +150,41 @@ DATETIME_FORMAT = 'd.m.Y h:i A'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
-STATIC_URL = '/static/'
+if env('ENVIRONMENT') == 'dev':
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+    # Local COnfiguration
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+    STATIC_URL = '/static/'
+
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    MEDIA_URL = '/media/'
+
+else:
+
+    # Google Configuration
+
+    # Set "static" folder
+    STATICFILES_STORAGE = 'itekad.gcsUtils.Static'
+
+    # Set "media" folder
+    DEFAULT_FILE_STORAGE = 'itekad.gcsUtils.Media'
+
+    #  Set bucket name
+    GS_BUCKET_NAME = 'bm-gc-gcs-itekad-sit'
+
+    STATIC_URL = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
+    STATIC_ROOT = "static/"
+
+    MEDIA_ROOT = f"https://storage.googleapis.com/{GS_BUCKET_NAME}/"
+    MEDIA_URL = '/media/'
+
+    # Add an unique ID to a file name if same file name exists
+    GS_FILE_OVERWRITE = False
+
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+        os.path.join(BASE_DIR, env(JSON_FILE)),
+    )
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
