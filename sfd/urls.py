@@ -44,4 +44,9 @@ urlpatterns = [
     path('report/create/<int:id>/', views.CreateReportView, name='create_report_page'),
     path('report/update/<int:campaign>/<int:id>/', views.UpdateReportView, name='update_report_page'),
     path('report/delete/<int:id>/', views.DeleteReportView, name='delete_report_page'),
+    path('gallery/<int:id>/', views.ListImageGalleryView, name='image_gallery_page'),
+    path('gallery/details/<int:id>/', views.ReadImageGalleryView, name='read_image_gallery_page'),
+    path('gallery/create/<int:id>/', views.CreateImageGalleryView, name='create_image_gallery_page'),
+    path('gallery/update/<int:campaign>/<int:id>/', views.UpdateImageGalleryView, name='update_image_gallery_page'),
+    path('gallery/delete/<int:id>/', views.DeleteImageGalleryView, name='delete_image_gallery_page'),
 ]

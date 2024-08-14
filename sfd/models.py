@@ -1,13 +1,13 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from .helper import check_file_type
 from users.models import UserProfile
 
-
 # Validate File
 def validate_file_image(value):
-	if not check_file_type(value, ['pdf']):
+	if not check_file_type(value):
 		raise ValidationError(
-			('%(value)s is not a valid file.'),
+			('%(value)s is not a valid image.'),
 			params={'value': value},
 		)
 
@@ -49,7 +49,7 @@ class CompanyProfile(models.Model):
 	company_website = models.CharField(max_length=150, null=True,blank=True)
 	company_address = models.CharField(max_length=300, null=True,blank=True)
 	company_logo = models.FileField(upload_to='company/logo/', verbose_name='Company Logo', blank=True, null=True, validators=[validate_file_image], help_text='Format Image is PNG and JPG only')
-	company_portfolio = models.FileField(upload_to='company/portfolio/', verbose_name='Company Portfolio', blank=True, null=True, validators=[validate_file_image], help_text='Format Image is PNG and JPG only')
+	company_portfolio = models.FileField(upload_to='company/portfolio/', verbose_name='Company Portfolio', blank=True, null=True, validators=[validate_file_document], help_text='Format File is PDF only')
 	company_registration_number = models.CharField(max_length=150, null=True,blank=True)
 	company_summary = models.CharField(max_length=1000, null=True,blank=True)
 	financing_amount = models.CharField(max_length=100, null=True,blank=True)
@@ -86,7 +86,6 @@ class TrancheInvestor(models.Model):
 
 	def __str__(self):
 		return self.user
-    
 
 class TrancheEntrepreneur(models.Model):
 	user = models.ForeignKey(UserProfile, on_delete=models.CASCADE,null=True,blank=True)
@@ -108,3 +107,14 @@ class TrancheReport(models.Model):
 	def __str__(self):
 		return self.user
 
+class GalleryEntrepreneur(models.Model):
+	company_profile = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE,related_name="company_gallery")
+	name = models.CharField(max_length=255) 
+	description = models.TextField() 
+	image = models.ImageField(upload_to='gallery/')
+	status = models.BooleanField(default=False)
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True) 
+
+	def __str__(self): 
+		return self.name

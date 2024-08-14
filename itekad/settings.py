@@ -182,7 +182,7 @@ else:
     GS_FILE_OVERWRITE = False
 
     GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
-        os.path.join(BASE_DIR, env(JSON_FILE)),
+        os.path.join(BASE_DIR, env("JSON_FILE")),
     )
 
 

@@ -11,6 +11,7 @@ from sfd.models import (
   TrancheReport,
   NatureOfBusiness,
   CategoryOfBusiness,
+  GalleryEntrepreneur,
 )
 
 # Create your forms here.
@@ -83,4 +84,12 @@ class CategoryOfBusinessForm(ModelForm):
     fields = "__all__"
     widgets = {
       'description': forms.Textarea()
+    }
+
+class GalleryEntrepreneurForm(ModelForm):
+  class Meta:
+    model = GalleryEntrepreneur
+    fields = "__all__"
+    widgets = {
+      # 'image': forms.FileInput(attrs={'multiple': True}),
     }

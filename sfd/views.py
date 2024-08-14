@@ -5,6 +5,7 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.db.models import Q
+
 from .forms import (
   CompanyProfileForm,
   CampaignForm,
@@ -13,6 +14,7 @@ from .forms import (
   TrancheReportForm,
   NatureOfBusinessForm,
   CategoryOfBusinessForm,
+  GalleryEntrepreneurForm,
 )
 from .models import (
   CategoryOfBusiness,
@@ -22,6 +24,7 @@ from .models import (
   TrancheEntrepreneur,
   TrancheInvestor,
   TrancheReport,
+  GalleryEntrepreneur,
 )
 from users.models import (
   User,
@@ -324,7 +327,7 @@ def BusinessProfileView(request):
 
 def CreateBusinessProfileView(request):
   if request.method == "POST":
-    form = CompanyProfileForm(request.POST)
+    form = CompanyProfileForm(request.POST, request.FILES)
 
     if form.is_valid():
       company = form.save(commit=False)
@@ -344,7 +347,7 @@ def UpdateBusinessProfileView(request, id):
   company = CompanyProfile.objects.get(id=id)
 
   if request.method == "POST":
-    form = CompanyProfileForm(request.POST, instance=company)
+    form = CompanyProfileForm(request.POST, request.FILES, instance=company)
 
     if form.is_valid():
       form.save()
@@ -816,3 +819,48 @@ def DeleteReportView(request,id):
     'campaign': campaign,
   }
   return render(request, 'sfd/crud_report.html', context)
+
+def ListImageGalleryView(request, id):
+  # fetch images
+  images = GalleryEntrepreneur.objects.filter(company_profile__id=id)
+
+  context = {
+    'id': id,
+    'images': images,
+  }
+  return render(request, 'sfd/gallery.html', context)
+
+def CreateImageGalleryView(request, id):
+  #  fetch company profile
+  company_profile = CompanyProfile.objects.get(id=id)
+
+  form = GalleryEntrepreneurForm()
+  if request.method == 'POST':
+    form = GalleryEntrepreneurForm(request.POST, request.FILES)
+    if form.is_valid():
+      form.save()
+      return redirect('image_gallery_page', id)
+
+  context = {
+    'view': 'create',
+    'form': form,
+  }
+  return render(request, 'sfd/crud_gallery.html', context)
+
+def ReadImageGalleryView(request):
+  context = {
+    'view': 'update',
+  }
+  return render(request, 'sfd/crud_gallery.html', context)
+
+def UpdateImageGalleryView(request):
+  context = {
+    'view': 'read',
+  }
+  return render(request, 'sfd/crud_gallery.html', context)
+
+def DeleteImageGalleryView(request):
+  context = {
+    'view': 'delete',
+  }
+  return render(request, 'sfd/crud_gallery.html', context)

@@ -1,0 +1,73 @@
+{% extends 'sfd/master/base.html' %}
+{% load crispy_forms_tags %}
+{% load sfd_extras %}
+
+{% block title %} iTekad - Image Gallery {% endblock title %}
+{% block css %}{% endblock css %}
+
+{% block content %}
+<div class="mt-4">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a href="{% url 'create_image_gallery_page' id %}" class="btn btn-warning" type="button">
+      <i class="bx bx-list-plus bx-sm bx-pull-left"></i>Upload New Image
+    </a>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm mt-4">
+  <div class="card-body p-4">
+    <div class="mb-4">
+      <h4 class="card-title fw-bold text-uppercase">List of Images</h4>
+    </div>
+    <div class="table-responsive">
+      <table id="tblImageGallery" class="table table-striped" style="width:100%">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for image in images %}
+          <tr>
+            <td>{{ image.name }}</td>
+            <td>
+              {% if image.status %}
+              <span class="badge bg-success">Active</span>
+              {% else %}
+              <span class="badge bg-danger">Inactive</span>
+              {% endif %}
+            </td>
+            <td class="text-end">
+							<div class="d-grid gap-2 d-md-block">
+								<a href="#" class="btn btn-primary">
+									<i class="bx bx-search-alt bx-sm bx-pull-left"></i>View
+								</a>
+								<a href="#" class="btn btn-success">
+									<i class="bx bx-edit bx-sm bx-pull-left"></i>Edit
+								</a>
+								<a href="#" class="btn btn-danger">
+									<i class="bx bx-trash bx-sm bx-pull-left"></i>Delete
+								</a>
+							</div>
+						</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+  var tblImageGallery = new DataTable('#tblImageGallery', {
+    info: true,
+    ordering: true,
+    paging: false,
+    searching: false,
+  });
+</script>
+{% endblock js %}
